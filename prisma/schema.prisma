@@ -11,12 +11,12 @@ datasource db {
 }
 
 model Message {
-  id           Int        @id @default(autoincrement())
+  id           Int         @id @default(autoincrement())
   date         DateTime
-  author       String
+  author       String?
   message      String
-  attachment   Attachment @relation(fields: [attachmentId], references: [id])
-  attachmentId Int
+  attachment   Attachment? @relation(fields: [attachmentId], references: [id])
+  attachmentId Int?
 }
 
 model Attachment {
