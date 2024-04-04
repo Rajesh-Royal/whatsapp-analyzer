@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { Prisma } from '@prisma/client';
 import * as whatsapp from '@/utils/whatsapp-parser';
 import { logger } from '@/utils/logger';
+import { uploadChatDataToDB } from '../whatsapp-chat/route';
 
 
 export async function POST(request: NextRequest) {
@@ -17,12 +18,12 @@ export async function POST(request: NextRequest) {
 
     logger.info(`parsed uploaded file total messages found ${messages.length}`);
 
-    
+    const result = await uploadChatDataToDB(messages);
 
-    return NextResponse.json({ message: 'Fetched successfully', status: 200, data: [], count: messages.length })
-  } catch (error:any) {
+    return NextResponse.json({ message: 'File uploaded and parsed successfully', status: 200, data: result, count: messages.length })
+  } catch (error: any) {
     logger.error(`Something went wrong: ${error.message} ${JSON.stringify(error)}`)
 
-    return NextResponse.json({message: error.message, data: [], stackTrace: JSON.stringify(error)}, {status: 500})
+    return NextResponse.json({ message: error.message, data: [], stackTrace: JSON.stringify(error) }, { status: 500 })
   }
 }
