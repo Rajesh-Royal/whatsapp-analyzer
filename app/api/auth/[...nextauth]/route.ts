@@ -1,12 +1,12 @@
 import { NextApiHandler } from 'next';
-import NextAuth from 'next-auth';
+import NextAuth, { NextAuthOptions } from 'next-auth';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import GitHubProvider from 'next-auth/providers/github';
 import prisma from '../../../../lib/prisma';
 
 export const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, authOptions);
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   theme: {
     logo: "https://next-auth.js.org/img/logo/logo-sm.png",
   },
@@ -17,7 +17,7 @@ export const authOptions = {
     }),
   ],
   adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET,
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export { authHandler as GET, authHandler as POST };
