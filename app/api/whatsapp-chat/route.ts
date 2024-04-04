@@ -37,7 +37,6 @@ export const uploadChatDataToDB = async (messages: any[]) => {
   return result;
 }
 
-// TODO: if a message is already added do not add it again check duplicate via message
 // TODO: Index on message to make the fetches/duplicate checker faster
 // TODO: Add auth to routes
 // TODO: Rate Limit user so a user can't use this feature more than once in a day
@@ -49,6 +48,21 @@ export async function POST(request: NextRequest) {
     const result = await uploadChatDataToDB(messages);
 
     return NextResponse.json({ message: 'Data inserted successfully', status: 200, data: result })
+  } catch (error) {
+    logger.error(JSON.stringify(error || {}));
+    return NextResponse.error();
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    logger.info('started deleting messages');
+
+    const result = await prisma.message.deleteMany();
+
+    logger.info('deleted all the messages successfully');
+
+    return NextResponse.json({ message: 'Data deleted successfully', status: 200, data: result })
   } catch (error) {
     logger.error(JSON.stringify(error || {}));
     return NextResponse.error();

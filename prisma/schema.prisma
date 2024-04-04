@@ -19,6 +19,8 @@ model Message {
   message      String
   attachment   Attachment? @relation(fields: [attachmentId], references: [id])
   attachmentId Int?
+
+   @@unique([date, author, message])
 }
 
 model Attachment {
