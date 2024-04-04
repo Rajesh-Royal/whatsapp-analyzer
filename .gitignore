@@ -40,3 +40,7 @@ next-env.d.ts
 
 # assets
 assets/WhatsApp Chat with common .txt
+
+# logs file
+combined.log
+error.log
