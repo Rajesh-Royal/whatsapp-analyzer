@@ -30,6 +30,10 @@ export async function GET(request: NextRequest) {
 }
 
 // TODO: accept whatsapp chat file uploading
+// TODO: if a message is already added do not add it again check duplicate via message
+// TODO: Index on message to make the fetches/duplicate checker faster
+// TODO: Add auth to routes
+// TODO: Rate Limit user so a user can't use this feature more than once in a day
 export async function POST(request: NextRequest) {
   // Process a POST request
   try {
