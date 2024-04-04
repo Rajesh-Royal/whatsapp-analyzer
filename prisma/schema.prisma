@@ -11,6 +11,7 @@ datasource db {
 }
 
 // Whatsapp messages schema
+// TODO: add createdat and updatedat to the schema
 
 model Message {
   id           Int         @id @default(autoincrement())
