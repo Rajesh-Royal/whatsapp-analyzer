@@ -11,7 +11,7 @@ datasource db {
 }
 
 // Whatsapp messages schema
-// TODO: add createdat and updatedat to the schema
+// TODO: add createdat and updatedat to the schema can use @db.Index infront of field to make it indexed
 
 model Message {
   id           Int         @id @default(autoincrement())
