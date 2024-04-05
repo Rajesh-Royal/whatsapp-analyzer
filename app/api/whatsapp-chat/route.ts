@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: 'Data inserted successfully', status: 200, data: [], count: insertCount })
   } catch (error: any) {
     const status = error.status || 500;
-    
+
     logger.error(`Failed to upload chat messages - error: ${error.message}`);
 
     return NextResponse.json({ message: 'Failed to insert messages', status, data: [] }, { status })
@@ -73,12 +73,15 @@ export async function DELETE(request: NextRequest) {
 
     const result = await prisma.message.deleteMany();
 
-    logger.info('deleted all the messages successfully');
+    logger.info(`deleted all the messages successfully`, {deleteCount: result.count});
 
-    return NextResponse.json({ message: 'Data deleted successfully', status: 200, data: result })
-  } catch (error) {
-    logger.error(JSON.stringify(error || {}));
-    return NextResponse.error();
+    return NextResponse.json({ message: 'Data deleted successfully', status: 200, data: [], count: result.count })
+  } catch (error: any) {
+     const status = error.status || 500;
+    
+    logger.error(`Failed to delete chat messages - error: ${error.message}`);
+
+    return NextResponse.json({ message: 'Failed to delete messages', status, data: [] }, { status })
   }
 }
 
