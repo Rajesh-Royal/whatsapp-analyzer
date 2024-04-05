@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -15,13 +16,17 @@ const FileUpload = () => {
     const response = await fetch('/api/parse-and-save-whatsapp-chat', {
       method: 'POST',
       body: formData,
+    }).then(async (response) => {
+      return response.json();
+    }).then((response) => {
+      if(response.status > 299 || response.status < 200){
+        throw new Error(response.message);
+      }
+      toast.success(response.message);
+    }).catch((error) => {
+      console.log(error);
+      toast.error(`Failed to parse file - ${error.message}`)
     });
-
-    if (response.ok) {
-      console.log('File uploaded successfully');
-    } else {
-      console.error('File upload failed');
-    }
   };
 
   return (
