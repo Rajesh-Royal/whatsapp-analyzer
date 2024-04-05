@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: 'Fetched messages successfully', status: 200, data: paginatedMessages, count: totalMessagesCount });
   } catch (error: any) {
     const status = error.status || 500;
-    return NextResponse.json({ message: 'Failed to fetch messages', status, data: [] }, {status})
+    return NextResponse.json({ message: 'Failed to fetch messages', status, data: [] }, { status })
   }
 }
 
@@ -50,16 +50,20 @@ export const uploadChatDataToDB = async (messages: any[]) => {
 // TODO: Add auth to routes
 // TODO: Rate Limit user so a user can't use this feature more than once in a day
 export async function POST(request: NextRequest) {
-  // @ts-ignore
   const { messages = [] } = await request.json();
 
   try {
     const result = await uploadChatDataToDB(messages);
 
-    return NextResponse.json({ message: 'Data inserted successfully', status: 200, data: result })
-  } catch (error) {
-    logger.error(JSON.stringify(error || {}));
-    return NextResponse.error();
+    const insertCount = result.reduce((acc, item) => acc + item.count, 0);
+
+    return NextResponse.json({ message: 'Data inserted successfully', status: 200, data: [], count: insertCount })
+  } catch (error: any) {
+    const status = error.status || 500;
+    
+    logger.error(`Failed to upload chat messages - error: ${error.message}`);
+
+    return NextResponse.json({ message: 'Failed to insert messages', status, data: [] }, { status })
   }
 }
 
