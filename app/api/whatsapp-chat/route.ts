@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
-import { logger } from '@/lib/logger';
+import { createLogger } from '@/lib/logger';
 import { chunkArray } from '@/utils/chunkArray';
+
+const logger = createLogger('app/api/whatsapp-chat');
 
 export async function GET(request: NextRequest) {
   try {

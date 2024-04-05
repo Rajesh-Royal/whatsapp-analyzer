@@ -1,14 +1,21 @@
 import winston from "winston";
+const { combine, timestamp, json, colorize } = winston.format;
 
-export const logger = winston.createLogger({
+const logger = winston.createLogger({
   level: 'info',
-  format: winston.format.json(),
-  defaultMeta: { service: 'whatsapp-service' },
+  format: combine(timestamp(), json(), colorize()),
+  defaultMeta: {},
   transports: [
-    new winston.transports.File({ filename: 'error.log', level: 'error' }),
-    new winston.transports.File({ filename: 'combined.log' }),
+    new winston.transports.File({ filename: 'app.log' }),
   ],
 });
+
+export const createLogger = (namespace?: string) => {
+  if(namespace){
+    return logger.child({service: namespace})
+  }
+  return logger;
+}
 
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
