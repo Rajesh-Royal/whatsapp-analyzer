@@ -1,21 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
-import fs from 'node:fs';
 import prisma from '@/lib/prisma';
-import { Prisma } from '@prisma/client';
-import * as whatsapp from '@/utils/whatsapp-parser';
 import { logger } from '@/utils/logger';
 import { chunkArray } from '@/utils/chunkArray';
 
 export async function GET(request: NextRequest) {
-  // Process a GET request
-  // Process a GET request
-  const urlParams = new URLSearchParams(request.nextUrl.search);
-  const limit = Number(urlParams.get('limit')) || 50; // Default limit is 50
-  const offset = Number(urlParams.get('offset')) || 0; // Default offset is 0
+  try {
+    // Process a GET request
+    const urlParams = new URLSearchParams(request.nextUrl.search);
+    const limit = Number(urlParams.get('limit')) || 50; // Default limit is 50
+    const offset = Number(urlParams.get('offset')) || 0; // Default offset is 0
 
-  // const paginatedMessages = messages.slice(offset, offset + limit);
+    const [paginatedMessages, totalMessagesCount] = await prisma.$transaction([
+      prisma.message.findMany({
+        skip: offset,
+        take: limit,
+        orderBy: {
+          date: 'asc'
+        }
+      }),
+      prisma.message.count()
+    ]);
 
-  return NextResponse.json({ message: 'Fetched successfully', status: 200, data: [] })
+    return NextResponse.json({ message: 'Fetched messages successfully', status: 200, data: paginatedMessages, count: totalMessagesCount });
+  } catch (error: any) {
+    const status = error.status || 500;
+    return NextResponse.json({ message: 'Failed to fetch messages', status, data: [] }, {status})
+  }
 }
 
 export const uploadChatDataToDB = async (messages: any[]) => {
@@ -37,7 +47,6 @@ export const uploadChatDataToDB = async (messages: any[]) => {
   return result;
 }
 
-// TODO: Index on message to make the fetches/duplicate checker faster
 // TODO: Add auth to routes
 // TODO: Rate Limit user so a user can't use this feature more than once in a day
 export async function POST(request: NextRequest) {

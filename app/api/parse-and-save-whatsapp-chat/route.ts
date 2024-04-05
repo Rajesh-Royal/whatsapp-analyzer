@@ -23,7 +23,7 @@ export async function POST(request: NextRequest) {
 
     const totalRecordsCreated = result.reduce((acc, item) => acc + item.count, 0);
     
-    logger.info(`Inserted ${totalRecordsCreated} new messages into the messages table`);
+    logger.info(`inserted ${totalRecordsCreated} new messages into the messages table`);
 
     return NextResponse.json({ message: `File uploaded and parsed successfully ${totalRecordsCreated} new messages were found`, status: 200, data: [], count: totalRecordsCreated });
   } catch (error: any) {
