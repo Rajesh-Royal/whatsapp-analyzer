@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
     logger.info(`parsed uploaded file total messages found ${messages.length}`);
 
-    const result = await uploadChatDataToDB(makeTimeStampUnique(messages.slice(0,50)));
+    const result = await uploadChatDataToDB(makeTimeStampUnique(messages));
 
     const totalRecordsCreated = result.reduce((acc, item) => acc + item.count, 0);
     
