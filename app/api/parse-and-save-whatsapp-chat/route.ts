@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { Prisma } from '@prisma/client';
 import * as whatsapp from '@/utils/whatsapp-parser';
-import { logger } from '@/utils/logger';
+import { logger } from '@/lib/logger';
 import { uploadChatDataToDB } from '../whatsapp-chat/route';
 import { makeTimeStampUnique } from '@/utils/addUniqueTimestamp';
 
