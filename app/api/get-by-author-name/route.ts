@@ -6,22 +6,25 @@ export async function GET(request: NextRequest) {
     const urlParams = new URLSearchParams(request.nextUrl.search);
     const author = urlParams.get('author');
 
-    if(!author) {
+    if (!author) {
       return NextResponse.json({ message: 'Author name is required', status: 400, data: [] }, { status: 400 })
     }
-    
-    const result =  await prisma.message.findFirst({
+
+    const result = await prisma.message.findFirst({
       where: {
-        author: String(author)
+        author: {
+          equals: String(author),
+          mode: 'insensitive',
+        }
       }
     });
 
     let data: any[] = [];
     let count = 0;
-    if(result?.id){
+    if (result?.id) {
       count = 1;
       data.push(result);
-    }else {
+    } else {
       return NextResponse.json({ message: 'No message found for this author', status: 204, data, count });
     }
 
