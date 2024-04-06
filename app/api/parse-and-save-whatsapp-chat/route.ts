@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import * as whatsapp from '@/utils/whatsapp-parser';
+import * as whatsapp from '@/lib/utils/whatsapp-parser';
 import { createLogger } from '@/lib/logger';
 import { uploadChatDataToDB } from '../whatsapp-chat/route';
-import { makeTimeStampUnique } from '@/utils/addUniqueTimestamp';
+import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
 
 const logger = createLogger('app/api/parse-and-save-whatsapp-chat');
 
