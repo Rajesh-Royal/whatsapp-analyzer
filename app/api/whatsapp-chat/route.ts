@@ -7,7 +7,6 @@ const logger = createLogger('app/api/whatsapp-chat');
 
 export async function GET(request: NextRequest) {
   try {
-    // Process a GET request
     const urlParams = new URLSearchParams(request.nextUrl.search);
     const limit = Number(urlParams.get('limit')) || 50; // Default limit is 50
     const offset = Number(urlParams.get('offset')) || 0; // Default offset is 0
