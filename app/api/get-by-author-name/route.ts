@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
+import { getPaginationParams } from '@/lib/utils/getPaginationParams';
 
 export async function GET(request: NextRequest) {
   try {
     const urlParams = new URLSearchParams(request.nextUrl.search);
     const author = urlParams.get('author');
-    const limit = Number(urlParams.get('limit')) || 50;
-    const offset = Number(urlParams.get('offset')) || 0;
+    const { limit, offset } = getPaginationParams(request);
 
     if (!author) {
       return NextResponse.json({ message: 'Author name is required', status: 400, data: [] }, { status: 400 })

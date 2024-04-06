@@ -2,14 +2,13 @@ import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { createLogger } from '@/lib/logger';
 import { chunkArray } from '@/lib/utils/chunkArray';
+import { getPaginationParams } from '@/lib/utils/getPaginationParams';
 
 const logger = createLogger('app/api/whatsapp-chat');
 
 export async function GET(request: NextRequest) {
   try {
-    const urlParams = new URLSearchParams(request.nextUrl.search);
-    const limit = Number(urlParams.get('limit')) || 50; // Default limit is 50
-    const offset = Number(urlParams.get('offset')) || 0; // Default offset is 0
+    const { limit, offset } = getPaginationParams(request);
 
     const [paginatedMessages, totalMessagesCount] = await prisma.$transaction([
       prisma.message.findMany({
@@ -74,12 +73,12 @@ export async function DELETE(request: NextRequest) {
 
     const result = await prisma.message.deleteMany();
 
-    logger.info(`deleted all the messages successfully`, {deleteCount: result.count});
+    logger.info(`deleted all the messages successfully`, { deleteCount: result.count });
 
     return NextResponse.json({ message: 'Data deleted successfully', status: 200, data: [], count: result.count })
   } catch (error: any) {
-     const status = error.status || 500;
-    
+    const status = error.status || 500;
+
     logger.error(`Failed to delete chat messages - error: ${error.message}`);
 
     return NextResponse.json({ message: 'Failed to delete messages', status, data: [] }, { status })
