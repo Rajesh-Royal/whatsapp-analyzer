@@ -16,14 +16,31 @@ export async function GET(request: NextRequest) {
 
     logger.info('incoming GET request', { params: { fromDate, toDate } });
 
-    const result: any[] = await prisma.$queryRawUnsafe(
-      `SELECT DATE(date) as date, ${author ? 'author,' : ''} COUNT(*) as count
-      FROM verceldb.public."Message"
-      WHERE date >= '${fromDate}' ${toDate ? `AND date <= '${toDate}'`: ''} ${author ? `AND LOWER(author) = '${author.toLowerCase()}'` : ''}
-      GROUP BY DATE(date) ${author ? `, author` : ''}
-      ORDER BY count DESC
-      ${limit ? `LIMIT ${limit} OFFSET ${offset || 0}` : ''}`
-    )
+    const result = await prisma.message.groupBy({
+      by: ['author'],
+      _count: {
+        message: true,
+      },
+      where: {
+        ...(fromDate || toDate ? {
+          date: {
+            ...(fromDate ? { gte: fromDate } : {}),
+            ...(toDate ? { lte: toDate } : {}),
+          }
+        } : {}),
+        ...(author ? {author: {
+          equals: author,
+          mode: 'insensitive'
+        }} : {})
+      },
+      orderBy: {
+        _count: {
+          message: 'desc',
+        },
+      },
+    skip: offset,
+    take: limit
+    });
     
     if (result.length === 0) {
       return NextResponse.json({ message: 'No messages analytics data found for this search', status: 204, data: [], count: 0 });
