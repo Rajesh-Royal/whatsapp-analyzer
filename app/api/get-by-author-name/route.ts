@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export async function GET(request: NextRequest) {
   try {
@@ -33,6 +34,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ message: 'Fetched message successfully', status: 200, data: result, count: result.length });
   } catch (error: any) {  
     const status = error.status || 500;
-    return NextResponse.json({ message: 'Failed to fetch message', status, data: [] }, { status })
+    return NextResponse.json({ message: 'Failed to fetch message', status, data: [], errorMessage: (error as PrismaClientKnownRequestError).message }, { status })
   }
 }

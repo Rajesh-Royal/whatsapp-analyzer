@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma';
 import { createLogger } from '@/lib/logger';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 const logger = createLogger('app/api/whatsapp-chat');
 
@@ -81,7 +82,7 @@ export async function DELETE(request: NextRequest) {
 
     logger.error(`Failed to delete chat messages - error: ${error.message}`);
 
-    return NextResponse.json({ message: 'Failed to delete messages', status, data: [] }, { status })
+    return NextResponse.json({ message: 'Failed to delete messages', status, data: [],errorMessage: (error as PrismaClientKnownRequestError).message }, { status })
   }
 }
 

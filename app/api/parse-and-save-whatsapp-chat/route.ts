@@ -3,6 +3,7 @@ import * as whatsapp from '@/lib/utils/whatsapp-parser';
 import { createLogger } from '@/lib/logger';
 import { uploadChatDataToDB } from '../whatsapp-chat/route';
 import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 const logger = createLogger('app/api/parse-and-save-whatsapp-chat');
 
@@ -29,6 +30,6 @@ export async function POST(request: NextRequest) {
   } catch (error: any) {
     logger.error(`Something went wrong: ${error.message} ${JSON.stringify(error)}`);
 
-    return NextResponse.json({ message: error.message, data: [], stackTrace: JSON.stringify(error) }, { status: 500 });
+    return NextResponse.json({ message: error.message, data: [], stackTrace: (error).stack, errorMessage: (error as PrismaClientKnownRequestError).message }, { status: 500 });
   }
 }
