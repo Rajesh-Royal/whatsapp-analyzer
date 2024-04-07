@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma';
 import { createLogger } from '@/lib/logger';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
-const logger = createLogger("app/api/get-by-messages-day");
+const logger = createLogger("app/api/chat-summary");
 
 export async function GET(request: NextRequest) {
   try {

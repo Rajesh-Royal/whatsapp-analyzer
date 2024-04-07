@@ -5,7 +5,7 @@ import { getDateParams } from '@/lib/utils/getDateParams';
 import { createLogger } from '@/lib/logger';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
-const logger = createLogger("app/api/get-by-messages-day");
+const logger = createLogger("app/api/get-by-messages-per-author");
 
 export async function GET(request: NextRequest) {
   try {
