@@ -4,6 +4,7 @@ import { createLogger } from '@/lib/logger';
 import { uploadChatDataToDB } from '../whatsapp-chat/route';
 import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger('app/api/parse-and-save-whatsapp-chat');
 
@@ -28,8 +29,6 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: `File uploaded and parsed successfully ${totalRecordsCreated} new messages were found`, status: 200, data: [], count: totalRecordsCreated });
   } catch (error: any) {
-    logger.error(`Something went wrong: ${error.message} ${JSON.stringify(error)}`);
-
-    return NextResponse.json({ message: error.message, data: [], stackTrace: (error).stack, errorMessage: (error as PrismaClientKnownRequestError).message }, { status: 500 });
+    return NextApiErrorHandler(error, 'Failed to parse file and save whatsapp chat');
   }
 }

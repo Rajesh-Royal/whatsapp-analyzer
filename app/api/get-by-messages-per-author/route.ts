@@ -3,7 +3,7 @@ import prisma from '@/lib/prisma';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
 import { getDateParams } from '@/lib/utils/getDateParams';
 import { createLogger } from '@/lib/logger';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger("app/api/get-by-messages-per-author");
 
@@ -48,7 +48,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ message: 'Fetched messages analytics successfully', status: 200, data: result, count: result.length });
   } catch (error: any) {
-    logger.error(error)
-    return NextResponse.json({ message: 'Failed to fetch messages analytics data', status: 500, data: [], errorMessage: (error as PrismaClientKnownRequestError).message }, { status: 500 })
+    return NextApiErrorHandler(error, 'Failed to fetch messages analytics data');
   }
 }

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { createLogger } from '@/lib/logger';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger("app/api/active-time-of-day");
 
@@ -14,10 +14,9 @@ export async function GET(request: NextRequest) {
 
     const result = await getMostActiveTime(author);
 
-    return NextResponse.json({ message: 'Fetched messages fun facts successfully', status: 200, data: [result], count: null });
+    return NextResponse.json({ message: 'Fetched active time analytics data successfully', status: 200, data: [result], count: null });
   } catch (error: any) {
-    logger.error(error)
-    return NextResponse.json({ message: 'Failed to fetch messages fun facts data', status: 500, data: [], errorMessage: (error as PrismaClientKnownRequestError).message }, { status: 500 })
+    return NextApiErrorHandler(error, 'Failed to fetch active time analytics data');
   }
 }
 

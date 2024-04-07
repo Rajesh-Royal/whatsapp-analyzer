@@ -4,6 +4,7 @@ import { createLogger } from '@/lib/logger';
 import { chunkArray } from '@/lib/utils/chunkArray';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger('app/api/whatsapp-chat');
 
@@ -24,8 +25,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ message: 'Fetched messages successfully', status: 200, data: paginatedMessages, count: totalMessagesCount });
   } catch (error: any) {
-    const status = error.status || 500;
-    return NextResponse.json({ message: 'Failed to fetch messages', status, data: [] }, { status })
+    return NextApiErrorHandler(error, 'Failed to fetch messages')
   }
 }
 
@@ -60,11 +60,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ message: 'Data inserted successfully', status: 200, data: [], count: insertCount })
   } catch (error: any) {
-    const status = error.status || 500;
-
-    logger.error(`Failed to upload chat messages - error: ${error.message}`);
-
-    return NextResponse.json({ message: 'Failed to insert messages', status, data: [] }, { status })
+    return NextApiErrorHandler(error, 'Failed to insert messages')
   }
 }
 
@@ -78,11 +74,7 @@ export async function DELETE(request: NextRequest) {
 
     return NextResponse.json({ message: 'Data deleted successfully', status: 200, data: [], count: result.count })
   } catch (error: any) {
-    const status = error.status || 500;
-
-    logger.error(`Failed to delete chat messages - error: ${error.message}`);
-
-    return NextResponse.json({ message: 'Failed to delete messages', status, data: [],errorMessage: (error as PrismaClientKnownRequestError).message }, { status })
+    return NextApiErrorHandler(error, 'Failed to delete messages')
   }
 }
 

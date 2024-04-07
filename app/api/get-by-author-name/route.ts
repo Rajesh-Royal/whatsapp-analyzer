@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
 import prisma from '@/lib/prisma';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { createLogger } from '@/lib/logger';
-import { ZOD_VALIDATION_ERROR } from '@/lib/utils/constants';
+import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger("app/api/get-by-author-name");
 
@@ -36,13 +34,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ message: 'Fetched message successfully', status: 200, data: result, count: result.length });
   } catch (error: any) {
-    console.log(error);
-    const status = error.status || 500;
-    if (error.cause === ZOD_VALIDATION_ERROR) {
-      const validationErrors = JSON.parse(error.message) as z.ZodIssue[];
-      return NextResponse.json({ message: 'Invalid Params', status, data: [], errorMessage: validationErrors[0].message, validationErrors }, { status })
-    }
-
-    return NextResponse.json({ message: 'Failed to fetch message', status, data: [], errorMessage: (error as PrismaClientKnownRequestError).message }, { status })
+    return NextApiErrorHandler(error, 'Failed to fetch message');
   }
 }
