@@ -9,10 +9,10 @@ interface PaginationParams {
 
 // Define a schema for the query parameters
 const schema = z.object({
-  limit: z.string().optional().refine(value => !isNaN(Number(value)), {
+  limit: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
     message: 'limit must be a number',
   }),
-  offset: z.string().optional().refine(value => !isNaN(Number(value)), {
+  offset: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
     message: 'offset must be a number',
   }),
 });

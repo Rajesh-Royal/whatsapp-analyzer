@@ -7,11 +7,18 @@ import { NextApiErrorHandler } from '@/lib/apiError';
 
 const logger = createLogger("app/api/get-by-messages-per-day");
 
+// to solve Prisma: TypeError: Do not know how to serialize a BigInt
+// @ts-ignore
+BigInt.prototype.toJSON = function () {
+  const int = Number.parseInt(this.toString());
+  return int ?? this.toString();
+};
+
 export async function GET(request: NextRequest) {
   try {
     const urlParams = new URLSearchParams(request.nextUrl.search);
     const author = urlParams.get('author');
-    const { fromDate, toDate } = getDateParams(request);
+    const { fromDate, toDate } = getDateParams(request, {fromDate: true, toDate: false});
     const {limit, offset} = getPaginationParams(request);
 
     logger.info('incoming GET request', { params: { fromDate, toDate } });
