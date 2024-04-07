@@ -13,15 +13,17 @@ export async function GET(request: NextRequest) {
     const urlParams = new URLSearchParams(request.nextUrl.search);
     const author = urlParams.get('author');
     const { fromDate, toDate } = getDateParams(request);
+    const {limit, offset} = getPaginationParams(request);
 
     logger.info('incoming GET request', { params: { fromDate, toDate } });
 
     const result: any[] = await prisma.$queryRawUnsafe(
       `SELECT DATE(date) as date, ${author ? 'author,' : ''} COUNT(*) as count
       FROM verceldb.public."Message"
-      WHERE date >= '${fromDate}' AND date <= '${toDate}' ${author ? `AND author = '${author}'` : ''}
+      WHERE date >= '${fromDate}' ${toDate ? `AND date <= '${toDate}'`: ''} ${author ? `AND LOWER(author) = '${author.toLowerCase()}'` : ''}
       GROUP BY DATE(date) ${author ? `, author` : ''}
-      ORDER BY count DESC`
+      ORDER BY count DESC
+      ${limit ? `LIMIT ${limit} OFFSET ${offset || 0}` : ''}`
     )
     
     if (result.length === 0) {
