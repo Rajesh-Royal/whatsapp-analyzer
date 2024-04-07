@@ -18,3 +18,10 @@ export function middleware(request: NextRequest) {
 
   return NextResponse.next();
 }
+
+// to solve Prisma: TypeError: Do not know how to serialize a BigInt
+// @ts-ignore
+BigInt.prototype.toJSON = function () {
+  const int = Number.parseInt(this.toString());
+  return int ?? this.toString();
+};
