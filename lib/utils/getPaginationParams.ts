@@ -1,16 +1,37 @@
-import { NextRequest } from "next/server";
+import { z } from 'zod';
+import { NextRequest } from 'next/server';
+import { ZOD_VALIDATION_ERROR } from './constants';
 
-// Define a type for the pagination parameters
-type PaginationParams = {
-  limit: number | undefined;
-  offset: number | undefined;
-};
+interface PaginationParams {
+  limit?: number;
+  offset?: number;
+}
 
-// Create a function to get the pagination parameters from the request
+// Define a schema for the query parameters
+const schema = z.object({
+  limit: z.string().optional().refine(value => !isNaN(Number(value)), {
+    message: 'limit must be a number',
+  }),
+  offset: z.string().optional().refine(value => !isNaN(Number(value)), {
+    message: 'offset must be a number',
+  }),
+});
+
 export function getPaginationParams(request: NextRequest): PaginationParams {
   const urlParams = new URLSearchParams(request.nextUrl.search);
-  const limit = Number(urlParams.get('limit')) || undefined
-  const offset = Number(urlParams.get('offset')) || undefined
+  const params = {
+    limit: urlParams.get('limit'),
+    offset: urlParams.get('offset'),
+  };
 
-  return { limit, offset };
+  // Validate the query parameters
+  const result = schema.safeParse(params);
+  if (!result.success) {
+    throw new Error(JSON.stringify(result.error.errors), {cause: ZOD_VALIDATION_ERROR});
+  }
+
+  return {
+    limit: result.data.limit ? Number(result.data.limit) : undefined,
+    offset: result.data.offset ? Number(result.data.offset) : undefined,
+  };
 }
