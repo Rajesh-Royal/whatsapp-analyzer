@@ -1,8 +1,6 @@
 import FileUpload from "@/components/FileUpload";
-import { serverSession } from "@/serverSession";
 
 export default async function Index() {
-  const session = await serverSession();
 
   return (
     <div className="flex flex-col gap-6">
@@ -12,7 +10,7 @@ export default async function Index() {
           Current Session
         </div>
         <pre className="py-6 px-4 whitespace-pre-wrap break-all text-black">
-          {JSON.stringify(session, null, 2)}
+          {JSON.stringify({}, null, 2)}
         </pre>
       </div>
     <div>
