@@ -36,6 +36,7 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
+import { BeatLoader } from "react-spinners";
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -222,7 +223,7 @@ const SettingsPage = () => {
               disabled={isPending}
               type="submit"
             >
-              Save
+              {!isPending ? <BeatLoader /> : 'Save'}
             </Button>
           </form>
         </Form>

@@ -1,19 +1,62 @@
-import { NextRequest, NextResponse } from 'next/server';
+import NextAuth from "next-auth";
 
-export function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname.startsWith('/api')) {
-  
-    if(request.method === "GET"){
-      const urlParams = new URLSearchParams(request.nextUrl.search);
-    const params: {[x: string]: string} = {};
+import authConfig from "@/auth.config";
+import {
+  DEFAULT_LOGIN_REDIRECT,
+  apiAuthPrefix,
+  authRoutes,
+  publicRoutes,
+} from "@/routes";
+
+const { auth } = NextAuth(authConfig);
+
+export default auth((req) => {
+  if (req.method === "GET") {
+    const urlParams = new URLSearchParams(req.nextUrl.search);
+    const params: { [x: string]: string } = {};
 
     for (const [key, value] of urlParams.entries()) {
       params[key] = value;
     }
 
     console.info('incoming GET request', { params });
-    }
+  }
+  const { nextUrl } = req;
+  const isLoggedIn = !!req.auth;
+
+  const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
+  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+
+  if (isApiAuthRoute) {
+    return;
   }
 
-  return NextResponse.next();
+  if (isAuthRoute) {
+    if (isLoggedIn) {
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+    }
+    return;
+  }
+
+  if (!isLoggedIn && !isPublicRoute) {
+    let callbackUrl = nextUrl.pathname;
+    if (nextUrl.search) {
+      callbackUrl += nextUrl.search;
+    }
+
+    const encodedCallbackUrl = encodeURIComponent(callbackUrl);
+
+    return Response.redirect(new URL(
+      `/auth/login?callbackUrl=${encodedCallbackUrl}`,
+      nextUrl
+    ));
+  }
+
+  return;
+})
+
+// Optionally, don't invoke Middleware on some paths
+export const config = {
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/', '/(api|trpc)(.*)'],
 }
