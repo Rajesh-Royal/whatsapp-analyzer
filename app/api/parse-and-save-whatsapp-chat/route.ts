@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import * as whatsapp from '@/lib/utils/whatsapp-parser';
 import { createLogger } from '@/lib/logger';
 import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NextApiErrorHandler } from '@/lib/apiError';
 import { uploadChatDataToDB } from '@/actions/uploadChatDataToDB';
 
