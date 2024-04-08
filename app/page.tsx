@@ -1,9 +1,10 @@
+'use client'
 import FileUpload from "@/components/FileUpload";
-import { serverSession } from "@/serverSession";
+import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
-export default async function Index() {
-  const session = await serverSession();
-
+export default function Index() {
+const session = useSession();
   return (
     <div className="flex flex-col gap-6">
       <h1 className="text-3xl font-bold">User Session Next Auth github</h1>
