@@ -223,7 +223,7 @@ const SettingsPage = () => {
               disabled={isPending}
               type="submit"
             >
-              {!isPending ? <BeatLoader /> : 'Save'}
+              {isPending ? <BeatLoader /> : 'Save'}
             </Button>
           </form>
         </Form>
