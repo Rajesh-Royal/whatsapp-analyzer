@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { NextApiRequest, NextApiResponse } from 'next';
-import { authOptions } from '@/auth';
+
 
 const secret = process.env.AUTH_SECRET;
 
