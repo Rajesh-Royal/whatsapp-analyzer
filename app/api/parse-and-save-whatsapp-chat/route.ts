@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as whatsapp from '@/lib/utils/whatsapp-parser';
 import { createLogger } from '@/lib/logger';
-import { uploadChatDataToDB } from '../whatsapp-chat/route';
 import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NextApiErrorHandler } from '@/lib/apiError';
+import { uploadChatDataToDB } from '@/actions/uploadChatDataToDB';
 
 const logger = createLogger('app/api/parse-and-save-whatsapp-chat');
 

@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import prisma from '@/lib/prisma';
 import { createLogger } from '@/lib/logger';
-import { chunkArray } from '@/lib/utils/chunkArray';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { NextApiErrorHandler } from '@/lib/apiError';
+import { uploadChatDataToDB } from '@/actions/uploadChatDataToDB';
 
 const logger = createLogger('app/api/whatsapp-chat');
 
@@ -29,24 +28,6 @@ export async function GET(request: NextRequest) {
   }
 }
 
-export const uploadChatDataToDB = async (messages: any[]) => {
-  const messagesChunks = chunkArray(messages, 500);
-
-  const createManyQueries = messagesChunks.map((messagesChunk) => {
-    return prisma.message.createMany({
-      data: messagesChunk,
-      skipDuplicates: true,
-    });
-  });
-
-  logger.info("Started creating whatsapp messages");
-
-  const result = await prisma.$transaction(createManyQueries);
-
-  logger.info("finished executing prisma transactions for whatsapp messages");
-
-  return result;
-}
 
 // TODO: Add auth to routes
 // TODO: Rate Limit user so a user can't use this feature more than once in a day
