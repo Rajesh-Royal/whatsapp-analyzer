@@ -1,5 +1,4 @@
 import FileUpload from "@/components/FileUpload";
-import CustomLink from "@/components/custom-link"
 import { serverSession } from "@/serverSession";
 
 export default async function Index() {

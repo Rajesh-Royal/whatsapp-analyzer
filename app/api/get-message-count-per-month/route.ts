@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
-import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
+import { NextApiErrorHandler } from '@/lib/apiError';
+import {z} from 'zod';
 
 // to solve Prisma: TypeError: Do not know how to serialize a BigInt
 // @ts-ignore
@@ -8,6 +9,16 @@ BigInt.prototype.toJSON = function () {
   const int = Number.parseInt(this.toString());
   return int ?? this.toString();
 };
+
+const schema = z.object({
+  year: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
+    message: 'Year must be a 4 digit number',
+  }),
+  month: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
+    message: 'Month must be a number',
+  }),
+  author: z.string().optional().nullable(),
+});
 
 export async function GET(request: NextRequest) {
   try {
@@ -20,7 +31,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ message: 'Year or month parameter is required', status: 400, data: {} }, { status: 400 });
     }
 
-    let result;
+    let result: { author: string, month: number, message_count: number }[] = [];
     if (year && month) {
       // Fetch message count for the specified month and year
       result = await prisma.$queryRawUnsafe(`
@@ -53,9 +64,14 @@ export async function GET(request: NextRequest) {
         "author", "month"
     `);
     }
-    console.log(result);
+
     // Format the result
-    const formattedResult = {};
+    const formattedResult: {
+      [x: string]: {
+        [x: string]: number
+      }
+    } = {};
+
     result.forEach(row => {
       const { author, month, message_count } = row;
       if (!formattedResult[author]) {
@@ -64,9 +80,8 @@ export async function GET(request: NextRequest) {
       formattedResult[author][month] = message_count;
     });
 
-    return NextResponse.json({ message: 'Fetched message count successfully', status: 200, data: formattedResult });
+    return NextResponse.json({ message: 'Fetched message count per month successfully', status: 200, data: formattedResult });
   } catch (error: any) {
-    const status = error.status || 500;
-    return NextResponse.json({ message: 'Failed to fetch message count', status, data: {}, errorMessage: (error as PrismaClientKnownRequestError).message }, { status });
+    return NextApiErrorHandler(error, 'Failed to fetch message count per month');
   }
 }
