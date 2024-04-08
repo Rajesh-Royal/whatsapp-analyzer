@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import { NextApiRequest, NextApiResponse } from 'next';
-import { decode } from 'next-auth/jwt';
 import { getServerSession } from 'next-auth';
-import { authOptions } from './auth/[...nextauth]/route';
+import { authOptions } from '@/auth';
 
 const secret = process.env.AUTH_SECRET;
 
