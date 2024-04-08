@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { NextApiErrorHandler } from '@/lib/apiError';
-import {z} from 'zod';
+import { z } from 'zod';
+import { ZOD_VALIDATION_ERROR } from '@/lib/utils/constants';
 
 // to solve Prisma: TypeError: Do not know how to serialize a BigInt
 // @ts-ignore
@@ -11,14 +12,19 @@ BigInt.prototype.toJSON = function () {
 };
 
 const schema = z.object({
-  year: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
-    message: 'Year must be a 4 digit number',
+  year: z.number().optional().nullable().refine(value => value ? value > 2014 && value <= new Date().getFullYear() : true, {
+    message: `Year must be a 4 digit number and between 2014 and ${new Date().getFullYear()}`,
   }),
-  month: z.string().optional().nullable().refine(value => !isNaN(Number(value)), {
-    message: 'Month must be a number',
+  month: z.number().optional().nullable().refine(value => value ? value >= 1 && value <= 12 : true, {
+    message: 'Month must be a number between 1 and 12',
   }),
-  author: z.string().optional().nullable(),
+  author: z.string().max(10, {
+    message: 'Author can have a maximum of 10 characters',
+  }).optional().nullable(),
+}).refine(data => !(data.month && !data.year), {
+  message: 'Year is required when month is provided',
 });
+
 
 export async function GET(request: NextRequest) {
   try {
@@ -27,8 +33,10 @@ export async function GET(request: NextRequest) {
     const month = Number(urlParams.get('month'));
     const author = String(urlParams.get('author') || '');
 
-    if (!year && !month) {
-      return NextResponse.json({ message: 'Year or month parameter is required', status: 400, data: {} }, { status: 400 });
+    // Validate the query parameters
+    const schemaParseResult = schema.safeParse({year, month, author});
+    if (!schemaParseResult.success) {
+      throw new Error(JSON.stringify(schemaParseResult.error.errors), { cause: ZOD_VALIDATION_ERROR });
     }
 
     let result: { author: string, month: number, message_count: number }[] = [];
@@ -80,7 +88,7 @@ export async function GET(request: NextRequest) {
       formattedResult[author][month] = message_count;
     });
 
-    return NextResponse.json({ message: 'Fetched message count per month successfully', status: 200, data: formattedResult });
+    return NextResponse.json({ message: 'Fetched message count per month successfully', status: 200, data: [formattedResult] });
   } catch (error: any) {
     return NextApiErrorHandler(error, 'Failed to fetch message count per month');
   }
