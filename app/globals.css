@@ -31,3 +31,39 @@ body {
     text-wrap: balance;
   }
 }
+
+nav {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+}
+.right {
+  margin-left: auto;
+}
+
+.right a {
+  border: 1px solid var(--geist-foreground);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+button {
+  border: none;
+}
+.bold {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: var(--geist-foreground);
+  display: inline-block;
+}
+
+.left a[data-active='true'] {
+  color: gray;
+}
+
+a + a {
+  margin-left: 1rem;
+}
