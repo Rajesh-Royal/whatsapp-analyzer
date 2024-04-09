@@ -1,4 +1,15 @@
-# Key Features
+# How to add/update/disable auth providers
+
+- Navigate to the `auth.config.ts` in the project root and disable/enable/add/update the auth provider as per your need.
+- The `auth.ts` as project root contains all the Auth v5 configurations, like custom pages, events, callbacks etc.
+- To Edit public and auth routes update `routes.ts` in the project root.
+- The middleware settings are in the `middleware.ts` file in the project root.
+- Auth pages are inside `app/auth/*` folder.
+- Auth actions like `login`, `signup` are in the `actions/**` folder.
+- Auth hooks inside `hooks/` folder can be used to get current user session details.
+- All the DB realted controllers are inside `data/` folder.
+
+## Key Features
 
 - 🔐 Next-auth v5 (Auth.js)
 - 🚀 Next.js 14 with server actions
