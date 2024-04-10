@@ -30,7 +30,7 @@ export default function Header() {
                     {sessionData?.user ? (
                         <UserNav user={sessionData.user} />
                     ) : (
-                        <LoginButton>
+                        <LoginButton mode="modal">
                             <Button size="sm">
                                 Sign In
                             </Button>
