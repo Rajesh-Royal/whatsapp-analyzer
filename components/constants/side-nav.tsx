@@ -9,18 +9,24 @@ export const NavItems: NavItem[] = [
     color: "text-sky-500",
   },
   {
-    title: "Example",
+    title: "Users",
     icon: BookOpenCheck,
-    href: "/dashboard/example",
+    href: "/dashboard/user",
     color: "text-orange-500",
     isChidren: true,
     children: [
       {
-        title: "Example-01",
+        title: "All Users",
         icon: BookOpenCheck,
         color: "text-red-500",
-        href: "/dashboard/example/employees",
+        href: "/dashboard/user/users",
       },
     ],
+  },
+  {
+    title: "Admin Settings",
+    icon: LayoutDashboard,
+    href: "/dashboard/admin/settings",
+    color: "text-sky-500",
   },
 ];

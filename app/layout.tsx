@@ -21,12 +21,15 @@ export default async function RootLayout({
 
   return (
     <SessionProvider session={session}>
+      {/* TODO: fix theme provider */}
+      {/* <NextThemeProviders > */}
       <html lang="en">
         <body className={inter.className}>
           <Toaster />
           {children}
         </body>
       </html>
+      {/* </NextThemeProviders> */}
     </SessionProvider>
   )
 }

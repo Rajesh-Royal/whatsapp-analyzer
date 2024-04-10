@@ -7,6 +7,7 @@ import { Boxes } from "lucide-react";
 import { UserNav } from "@/components/dashboardLayout/user-nav";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "../auth/login-button";
 
 export default function Header() {
     const { data: sessionData } = useSession();
@@ -18,7 +19,7 @@ export default function Header() {
                     className="hidden items-center justify-between gap-2 md:flex"
                 >
                     <Boxes className="h-6 w-6" />
-                    <h1 className="text-lg font-semibold">T3 app template</h1>
+                    <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
                 </Link>
                 <div className={cn("block md:!hidden")}>
                     <MobileSidebar />
@@ -29,13 +30,11 @@ export default function Header() {
                     {sessionData?.user ? (
                         <UserNav user={sessionData.user} />
                     ) : (
-                        <Button size="sm"
-                            onClick={() => {
-                                void signIn();
-                            }}
-                        >
-                            Sign In
-                        </Button>
+                        <LoginButton>
+                            <Button size="sm">
+                                Sign In
+                            </Button>
+                        </LoginButton>
                     )}
                 </div>
             </nav>
