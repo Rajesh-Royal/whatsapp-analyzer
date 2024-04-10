@@ -1,10 +1,10 @@
 
-import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { ThemeToggle } from "@/components/dashboardLayout/theme-toggle";
 import { cn } from "@/lib/utils";
-import { MobileSidebar } from "@/components/layout/mobile-sidebar";
+import { MobileSidebar } from "@/components/dashboardLayout/mobile-sidebar";
 import Link from "next/link";
 import { Boxes } from "lucide-react";
-import { UserNav } from "@/components/layout/user-nav";
+import { UserNav } from "@/components/dashboardLayout/user-nav";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 

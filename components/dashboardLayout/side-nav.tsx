@@ -13,7 +13,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/layout/subnav-accordion";
+} from "@/components/dashboardLayout/subnav-accordion";
 import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 

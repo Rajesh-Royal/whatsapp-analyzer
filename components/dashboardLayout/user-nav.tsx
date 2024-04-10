@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { LogOut } from "lucide-react";
-import { UserAvatar } from "@/components/layout/user-avatar";
+import { UserAvatar } from "@/components/dashboardLayout/user-avatar";
 
 type Props = {
     user: Pick<User, "name" | "image" | "email">;

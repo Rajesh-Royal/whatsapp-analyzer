@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { SideNav } from "@/components/layout/side-nav";
+import { SideNav } from "@/components/dashboardLayout/side-nav";
 import { NavItems } from "@/components/constants/side-nav";
 
 import { cn } from "@/lib/utils";

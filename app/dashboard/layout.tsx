@@ -1,8 +1,9 @@
+'use client'
 import React from "react";
-import Header from "@/components/layout/header";
-import Sidebar from "@/components/layout/sidebar";
+import Header from "@/components/dashboardLayout/header";
+import Sidebar from "@/components/dashboardLayout/sidebar";
 
-export const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
     return (
         <>
             <Header />
@@ -15,3 +16,5 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         </>
     );
 };
+
+export default Layout;
