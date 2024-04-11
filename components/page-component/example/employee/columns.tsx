@@ -2,11 +2,11 @@
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { type ColumnDef } from "@tanstack/react-table";
-import { CellAction } from "./cell-action";
+import { format } from "date-fns";
 
 export const columns: ColumnDef<any>[] = [
   {
-    id: "select",
+    id: "selected",
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -30,28 +30,27 @@ export const columns: ColumnDef<any>[] = [
     enableHiding: false,
   },
   {
-    accessorKey: "name",
-    header: "First Name",
+    accessorKey: "author",
+    header: "User",
   },
   {
-    accessorKey: "name",
-    header: "Last Name",
+    accessorKey: "message",
+    header: "Message",
   },
   {
-    accessorKey: "gender",
-    header: "Gender",
+    accessorKey: "attachmentId",
+    header: "Attachment",
   },
   {
-    accessorKey: "createAt",
-    header: "Create Time",
+    accessorKey: "date",
+    header: "Message Date",
+    cell({ getValue }) {
+      return format(new Date(getValue() as string), 'EEE dd yyyy h:mm aa');
+    },
   },
-  {
-    accessorKey: "updateAt",
-    header: "Update Time",
-  },
-  {
-    id: "actions",
-    enableSorting: false,
-    cell: ({ row }) => <CellAction data={row.original} />,
-  },
+  // {
+  //   id: "actions",
+  //   enableSorting: false,
+  //   cell: ({ row }) => <CellAction data={row.original} />,
+  // },
 ];

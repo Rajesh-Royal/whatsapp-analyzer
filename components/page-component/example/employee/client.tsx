@@ -18,16 +18,16 @@ export const EmployeeClient = ({ data }: EmployeeClientProps) => {
     <>
       <div className="flex items-center justify-between">
         <Heading
-          title="Employee"
-          description="Manage employee for you business"
+          title="Whatsapp Chats"
+          description="See all"
         />
-        <Button
+        {/* <Button
           onClick={() => {
             router.push("/example/employees/new");
           }}
         >
           <Plus className="mr-2 h-4 w-4" /> Add New
-        </Button>
+        </Button> */}
       </div>
       <Separator />
       <div>

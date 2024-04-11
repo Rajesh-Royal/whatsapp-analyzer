@@ -30,7 +30,7 @@ import { DataTableToolbar } from "@/components/ui/data-table/data-table-toolbar"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
-  data: TData[]
+  data: TData[],
 }
 
 export function DataTable<TData, TValue>({
@@ -65,7 +65,8 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-  })
+  });
+  
 
   return (
     <div className="space-y-4">
