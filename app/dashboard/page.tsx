@@ -67,7 +67,7 @@ const Home = async () => {
                  <CalendarDaysIcon className="size-4 text-muted-foreground"/>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">+12,234</div>
+                  <div className="text-2xl font-bold">{result.totalDays}</div>
                   <p className="text-xs text-muted-foreground">
                     From {result.firstMessage?.getFullYear()} to {result.lastMessage?.getFullYear()}
                   </p>
