@@ -23,7 +23,7 @@ const AdminPage = () => {
   }
   
   const onApiRouteClick = () => {
-    fetch("/api/admin")
+    fetch("/api")
       .then((response) => {
         if (response.ok) {
           toast.success("Allowed API Route!");
