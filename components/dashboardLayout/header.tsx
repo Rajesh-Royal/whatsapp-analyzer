@@ -1,4 +1,4 @@
-
+'use client'
 import { ThemeToggle } from "@/components/dashboardLayout/theme-toggle";
 import { cn } from "@/lib/utils";
 import { MobileSidebar } from "@/components/dashboardLayout/mobile-sidebar";
