@@ -12,7 +12,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
         return (
             <div className="custom-tooltip bg-muted p-3">
-                <p className="label">{`Date : ${format(label, 'MMM dd yyyy h:mm aa')}`}</p>
+                <p className="label">{`Date : ${format(label, 'EEE MMM dd yyyy h:mm aa')}`}</p>
                 <p className="intro">{`Count : ${payload[0].value}`}</p>
             </div>
         );

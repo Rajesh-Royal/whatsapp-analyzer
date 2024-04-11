@@ -32,7 +32,7 @@ const Home = async () => {
         </div>
         <Tabs defaultValue="overview" className="space-y-4">
           <TabsList>
-            <TabsTrigger value="overview">Messages Per Month</TabsTrigger>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics">
               Analytics
             </TabsTrigger>
