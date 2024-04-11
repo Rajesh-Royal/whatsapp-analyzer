@@ -1,4 +1,4 @@
-import { BookOpenCheck, LayoutDashboard } from "lucide-react";
+import { BookOpenCheck, LayoutDashboard, MessageSquare, Settings } from "lucide-react";
 import { type NavItem } from "@/types";
 
 export const NavItems: NavItem[] = [
@@ -9,23 +9,23 @@ export const NavItems: NavItem[] = [
     color: "text-sky-500",
   },
   {
-    title: "Users",
-    icon: BookOpenCheck,
-    href: "/dashboard/user",
+    title: "Chats",
+    icon: MessageSquare,
+    href: "/dashboard/chats",
     color: "text-orange-500",
-    isChidren: true,
-    children: [
-      {
-        title: "All Users",
-        icon: BookOpenCheck,
-        color: "text-red-500",
-        href: "/dashboard/user/users",
-      },
-    ],
+    // isChidren: true,
+    // children: [
+    //   {
+    //     title: "All Users",
+    //     icon: BookOpenCheck,
+    //     color: "text-red-500",
+    //     href: "/dashboard/user/users",
+    //   },
+    // ],
   },
   {
     title: "Admin Settings",
-    icon: LayoutDashboard,
+    icon: Settings,
     href: "/dashboard/admin/settings",
     color: "text-sky-500",
   },
