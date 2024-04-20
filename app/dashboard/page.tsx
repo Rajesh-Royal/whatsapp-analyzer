@@ -1,25 +1,13 @@
-import React from "react";
-import {
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardDescription,
-  Card,
-} from "@/components/ui/card";
+import React, { Suspense } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { RecentSales } from "@/components/dashboard/recent-sales";
-import { getChatSummary } from "@/data/whatsapp-chat/chat-summary";
-import { CalendarDaysIcon, CalendarRangeIcon, MessageSquareIcon } from "lucide-react";
-import { format } from "date-fns";
-import { getMessagesCountPerAuthor } from "@/data/whatsapp-chat/messages-per-author";
-import { MessagesPerDayBarChart } from "@/components/dashboard/MessagesPerDayBarChart";
-import { getMessagesPerDay } from "@/data/whatsapp-chat/messages-per-day";
+import OverviewCards from "./_components/OverviewCards";
+import TopUsersList from "./_components/TopUsersList";
+import MessagesPerMonth from "./_components/MessagesPerMonth";
+import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
+import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
+import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
 
-const Home = async () => {
-  const result = await getChatSummary();
-  const messagesPerAuthor = await getMessagesCountPerAuthor();
-  const messagesPerDay = await getMessagesPerDay(result.firstMessage?.toLocaleDateString(), '', '', 0, 50);
-
+const Home = () => {
   return (
     <div className="flex h-full flex-col">
       <div className="flex-1 space-y-4 p-8 pt-6">
@@ -45,99 +33,17 @@ const Home = async () => {
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    First Message
-                  </CardTitle>
-                  <CalendarRangeIcon className="size-4 text-muted-foreground"/>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{
-                    format(result.firstMessage as Date, 'MMM dd yyyy h:mm aa')
-                  }</div>
-                  <p className="text-xs text-muted-foreground">
-                    Day: {format(result.firstMessage as Date, 'EEEE')}
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Days</CardTitle>
-                 <CalendarDaysIcon className="size-4 text-muted-foreground"/>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{result.totalDays}</div>
-                  <p className="text-xs text-muted-foreground">
-                    From {result.firstMessage?.getFullYear()} to {result.lastMessage?.getFullYear()}
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Last Message
-                  </CardTitle>
-                  <CalendarRangeIcon className="size-4 text-muted-foreground"/>
-                </CardHeader>
-                <CardContent>
-                <div className="text-2xl font-bold">{
-                    format(result.lastMessage as Date, 'EEE dd yyyy h:mm aa')
-                  }</div>
-                  <p className="text-xs text-muted-foreground">
-                    Day: {format(result.lastMessage as Date, 'EEEE')}
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Messages
-                  </CardTitle>
-                 <MessageSquareIcon className="size-4 text-muted-foreground"/>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{result.totalMessages}</div>
-                  <p className="text-xs text-muted-foreground">
-                    Since {result.firstMessage?.getFullYear()}
-                  </p>
-                </CardContent>
-              </Card>
-              <Card>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">
-                    Total Users
-                  </CardTitle>
-                 <MessageSquareIcon className="size-4 text-muted-foreground"/>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{result.authors.length}</div>
-                  <p className="text-xs text-muted-foreground">
-                    Since {result.firstMessage?.getFullYear()}
-                  </p>
-                </CardContent>
-              </Card>
+              <Suspense fallback={<OverviewCardsSkeleton />}>
+                <OverviewCards />
+              </Suspense>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-              <Card className="col-span-4">
-                <CardHeader>
-                  <CardTitle>Messages per month</CardTitle>
-                </CardHeader>
-                <CardContent className="pl-2">
-                  <MessagesPerDayBarChart data={messagesPerDay}/>
-                </CardContent>
-              </Card>
-              <Card className="col-span-3">
-                <CardHeader>
-                  <CardTitle>Top users</CardTitle>
-                  <CardDescription>
-                    Users who sent most messages of all time
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <RecentSales topMessageCountUsers={messagesPerAuthor}/>
-                </CardContent>
-              </Card>
+              <Suspense fallback={<MessagesPerMonthSkeleton />}>
+                <MessagesPerMonth />
+              </Suspense>
+              <Suspense fallback={<TopUsersListSkeleton />}>
+                <TopUsersList />
+              </Suspense>
             </div>
           </TabsContent>
         </Tabs>
