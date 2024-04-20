@@ -1,18 +1,13 @@
-"use client";
 import React from "react";
 import { Heading } from "@/components/common/heading";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { DataTable } from "@/components/ui/data-table/data-table";
 import { columns } from "./columns";
+import { getAllWhatsappChat } from "@/data/whatsapp-chat/get-all-chat";
 
-interface EmployeeClientProps {
-  data: any[];
-}
-export const EmployeeClient = ({ data }: EmployeeClientProps) => {
-  const router = useRouter();
+export const WhatsappChat = async () => {
+  const result = await getAllWhatsappChat();
 
   return (
     <>
@@ -21,17 +16,10 @@ export const EmployeeClient = ({ data }: EmployeeClientProps) => {
           title="Whatsapp Chats"
           description="See all"
         />
-        {/* <Button
-          onClick={() => {
-            router.push("/example/employees/new");
-          }}
-        >
-          <Plus className="mr-2 h-4 w-4" /> Add New
-        </Button> */}
       </div>
       <Separator />
       <div>
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={result.paginatedMessages} />
       </div>
     </>
   );

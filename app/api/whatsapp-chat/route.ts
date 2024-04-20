@@ -4,6 +4,7 @@ import { createLogger } from '@/lib/logger';
 import { getPaginationParams } from '@/lib/utils/getPaginationParams';
 import { NextApiErrorHandler } from '@/lib/apiError';
 import { uploadChatDataToDB } from '@/actions/uploadChatDataToDB';
+import { getAllWhatsappChat } from '@/data/whatsapp-chat/get-all-chat';
 
 const logger = createLogger('app/api/whatsapp-chat');
 
@@ -11,16 +12,7 @@ export async function GET(request: NextRequest) {
   try {
     const { limit, offset } = getPaginationParams(request);
 
-    const [paginatedMessages, totalMessagesCount] = await prisma.$transaction([
-      prisma.message.findMany({
-        skip: offset,
-        take: limit,
-        orderBy: {
-          date: 'asc'
-        }
-      }),
-      prisma.message.count()
-    ]);
+    const {paginatedMessages, totalMessagesCount} = await getAllWhatsappChat(limit, offset);
 
     return NextResponse.json({ message: 'Fetched messages successfully', status: 200, data: paginatedMessages, count: totalMessagesCount });
   } catch (error: any) {
