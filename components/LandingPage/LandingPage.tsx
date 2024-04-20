@@ -13,7 +13,7 @@ const LandingPage = () => {
         <Heading
           title='Welcome to WhatsappAnalyzer'
           description='Get insights into your chats - Now with more interesting graphs, free statistics and full PDF export, whatsapp chat file upload and more features will be added one by one, please consider to contribute.'
-          className='text-center my-5'
+          className='text-center my-5 max-w-[800px]'
         />
         <Button>
           Go to dashboard
