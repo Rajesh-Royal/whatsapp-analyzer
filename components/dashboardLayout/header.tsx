@@ -8,6 +8,7 @@ import { UserNav } from "@/components/dashboardLayout/user-nav";
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "../auth/login-button";
+import Image from 'next/image'
 
 export default function Header() {
     const { data: sessionData } = useSession();
@@ -18,7 +19,12 @@ export default function Header() {
                     href={"/"}
                     className="hidden items-center justify-between gap-2 md:flex"
                 >
-                    <Boxes className="h-6 w-6" />
+                    <Image
+                        src="/logo.png"
+                        width={50}
+                        height={50}
+                        alt="Picture of the author"
+                    />
                     <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
                 </Link>
                 <div className={cn("block md:!hidden")}>
