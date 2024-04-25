@@ -1,13 +1,16 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../dashboardLayout/header'
 import { Button } from '../ui/button'
 import { Heading } from '../common/heading'
 import { useRouter } from "next/navigation";
+import * as whatsapp from '@/lib/utils/whatsapp-parser';
+import GetWhatsappChatInsights from '@/lib/utils/whatsapp-insight/insight'
 
 const LandingPage = () => {
   const router = useRouter();
+
   return (
     <>
       <Header />
@@ -22,9 +25,67 @@ const LandingPage = () => {
         }}>
           Go to dashboard
         </Button>
+
+        <UploadComponent />
       </div>
     </>
   )
 }
 
 export default LandingPage
+
+const UploadComponent: React.FC = () => {
+  const [file, setFile] = useState<File | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files && event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
+
+  const handleSubmit = async () => {
+    try {
+      setLoading(true);
+      const parsedText = whatsapp.parseString(await file?.text() as string);
+      const insights = new GetWhatsappChatInsights(parsedText, file?.name)
+      const new_insights = insights.analysis();
+
+      console.log(new_insights);
+      if (!file) {
+        throw new Error("Select a file");
+      }
+      const response = {data: []};
+      console.log(response.data); // Handle response data as needed
+    } catch (error: any) {
+      setLoading(false)
+      setError(error.message);
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center mt-8">
+      <input
+        type="file"
+        onChange={handleFileChange}
+        accept=".txt"
+        className="mb-4"
+      />
+      <button
+        onClick={handleSubmit}
+        disabled={loading}
+        className={`bg-blue-500 text-white px-4 py-2 rounded ${
+          loading ? 'opacity-50 cursor-not-allowed' : ''
+        }`}
+      >
+        {loading ? 'Uploading...' : 'Upload File'}
+      </button>
+      {error && <p className="text-red-500 mt-2">{error}</p>}
+    </div>
+  );
+};
