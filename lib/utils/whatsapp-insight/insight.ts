@@ -17,6 +17,7 @@ class GetWhatsappChatInsights {
         this.chatInsightsVars.fileName = filename.slice(19, -4);
 
         this.generateEmojiData();
+        this.generateWordCloud();
     }
 
     analysis() {
@@ -121,7 +122,7 @@ class GetWhatsappChatInsights {
         const messageCountByUser: { [username: string]: number } = {};
         let totalLinks = 0;
         let totalMedia = 0;
-    
+
         // Count messages and links (excluding system messages)
         this.chatDatabase.forEach(message => {
             if (message.author !== "system") {
@@ -135,7 +136,7 @@ class GetWhatsappChatInsights {
                 }
             }
         });
-    
+
         // Find user with least and most texts
         let leastTextsUser = '';
         let mostTextsUser = '';
@@ -151,13 +152,13 @@ class GetWhatsappChatInsights {
                 mostTextsUser = user;
             }
         });
-    
+
         // Calculate total days, total messages, total words, and total users
         const totalDays = Math.ceil((new Date(this.chatDatabase[this.chatDatabase.length - 1].date).getTime() - new Date(this.chatDatabase[0].date).getTime()) / (1000 * 60 * 60 * 24));
         const totalMessageExchanged = this.chatDatabase.filter(message => message.author !== "system").length;
         const totalWords = this.chatInsightsVars.totalwords;
         const totalUsers = Object.keys(messageCountByUser).length;
-    
+
         return {
             leastTexts: leastTextsUser,
             mostTexts: mostTextsUser,
@@ -169,6 +170,79 @@ class GetWhatsappChatInsights {
             totalWords
         };
     }
+
+    /**
+     * Generate word cloud of all the chat messages.
+     */
+    generateWordCloud() {
+        const wordCloudData: WordCloudData = {};
+
+        // Helper function to tokenize messages into words
+        const tokenizeMessage = (message: string): string[] => {
+            // Use regex to split message into words
+            return message.toLowerCase().match(/\b\w+\b/g) || [];
+        };
+
+        // Count word usage for each user
+        this.chatDatabase.forEach(message => {
+            const author = message.author as string;
+            if (!wordCloudData[author]) {
+                wordCloudData[author] = {
+                    wordStat: {
+                        leastUsedWord: '',
+                        mostUsedWord: ''
+                    },
+                    wordUsage: []
+                };
+            }
+            const words = tokenizeMessage(message.message);
+            words.forEach(word => {
+                // Skip "<Media omitted>" and similar words
+                if (!word.includes('<media') && !word.includes('omitted>')) {
+                    const existingWordIndex = wordCloudData[author].wordUsage.findIndex(item => item.text === word);
+                    if (existingWordIndex !== -1) {
+                        wordCloudData[author].wordUsage[existingWordIndex].value++;
+                    } else {
+                        wordCloudData[author].wordUsage.push({ text: word, value: 1 });
+                    }
+                }
+            });
+        });
+
+        // Calculate most and least used words for each user
+        Object.keys(wordCloudData).forEach(username => {
+            const userWordUsage = wordCloudData[username].wordUsage;
+            const sortedWords = userWordUsage.sort((a, b) => b.value - a.value);
+            wordCloudData[username].wordStat.mostUsedWord = sortedWords[0]?.text || '';
+            wordCloudData[username].wordStat.leastUsedWord = sortedWords[sortedWords.length - 1]?.text || '';
+        });
+
+        // Calculate word usage for all users combined
+        const allWordUsage: { [word: string]: number } = {};
+        Object.values(wordCloudData).forEach(userWordData => {
+            userWordData.wordUsage.forEach(({ text, value }) => {
+                allWordUsage[text] = (allWordUsage[text] || 0) + value;
+            });
+        });
+
+        // Find most and least used words for all users combined
+        const sortedAllWords = Object.keys(allWordUsage).sort((a, b) => allWordUsage[b] - allWordUsage[a]);
+        const mostUsedWordAll = sortedAllWords[0] || '';
+        const leastUsedWordAll = sortedAllWords[sortedAllWords.length - 1] || '';
+
+        // Add word cloud data for all users combined
+        wordCloudData.All = {
+            wordStat: {
+                mostUsedWord: mostUsedWordAll,
+                leastUsedWord: leastUsedWordAll
+            },
+            wordUsage: sortedAllWords.map(word => ({ text: word, value: allWordUsage[word] }))
+        };
+
+        // Assign word cloud data to class variable
+        this.chatInsightsVars.worddata = wordCloudData;
+    }
+
 
 }
 
@@ -188,3 +262,16 @@ interface EmojiData {
         }[];
     };
 }
+
+interface WordCloudData {
+    [username: string]: {
+        wordStat: {
+            mostUsedWord: string;
+            leastUsedWord: string;
+        };
+        wordUsage: {
+            text: string;
+            value: number;
+        }[];
+    };
+};

@@ -58,7 +58,7 @@ const UploadComponent: React.FC = () => {
         throw new Error("Select a file");
       }
       const response = {data: []};
-      console.log(response.data); // Handle response data as needed
+      // console.log(response.data); // Handle response data as needed
     } catch (error: any) {
       setLoading(false)
       setError(error.message);
