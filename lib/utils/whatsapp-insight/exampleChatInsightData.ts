@@ -1,4 +1,4 @@
-{
+export const exampleChatInsightData = {
     "stats": {
         "emoji": {
             "All": {
@@ -50584,7 +50584,7 @@
             "totalMedia": 543,
             "totalMessageExchanged": 5629,
             "totalUsers": 3,
-            "totalWords": 0
+            "totalWords": 105599
         },
         "basedOnDays": {
             "All": [
@@ -50788,5 +50788,5 @@
         "denny"
     ],
     "groupName": "common ",
-    "isDummyData": false
+    "isDummyData": true
 }

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface ChatStatsBoxProps {
   title: string;
-  stats: string;
+  stats: string | number;
   iconName: keyof typeof dynamicIconImports;
   subTitle?: string;
   bgClass?: string;

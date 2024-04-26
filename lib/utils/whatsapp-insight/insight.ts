@@ -162,7 +162,7 @@ class GetWhatsappChatInsights {
         // Calculate total days, total messages, total words, and total users
         const totalDays = Math.ceil((new Date(this.chatDatabase[this.chatDatabase.length - 1].date).getTime() - new Date(this.chatDatabase[0].date).getTime()) / (1000 * 60 * 60 * 24));
         const totalMessageExchanged = this.chatDatabase.filter(message => message.author !== "system").length;
-        const totalWords = this.chatInsightsVars.totalwords;
+        const totalWords = this.chatDatabase.reduce((acc, item) => acc + item.message.length, 0);
         const totalUsers = Object.keys(messageCountByUser).length;
 
         return {

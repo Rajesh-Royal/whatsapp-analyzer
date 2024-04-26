@@ -19,7 +19,7 @@ const Home = () => {
             <Button size="sm">Download</Button>
           </div> */}
         </div>
-        <Tabs defaultValue="overview" className="space-y-4">
+        <Tabs defaultValue="analytics" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics">
@@ -32,15 +32,15 @@ const Home = () => {
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>
-                {/* <OverviewCards /> */}
+                <OverviewCards />
               </Suspense>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
               <Suspense fallback={<MessagesPerMonthSkeleton />}>
-                {/* <MessagesPerMonth /> */}
+                <MessagesPerMonth />
               </Suspense>
               <Suspense fallback={<TopUsersListSkeleton />}>
-                {/* <TopUsersList /> */}
+                <TopUsersList />
               </Suspense>
             </div>
           </TabsContent>
