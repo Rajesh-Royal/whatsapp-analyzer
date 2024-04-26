@@ -9,6 +9,7 @@ class GetWhatsappChatInsights {
         userdata: {},
         emojidata: {} as EmojiData,
         fileName: '',
+        uniqueUserNames: [] as string[],
     }
     chatDatabase: Message[] = [];
 
@@ -16,6 +17,7 @@ class GetWhatsappChatInsights {
         this.chatDatabase = chatDatabase;
         this.chatInsightsVars.fileName = filename.slice(19, -4);
 
+        this.chatInsightsVars.uniqueUserNames = this.getUniqueUsernames()
         this.generateEmojiData();
         this.generateWordCloud();
     }
@@ -26,16 +28,20 @@ class GetWhatsappChatInsights {
                 emoji: this.chatInsightsVars.emojidata,
                 wordcloud: this.chatInsightsVars.worddata,
                 timeline: null, // we will implement it later
-                radarMap: null, // we will implement it later
+                radarMap: this.generateRadarMap(),
                 summary: this.chatSummary(),
                 basedOnDays: this.generateStatsBasedOnDays(),
                 userspecific: this.chatInsightsVars.userdata
             },
-            usernames: this.getUniqueUsernames(),
+            usernames: this.chatInsightsVars.uniqueUserNames,
             filename: this.chatInsightsVars.fileName,
             isDummyData: false
         };
         return analysis;
+    }
+
+    private isSystemUser(username: string | null): boolean {
+        return username === 'system';
     }
 
     /**
@@ -292,6 +298,83 @@ class GetWhatsappChatInsights {
         return basedOnDaysData;
     }
 
+    /**
+     * Generates radar map data based on the chat messages.
+     * Radar map data provides insights into the distribution of messages
+     * throughout the day, including average texts per hour, least active hour,
+     * and most active hour.
+     * 
+     * @returns Radar map data containing statistics and usage information.
+     */
+    generateRadarMap(): RadarMapData {
+        const radarMapData: RadarMapData = {};
+
+        // Helper function to get hour of the day from a date string
+        const getHourOfDay = (dateString: Date): number => {
+            const date = new Date(dateString);
+            return date.getHours();
+        };
+
+        // Count messages for each hour of the day
+        const hourStats: { [hour: number]: number } = {};
+        this.chatDatabase.forEach(message => {
+            const hour = getHourOfDay(message.date);
+            hourStats[hour] = (hourStats[hour] || 0) + 1;
+        });
+
+        // Convert hourStats to array of RadarMapUsage objects
+        const radarMapUsage: RadarMapUsage = Object.entries(hourStats).map(([time, count]) => ({ count, time: parseInt(time) }));
+
+        // Calculate average texts per hour, least active hour, and most active hour
+        const totalMessages = Object.values(hourStats).reduce((total, count) => total + count, 0);
+        const averageTextsPerHour = totalMessages / 24;
+        const leastActiveHour = Object.entries(hourStats).reduce((prev, [hour, count]) => count < prev[1] ? [hour, count] : prev, ['0', Infinity])[0];
+        const mostActiveHour = Object.entries(hourStats).reduce((prev, [hour, count]) => count > prev[1] ? [hour, count] : prev, ['0', 0])[0];
+
+        // Store data for all users combined
+        radarMapData.All = {
+            radarmapStat: {
+                averageTextsPerHour,
+                leastActiveHour,
+                mostActiveHour
+            },
+            radarmapUsage: radarMapUsage
+        };
+
+        // Calculate and store data for each user (excluding system)
+        const users = this.chatInsightsVars.uniqueUserNames.filter(author => author !== 'system');
+        users.forEach(user => {
+            const userMessages = this.chatDatabase.filter(message => message.author === user);
+
+            // Count messages for each hour of the day for the current user
+            const hourStatsUser: { [hour: number]: number } = {};
+            userMessages.forEach(message => {
+                const hour = getHourOfDay(message.date);
+                hourStatsUser[hour] = (hourStatsUser[hour] || 0) + 1;
+            });
+
+            // Convert hourStatsUser to array of RadarMapUsage objects for the current user
+            const radarMapUsageUser: RadarMapUsage = Object.entries(hourStatsUser).map(([time, count]) => ({ count, time: parseInt(time) }));
+
+            // Calculate average texts per hour, least active hour, and most active hour for the current user
+            const totalMessagesUser = Object.values(hourStatsUser).reduce((total, count) => total + count, 0);
+            const averageTextsPerHourUser = totalMessagesUser / 24;
+            const leastActiveHourUser = Object.entries(hourStatsUser).reduce((prev, [hour, count]) => count < prev[1] ? [hour, count] : prev, ['0', Infinity])[0];
+            const mostActiveHourUser = Object.entries(hourStatsUser).reduce((prev, [hour, count]) => count > prev[1] ? [hour, count] : prev, ['0', 0])[0];
+
+            // Store data for the current user
+            radarMapData[user] = {
+                radarmapStat: {
+                    averageTextsPerHour: averageTextsPerHourUser,
+                    leastActiveHour: leastActiveHourUser,
+                    mostActiveHour: mostActiveHourUser
+                },
+                radarmapUsage: radarMapUsageUser
+            };
+        });
+
+        return radarMapData;
+    }
 
 }
 
@@ -336,4 +419,24 @@ interface BasedOnDaysData {
         leastActiveDay: string;
         mostActiveDay: string;
     }];
+};
+
+// radar map types
+
+type RadarMapStat = {
+    averageTextsPerHour: number;
+    leastActiveHour: string;
+    mostActiveHour: string;
+};
+
+type RadarMapUsage = {
+    count: number;
+    time: number;
+}[];
+
+type RadarMapData = {
+    [username: string]: {
+        radarmapStat: RadarMapStat;
+        radarmapUsage: RadarMapUsage;
+    };
 };
