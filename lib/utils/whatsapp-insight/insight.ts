@@ -28,7 +28,7 @@ class GetWhatsappChatInsights {
                 timeline: null, // we will implement it later
                 radarMap: null, // we will implement it later
                 summary: this.chatSummary(),
-                basedOnDays: null, // we will implement it later
+                basedOnDays: this.generateStatsBasedOnDays(),
                 userspecific: this.chatInsightsVars.userdata
             },
             usernames: this.getUniqueUsernames(),
@@ -243,6 +243,55 @@ class GetWhatsappChatInsights {
         this.chatInsightsVars.worddata = wordCloudData;
     }
 
+    /**
+     * Chat insights based on days
+     */
+    generateStatsBasedOnDays(): BasedOnDaysData {
+        const basedOnDaysData: BasedOnDaysData = {};
+
+        // Helper function to get day of the week from a date string
+        const getDayOfWeek = (dateString: Date): string => {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const date = new Date(dateString);
+            return days[date.getDay()];
+        };
+
+        // Count messages for each day of the week
+        const dayStats: { [day: string]: number } = {};
+        this.chatDatabase.forEach(message => {
+            const day = getDayOfWeek(message.date);
+            dayStats[day] = (dayStats[day] || 0) + 1;
+        });
+
+        // Convert dayStats to array of DayStats objects
+        const dayStatsArray: DayStats[] = Object.entries(dayStats).map(([day, count]) => ({ DAY: day, MESSAGE: count }));
+
+        // Calculate average texts, least active day, and most active day
+        const totalMessages = Object.values(dayStats).reduce((total, count) => total + count, 0);
+        const averageTexts = totalMessages / 7;
+        const leastActiveDay = Object.entries(dayStats).reduce((prev, [day, count]) => count < prev[1] ? [day, count] : prev, ['Sunday', Infinity])[0];
+        const mostActiveDay = Object.entries(dayStats).reduce((prev, [day, count]) => count > prev[1] ? [day, count] : prev, ['Sunday', 0])[0];
+
+        // Store data for all users combined
+        basedOnDaysData.All = [dayStatsArray, {
+            averageTexts,
+            leastActiveDay,
+            mostActiveDay
+        }];
+
+        // Store data for each user (excluding system)
+        const users = new Set(this.chatDatabase.filter(message => message.author !== 'system').map(message => message.author as string));
+        users.forEach(user => {
+            basedOnDaysData[user] = [dayStatsArray, {
+                averageTexts,
+                leastActiveDay,
+                mostActiveDay
+            }];
+        });
+
+        return basedOnDaysData;
+    }
+
 
 }
 
@@ -274,4 +323,17 @@ interface WordCloudData {
             value: number;
         }[];
     };
+};
+
+interface DayStats {
+    DAY: string;
+    MESSAGE: number;
+};
+
+interface BasedOnDaysData {
+    [username: string]: [DayStats[], {
+        averageTexts: number;
+        leastActiveDay: string;
+        mostActiveDay: string;
+    }];
 };
