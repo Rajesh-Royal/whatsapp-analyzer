@@ -6,6 +6,7 @@ import MessagesPerMonth from "./_components/MessagesPerMonth";
 import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
 import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
 import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
+import ChatSummary from "./_components/analytics/ChatSummary";
 
 const Home = () => {
   return (
@@ -27,24 +28,24 @@ const Home = () => {
             <TabsTrigger value="reports">
               Reports
             </TabsTrigger>
-            <TabsTrigger value="notifications">
-              Notifications
-            </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>
-                <OverviewCards />
+                {/* <OverviewCards /> */}
               </Suspense>
             </div>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
               <Suspense fallback={<MessagesPerMonthSkeleton />}>
-                <MessagesPerMonth />
+                {/* <MessagesPerMonth /> */}
               </Suspense>
               <Suspense fallback={<TopUsersListSkeleton />}>
-                <TopUsersList />
+                {/* <TopUsersList /> */}
               </Suspense>
             </div>
+          </TabsContent>
+          <TabsContent value="analytics">
+            <ChatSummary />
           </TabsContent>
         </Tabs>
       </div>

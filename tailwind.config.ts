@@ -52,6 +52,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        whatsappGreenBg: {
+          default: "hsl(var(--whatsappLightGreenBackground))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",
