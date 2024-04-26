@@ -31,7 +31,7 @@ class GetWhatsappChatInsights {
                 radarMap: this.generateRadarMap(),
                 summary: this.chatSummary(),
                 basedOnDays: this.generateStatsBasedOnDays(),
-                userspecific: this.chatInsightsVars.userdata
+                userspecific: this.generateUserSpecificInformation(),
             },
             usernames: this.chatInsightsVars.uniqueUserNames,
             filename: this.chatInsightsVars.fileName,
@@ -410,6 +410,64 @@ class GetWhatsappChatInsights {
         return chatTimeline;
     }
 
+    /**
+     * Generates user-specific information based on the messages.
+     * 
+     * @returns The user-specific information.
+     */
+    generateUserSpecificInformation(): UserSpecificInfo {
+        const userSpecificInfo: UserSpecificInfo = {};
+
+         // Helper function to get day of the week from a date string
+         const getDayOfWeek = (dateString: Date): string => {
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const date = new Date(dateString);
+            return days[date.getDay()];
+        };
+
+        this.chatInsightsVars.uniqueUserNames.filter((username) => !this.isSystemUser(username)).forEach(username => {
+            const userMessages = this.chatDatabase.filter(message => message.author === username && !this.isSystemUser(username));
+            const totalMessages = userMessages.length;
+            const totalDays = new Set(userMessages.map(message => new Date(message.date).toLocaleDateString())).size;
+            const totalWords = userMessages.reduce((sum, message) => sum + message.message.split(/\s+/).length, 0);
+            const totalEmojis = userMessages.reduce((sum, message) => {
+                const emojisInMessage = message.message.match(emojiRegex());
+                return sum + (emojisInMessage ? emojisInMessage.length : 0);
+            }, 0);
+            const totalMedia = userMessages.filter(message => message.message.includes('<Media omitted>')).length;
+            const totalLinks = userMessages.filter(message => message.message.includes('http')).length;
+            const messageDates = userMessages.map(message => new Date(message.date).getTime());
+            const {maxMessageDate, minMessageDate} = {
+                maxMessageDate: new Date(Math.max(...messageDates)),
+                minMessageDate: new Date(Math.min(...messageDates)),
+            }
+            const mostActiveDate = maxMessageDate.toLocaleDateString();
+            const leastActiveDate = minMessageDate.toLocaleDateString();
+            const mostActiveDay = getDayOfWeek(maxMessageDate);
+            const leastActiveDay = getDayOfWeek(minMessageDate);
+            const averageMessagePerDay = totalDays ? totalMessages / totalDays : 0;
+            const averageWordsPerMessage = totalMessages ? totalWords / totalMessages : 0;
+
+            userSpecificInfo[username] = {
+                averageMessagePerDay,
+                averageWordsPerMessage,
+                leastActiveDate,
+                leastActiveDay,
+                mostActiveDate,
+                mostActiveDay,
+                totalDays,
+                totalEmojis,
+                totalLinks,
+                totalMedia,
+                totalMessages,
+                totalWords
+            };
+        });
+
+        return userSpecificInfo;
+    }
+
+
 
 }
 
@@ -489,3 +547,23 @@ interface ChatTimeline {
         }[];
     };
 }
+
+// userspecific information
+
+interface UserSpecificInfo {
+    [username: string]: {
+        averageMessagePerDay: number;
+        averageWordsPerMessage: number;
+        leastActiveDate: string;
+        leastActiveDay: string;
+        mostActiveDate: string;
+        mostActiveDay: string;
+        totalDays: number;
+        totalEmojis: number;
+        totalLinks: number;
+        totalMedia: number;
+        totalMessages: number;
+        totalWords: number;
+    };
+}
+
