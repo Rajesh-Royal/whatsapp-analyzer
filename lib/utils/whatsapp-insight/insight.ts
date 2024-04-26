@@ -8,14 +8,14 @@ class GetWhatsappChatInsights {
         worddata: {},
         userdata: {},
         emojidata: {} as EmojiData,
-        fileName: '',
+        groupName: '',
         uniqueUserNames: [] as string[],
     }
     chatDatabase: Message[] = [];
 
     constructor(chatDatabase: Message[], filename: string = '') {
         this.chatDatabase = chatDatabase;
-        this.chatInsightsVars.fileName = filename.slice(19, -4);
+        this.chatInsightsVars.groupName = filename.slice(19, -4);
 
         this.chatInsightsVars.uniqueUserNames = this.getUniqueUsernames()
         this.generateEmojiData();
@@ -34,7 +34,7 @@ class GetWhatsappChatInsights {
                 userspecific: this.generateUserSpecificInformation(),
             },
             usernames: this.chatInsightsVars.uniqueUserNames,
-            filename: this.chatInsightsVars.fileName,
+            groupName: this.chatInsightsVars.groupName,
             isDummyData: false
         };
         return analysis;
