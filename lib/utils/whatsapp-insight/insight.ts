@@ -27,7 +27,7 @@ class GetWhatsappChatInsights {
             stats: {
                 emoji: this.chatInsightsVars.emojidata,
                 wordcloud: this.chatInsightsVars.worddata,
-                timeline: null, // we will implement it later
+                timeline: this.generateChatTimeline(),
                 radarMap: this.generateRadarMap(),
                 summary: this.chatSummary(),
                 basedOnDays: this.generateStatsBasedOnDays(),
@@ -376,6 +376,41 @@ class GetWhatsappChatInsights {
         return radarMapData;
     }
 
+    /**
+     * Generates chat timeline data based on the messages.
+     * 
+     * @returns The chat timeline data.
+     */
+    generateChatTimeline(): ChatTimeline {
+        const chatTimeline: ChatTimeline = {};
+
+        this.chatDatabase.forEach(message => {
+            const author = message.author;
+            if (!this.isSystemUser(author) && author !== null) {
+                const messageDate = new Date(message.date);
+                const formattedDate = messageDate.toUTCString();
+                chatTimeline[author] = chatTimeline[author] || { timelineStat: { mostActiveDate: '', value: 0 }, timelineUsage: [] };
+                const existingUsage = chatTimeline[author].timelineUsage.find(usage => usage.date === formattedDate);
+                if (existingUsage) {
+                    existingUsage.count++;
+                } else {
+                    chatTimeline[author].timelineUsage.push({ date: formattedDate, count: 1 });
+                }
+            }
+        });
+
+        // Calculate statistics for each user
+        Object.keys(chatTimeline).forEach(author => {
+            const timelineUsage = chatTimeline[author].timelineUsage;
+            const mostActiveDate = timelineUsage.reduce((prev, curr) => curr.count > prev.count ? curr : prev).date;
+            const mostActiveCount = timelineUsage.find(usage => usage.date === mostActiveDate)?.count || 0;
+            chatTimeline[author].timelineStat = { mostActiveDate, value: mostActiveCount };
+        });
+
+        return chatTimeline;
+    }
+
+
 }
 
 export default GetWhatsappChatInsights;
@@ -440,3 +475,17 @@ type RadarMapData = {
         radarmapUsage: RadarMapUsage;
     };
 };
+
+// timeline
+interface ChatTimeline {
+    [username: string]: {
+        timelineStat: {
+            mostActiveDate: string;
+            value: number;
+        };
+        timelineUsage: {
+            count: number,
+            date: string,
+        }[];
+    };
+}
