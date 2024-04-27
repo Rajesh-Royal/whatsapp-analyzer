@@ -15,38 +15,30 @@ const ChatSummary: React.FC = () => {
         ? "We respect your decision. Here's how we'd show your stats."
         : `Showing chat between ${groupName}`
     }
-    subTitle={isDummyData ? `Showing example chat between ${groupName}` : ''}
+      subTitle={isDummyData ? `Showing example chat between ${groupName}` : ''}
     >
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <div className="tile is-parent">
-          <ChatStatsBox
-            title={"Total Days"}
-            stats={totalDays.toLocaleString()}
-            iconName="calendar"
-          />
-        </div>
-        <div className="tile is-parent">
-          <ChatStatsBox
-            title="Total Message Exchanged"
-            stats={totalMessageExchanged.toLocaleString()}
-            iconName="message-square"
-          />
-        </div>
-        <div className="tile is-parent">
-          <ChatStatsBox
-            title={"Total Words Sent"}
-            stats={totalWords.toLocaleString()}
-            iconName="send"
-          />
-        </div>
-        <div className="tile is-parent">
-          <ChatStatsBox
-            title={"Total Media Sent"}
-            stats={totalMedia.toLocaleString()}
-            iconName="clapperboard"
-          />
-        </div>
+        <ChatStatsBox
+          title={"Total Days"}
+          stats={totalDays.toLocaleString()}
+          iconName="calendar"
+        />
+        <ChatStatsBox
+          title="Total Message Exchanged"
+          stats={totalMessageExchanged.toLocaleString()}
+          iconName="message-square"
+        />
+        <ChatStatsBox
+          title={"Total Words Sent"}
+          stats={totalWords.toLocaleString()}
+          iconName="send"
+        />
+        <ChatStatsBox
+          title={"Total Media Sent"}
+          stats={totalMedia.toLocaleString()}
+          iconName="clapperboard"
+        />
       </div>
     </Section>
   );
