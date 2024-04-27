@@ -7,6 +7,7 @@ import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
 import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
 import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
 import ChatSummary from "./_components/analytics/ChatSummary";
+import ChatTimeline from "./_components/analytics/ChatTimeline";
 
 const Home = () => {
   return (
@@ -46,6 +47,7 @@ const Home = () => {
           </TabsContent>
           <TabsContent value="analytics">
             <ChatSummary />
+            <ChatTimeline />
           </TabsContent>
         </Tabs>
       </div>

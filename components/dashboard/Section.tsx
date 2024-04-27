@@ -18,7 +18,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   return (
 
-    <section>
+    <section className="mb-12 ">
       <Card
         className={cn(classNames, style.sectionDefaultShadow, "p-6 border-none dark:shadow-sm dark:shadow-neutral-600")}
       >
