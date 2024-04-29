@@ -11,7 +11,8 @@ interface ChatStatsBoxProps {
   subTitle?: string;
   bgClass?: string;
   noBox?: boolean;
-  iconClassNames?: string
+  iconClassNames?: string;
+  cardClassNames?: string;
 }
 
 const ChatStatsBox: React.FC<ChatStatsBoxProps>
@@ -21,9 +22,10 @@ const ChatStatsBox: React.FC<ChatStatsBoxProps>
     stats,
     iconName,
     iconClassNames,
+    cardClassNames,
   }) => {
     return (
-      <Card className="bg-whatsappGreenBg-default">
+      <Card className={cn("bg-whatsappGreenBg-default", cardClassNames)}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium">
             {title}
