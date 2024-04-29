@@ -22,6 +22,7 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        black: "hsl(222.2 84% 4.9%)",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         primary: {
@@ -52,6 +53,9 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        whatsappGreenBg: {
+          default: "hsl(var(--whatsappLightGreenBackground))",
+        }
       },
       borderRadius: {
         lg: "var(--radius)",

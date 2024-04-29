@@ -6,6 +6,9 @@ import MessagesPerMonth from "./_components/MessagesPerMonth";
 import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
 import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
 import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
+import ChatSummary from "./_components/analytics/ChatSummary";
+import ChatTimeline from "./_components/analytics/ChatTimeline";
+import ChatInsightDayWise from "./_components/analytics/ChatInsightDayWise";
 
 const Home = () => {
   return (
@@ -18,7 +21,7 @@ const Home = () => {
             <Button size="sm">Download</Button>
           </div> */}
         </div>
-        <Tabs defaultValue="overview" className="space-y-4">
+        <Tabs defaultValue="analytics" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics">
@@ -26,9 +29,6 @@ const Home = () => {
             </TabsTrigger>
             <TabsTrigger value="reports">
               Reports
-            </TabsTrigger>
-            <TabsTrigger value="notifications">
-              Notifications
             </TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
@@ -45,6 +45,11 @@ const Home = () => {
                 <TopUsersList />
               </Suspense>
             </div>
+          </TabsContent>
+          <TabsContent value="analytics">
+            <ChatSummary />
+            <ChatTimeline />
+            <ChatInsightDayWise />
           </TabsContent>
         </Tabs>
       </div>

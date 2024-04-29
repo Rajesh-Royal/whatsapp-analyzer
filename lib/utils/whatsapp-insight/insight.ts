@@ -162,7 +162,7 @@ class GetWhatsappChatInsights {
         // Calculate total days, total messages, total words, and total users
         const totalDays = Math.ceil((new Date(this.chatDatabase[this.chatDatabase.length - 1].date).getTime() - new Date(this.chatDatabase[0].date).getTime()) / (1000 * 60 * 60 * 24));
         const totalMessageExchanged = this.chatDatabase.filter(message => message.author !== "system").length;
-        const totalWords = this.chatInsightsVars.totalwords;
+        const totalWords = this.chatDatabase.reduce((acc, item) => acc + item.message.length, 0);
         const totalUsers = Object.keys(messageCountByUser).length;
 
         return {
@@ -377,38 +377,57 @@ class GetWhatsappChatInsights {
     }
 
     /**
-     * Generates chat timeline data based on the messages.
-     * 
-     * @returns The chat timeline data.
-     */
-    generateChatTimeline(): ChatTimeline {
-        const chatTimeline: ChatTimeline = {};
+ * Generates the chat timeline for each user and 'All'.
+ * 
+ * @returns The chat timeline.
+ */
+generateChatTimeline(): ChatTimeline {
+    const chatTimeline: ChatTimeline = {};
+    const allTimelineUsage: { date: string, count: number }[] = [];
 
-        this.chatDatabase.forEach(message => {
-            const author = message.author;
-            if (!this.isSystemUser(author) && author !== null) {
-                const messageDate = new Date(message.date);
-                const formattedDate = messageDate.toUTCString();
-                chatTimeline[author] = chatTimeline[author] || { timelineStat: { mostActiveDate: '', value: 0 }, timelineUsage: [] };
-                const existingUsage = chatTimeline[author].timelineUsage.find(usage => usage.date === formattedDate);
-                if (existingUsage) {
-                    existingUsage.count++;
-                } else {
-                    chatTimeline[author].timelineUsage.push({ date: formattedDate, count: 1 });
-                }
+    this.chatDatabase.forEach(message => {
+        const author = message.author;
+        if (!this.isSystemUser(author) && author !== null) {
+            const messageDate = new Date(message.date);
+            const formattedDate = messageDate.toUTCString();
+            
+            // Update timeline for the author
+            chatTimeline[author] = chatTimeline[author] || { timelineStat: { mostActiveDate: '', value: 0 }, timelineUsage: [] };
+            const existingUsage = chatTimeline[author].timelineUsage.find(usage => usage.date === formattedDate);
+            if (existingUsage) {
+                existingUsage.count++;
+            } else {
+                chatTimeline[author].timelineUsage.push({ date: formattedDate, count: 1 });
             }
-        });
 
-        // Calculate statistics for each user
-        Object.keys(chatTimeline).forEach(author => {
+            // Update 'All' timeline
+            const existingAllUsage = allTimelineUsage.find(usage => usage.date === formattedDate);
+            if (existingAllUsage) {
+                existingAllUsage.count++;
+            } else {
+                allTimelineUsage.push({ date: formattedDate, count: 1 });
+            }
+        }
+    });
+
+    // Calculate statistics for 'All'
+    const mostActiveDateAll = allTimelineUsage.reduce((prev, curr) => curr.count > prev.count ? curr : prev).date;
+    const mostActiveCountAll = allTimelineUsage.find(usage => usage.date === mostActiveDateAll)?.count || 0;
+    chatTimeline.All = { timelineStat: { mostActiveDate: mostActiveDateAll, value: mostActiveCountAll }, timelineUsage: allTimelineUsage };
+
+    // Calculate statistics for each user
+    Object.keys(chatTimeline).forEach(author => {
+        if (author !== 'All') {
             const timelineUsage = chatTimeline[author].timelineUsage;
             const mostActiveDate = timelineUsage.reduce((prev, curr) => curr.count > prev.count ? curr : prev).date;
             const mostActiveCount = timelineUsage.find(usage => usage.date === mostActiveDate)?.count || 0;
             chatTimeline[author].timelineStat = { mostActiveDate, value: mostActiveCount };
-        });
+        }
+    });
 
-        return chatTimeline;
-    }
+    return chatTimeline;
+}
+
 
     /**
      * Generates user-specific information based on the messages.
