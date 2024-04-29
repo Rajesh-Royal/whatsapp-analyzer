@@ -25,7 +25,7 @@ const Section: React.FC<SectionProps> = ({
         {title && <h1 className="text-2xl">{title}</h1>}
         {subTitle && <h1 className="text-sm text-muted-foreground leading-6">{subTitle}</h1>}
 
-        <div className={cn({'mt-6': title})}>{children}</div>
+        <div className={cn({'mt-6': title}, 'space-y-6')}>{children}</div>
       </Card>
     </section>
 

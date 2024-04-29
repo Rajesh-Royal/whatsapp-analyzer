@@ -2,6 +2,7 @@ import React from "react";
 import LucideIcon from "../ui/LucideIcon";
 import dynamicIconImports from "lucide-react/dynamicIconImports";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { cn } from "@/lib/utils";
 
 interface ChatStatsBoxProps {
   title: string;
@@ -10,6 +11,7 @@ interface ChatStatsBoxProps {
   subTitle?: string;
   bgClass?: string;
   noBox?: boolean;
+  iconClassNames?: string
 }
 
 const ChatStatsBox: React.FC<ChatStatsBoxProps>
@@ -18,6 +20,7 @@ const ChatStatsBox: React.FC<ChatStatsBoxProps>
     subTitle,
     stats,
     iconName,
+    iconClassNames,
   }) => {
     return (
       <Card className="bg-whatsappGreenBg-default">
@@ -25,7 +28,7 @@ const ChatStatsBox: React.FC<ChatStatsBoxProps>
           <CardTitle className="text-sm font-medium">
             {title}
           </CardTitle>
-          <LucideIcon name={iconName} className="size-6 text-muted-foreground" />
+          <LucideIcon name={iconName} className={cn("text-muted-foreground, size-6", iconClassNames)} />
         </CardHeader>
         <CardContent>
           <p className="text-2xl font-bold text-ellipsis truncate">{
