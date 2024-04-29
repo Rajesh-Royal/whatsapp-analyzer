@@ -9,6 +9,7 @@ import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
 import ChatSummary from "./_components/analytics/ChatSummary";
 import ChatTimeline from "./_components/analytics/ChatTimeline";
 import ChatInsightDayWise from "./_components/analytics/ChatInsightDayWise";
+import ChatTimeRadar from "./_components/analytics/ChatTimeRadar";
 
 const Home = () => {
   return (
@@ -50,6 +51,7 @@ const Home = () => {
             <ChatSummary />
             <ChatTimeline />
             <ChatInsightDayWise />
+            <ChatTimeRadar />
           </TabsContent>
         </Tabs>
       </div>
