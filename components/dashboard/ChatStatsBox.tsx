@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface ChatStatsBoxProps {
   title: string;
-  stats: string | number;
+  stats: string | number | (string | null)[];
   iconName: keyof typeof dynamicIconImports;
   subTitle?: string;
   bgClass?: string;
