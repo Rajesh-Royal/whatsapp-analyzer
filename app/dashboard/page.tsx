@@ -12,6 +12,7 @@ import ChatInsightDayWise from "./_components/analytics/ChatInsightDayWise";
 import ChatTimeRadar from "./_components/analytics/ChatTimeRadar";
 import ChatEmojiInsights from "./_components/analytics/ChatEmojiInsights";
 import ChatPersonalStats from "./_components/analytics/ChatPersonalStats";
+import ChatInsightWordCloud from "./_components/analytics/ChatInsightWordCloud";
 
 const Home = () => {
   return (
@@ -52,6 +53,7 @@ const Home = () => {
             <ChatTimeRadar />
             <ChatEmojiInsights />
             <ChatPersonalStats />
+            <ChatInsightWordCloud />
           </TabsContent>
         </Tabs>
       </div>
