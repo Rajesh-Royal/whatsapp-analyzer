@@ -1,16 +1,14 @@
-'use server'
-import React from 'react';
+"use server";
+import React from "react";
 import { format } from "date-fns";
+import { CardHeader, CardTitle, CardContent, Card } from "@/components/ui/card";
 import {
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Card,
-} from "@/components/ui/card";
-import { CalendarDaysIcon, CalendarRangeIcon, MessageSquareIcon } from "lucide-react";
+  CalendarDaysIcon,
+  CalendarRangeIcon,
+  MessageSquareIcon,
+} from "lucide-react";
 import { getChatSummary } from "@/data/whatsapp-chat/chat-summary";
-import { Skeleton } from '@/components/ui/skeleton';
-
+import { Skeleton } from "@/components/ui/skeleton";
 
 const OverviewCards = async () => {
   const result = await getChatSummary();
@@ -19,17 +17,15 @@ const OverviewCards = async () => {
     <React.Fragment>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            First Message
-          </CardTitle>
+          <CardTitle className="text-sm font-medium">First Message</CardTitle>
           <CalendarRangeIcon className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{
-            format(result.firstMessage as Date, 'MMM dd yyyy h:mm aa')
-          }</div>
+          <div className="text-2xl font-bold">
+            {format(result.firstMessage as Date, "MMM dd yyyy h:mm aa")}
+          </div>
           <p className="text-xs text-muted-foreground">
-            Day: {format(result.firstMessage as Date, 'EEEE')}
+            Day: {format(result.firstMessage as Date, "EEEE")}
           </p>
         </CardContent>
       </Card>
@@ -41,31 +37,28 @@ const OverviewCards = async () => {
         <CardContent>
           <div className="text-2xl font-bold">{result.totalDays}</div>
           <p className="text-xs text-muted-foreground">
-            From {result.firstMessage?.getFullYear()} to {result.lastMessage?.getFullYear()}
+            From {result.firstMessage?.getFullYear()} to{" "}
+            {result.lastMessage?.getFullYear()}
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Last Message
-          </CardTitle>
+          <CardTitle className="text-sm font-medium">Last Message</CardTitle>
           <CalendarRangeIcon className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">{
-            format(result.lastMessage as Date, 'EEE dd yyyy h:mm aa')
-          }</div>
+          <div className="text-2xl font-bold">
+            {format(result.lastMessage as Date, "EEE dd yyyy h:mm aa")}
+          </div>
           <p className="text-xs text-muted-foreground">
-            Day: {format(result.lastMessage as Date, 'EEEE')}
+            Day: {format(result.lastMessage as Date, "EEEE")}
           </p>
         </CardContent>
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Total Messages
-          </CardTitle>
+          <CardTitle className="text-sm font-medium">Total Messages</CardTitle>
           <MessageSquareIcon className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -77,9 +70,7 @@ const OverviewCards = async () => {
       </Card>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Total Users
-          </CardTitle>
+          <CardTitle className="text-sm font-medium">Total Users</CardTitle>
           <MessageSquareIcon className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
@@ -90,7 +81,7 @@ const OverviewCards = async () => {
         </CardContent>
       </Card>
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default OverviewCards
+export default OverviewCards;

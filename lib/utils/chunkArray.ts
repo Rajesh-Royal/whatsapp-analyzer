@@ -4,4 +4,4 @@ export const chunkArray = (arr: any[], chunkSize = 100) => {
     chunks.push(arr.slice(i, i + chunkSize));
   }
   return chunks;
-}
+};

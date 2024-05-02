@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {toast} from "sonner";
+import { toast } from "sonner";
 import { Heading } from "@/components/common/heading";
 import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
@@ -36,7 +36,10 @@ export const EmployeeForm = ({ initialData }: EmployeeFormProps) => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <Heading title={'Add employee'} description={'click here to add employee'} />
+        <Heading
+          title={"Add employee"}
+          description={"click here to add employee"}
+        />
         {initialData && (
           <Button
             disabled={loading}

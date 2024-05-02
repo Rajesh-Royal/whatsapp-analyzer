@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   CardHeader,
   CardTitle,
@@ -6,19 +6,21 @@ import {
   CardDescription,
   Card,
 } from "@/components/ui/card";
-import { Skeleton } from '@/components/ui/skeleton';
+import { Skeleton } from "@/components/ui/skeleton";
 
 const MessagesPerMonthSkeleton = () => {
   return (
     <Card className="col-span-4">
-    <CardHeader>
-      <CardTitle><Skeleton className='h-4 w-60'/></CardTitle>
-    </CardHeader>
-    <CardContent>
-      <Skeleton className='w-[100%] h-[450px]' />
-    </CardContent>
-  </Card>
-  )
-}
+      <CardHeader>
+        <CardTitle>
+          <Skeleton className="h-4 w-60" />
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Skeleton className="h-[450px] w-[100%]" />
+      </CardContent>
+    </Card>
+  );
+};
 
-export default MessagesPerMonthSkeleton
+export default MessagesPerMonthSkeleton;

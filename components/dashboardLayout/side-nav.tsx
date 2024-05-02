@@ -1,4 +1,3 @@
-
 "use client";
 import Link from "next/link";
 
@@ -9,37 +8,37 @@ import { useSidebar } from "@/hooks/useSidebar";
 import { buttonVariants } from "@/components/ui/button";
 
 import {
-    Accordion,
-    AccordionContent,
-    AccordionItem,
-    AccordionTrigger,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
 } from "@/components/dashboardLayout/subnav-accordion";
 import { useEffect, useState } from "react";
 import { ChevronDownIcon } from "@radix-ui/react-icons";
 
 interface SideNavProps {
-    items: NavItem[];
-    setOpen?: (open: boolean) => void;
-    className?: string;
+  items: NavItem[];
+  setOpen?: (open: boolean) => void;
+  className?: string;
 }
 
 export function SideNav({ items, setOpen, className }: SideNavProps) {
-    const path = usePathname();
-    const { isOpen } = useSidebar();
-    const [openItem, setOpenItem] = useState("");
-    const [lastOpenItem, setLastOpenItem] = useState("");
+  const path = usePathname();
+  const { isOpen } = useSidebar();
+  const [openItem, setOpenItem] = useState("");
+  const [lastOpenItem, setLastOpenItem] = useState("");
 
-    useEffect(() => {
-        if (isOpen) {
-            setOpenItem(lastOpenItem);
-        } else {
-            setLastOpenItem(openItem);
-            setOpenItem("");
-        }
-    }, [isOpen]);
+  useEffect(() => {
+    if (isOpen) {
+      setOpenItem(lastOpenItem);
+    } else {
+      setLastOpenItem(openItem);
+      setOpenItem("");
+    }
+  }, [isOpen]);
 
-    return (
-        <nav className="space-y-2">
+  return (
+    <nav className="space-y-2">
       {items.map((item) =>
         item.isChidren ? (
           <Accordion
@@ -53,16 +52,16 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
             <AccordionItem value={item.title} className="border-none ">
               <AccordionTrigger
                 className={cn(
-                  buttonVariants({ variant: 'ghost' }),
-                  'group relative flex h-12 justify-between px-4 py-2 text-base duration-200 hover:bg-muted hover:no-underline',
+                  buttonVariants({ variant: "ghost" }),
+                  "group relative flex h-12 justify-between px-4 py-2 text-base duration-200 hover:bg-muted hover:no-underline",
                 )}
               >
                 <div>
-                  <item.icon className={cn('h-5 w-5', item.color)} />
+                  <item.icon className={cn("h-5 w-5", item.color)} />
                 </div>
                 <div
                   className={cn(
-                    'absolute left-12 text-base duration-200 ',
+                    "absolute left-12 text-base duration-200 ",
                     !isOpen && className,
                   )}
                 >
@@ -79,19 +78,19 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
                     key={child.title}
                     href={child.href}
                     onClick={() => {
-                      if (setOpen) setOpen(false)
+                      if (setOpen) setOpen(false);
                     }}
                     className={cn(
-                      buttonVariants({ variant: 'ghost' }),
-                      'group relative flex h-12 justify-start gap-x-3',
+                      buttonVariants({ variant: "ghost" }),
+                      "group relative flex h-12 justify-start gap-x-3",
                       path === child.href &&
-                        'bg-muted font-bold hover:bg-muted',
+                        "bg-muted font-bold hover:bg-muted",
                     )}
                   >
-                    <child.icon className={cn('h-5 w-5', child.color)} />
+                    <child.icon className={cn("h-5 w-5", child.color)} />
                     <div
                       className={cn(
-                        'absolute left-12 text-base duration-200',
+                        "absolute left-12 text-base duration-200",
                         !isOpen && className,
                       )}
                     >
@@ -107,18 +106,18 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
             key={item.title}
             href={item.href}
             onClick={() => {
-              if (setOpen) setOpen(false)
+              if (setOpen) setOpen(false);
             }}
             className={cn(
-              buttonVariants({ variant: 'ghost' }),
-              'group relative flex h-12 justify-start',
-              path === item.href && 'bg-muted font-bold hover:bg-muted',
+              buttonVariants({ variant: "ghost" }),
+              "group relative flex h-12 justify-start",
+              path === item.href && "bg-muted font-bold hover:bg-muted",
             )}
           >
-            <item.icon className={cn('h-5 w-5', item.color)} />
+            <item.icon className={cn("h-5 w-5", item.color)} />
             <span
               className={cn(
-                'absolute left-12 text-base duration-200',
+                "absolute left-12 text-base duration-200",
                 !isOpen && className,
               )}
             >
@@ -128,5 +127,5 @@ export function SideNav({ items, setOpen, className }: SideNavProps) {
         ),
       )}
     </nav>
-    );
+  );
 }

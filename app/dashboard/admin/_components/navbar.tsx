@@ -10,39 +10,39 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="bg-secondary flex justify-between items-center p-4 rounded-xl w-[600px] shadow-sm">
+    <nav className="flex w-[600px] items-center justify-between rounded-xl bg-secondary p-4 shadow-sm">
       <div className="flex gap-x-2">
-        <Button 
+        <Button
           asChild
-          variant={pathname === "/dashboard/admin/server" ? "default" : "outline"}
+          variant={
+            pathname === "/dashboard/admin/server" ? "default" : "outline"
+          }
         >
-          <Link href="/dashboard/admin/server">
-            Server
-          </Link>
+          <Link href="/dashboard/admin/server">Server</Link>
         </Button>
-        <Button 
+        <Button
           asChild
-          variant={pathname === "/dashboard/admin/client" ? "default" : "outline"}
+          variant={
+            pathname === "/dashboard/admin/client" ? "default" : "outline"
+          }
         >
-          <Link href="/dashboard/admin/client">
-            Client
-          </Link>
+          <Link href="/dashboard/admin/client">Client</Link>
         </Button>
-        <Button 
+        <Button
           asChild
-          variant={pathname === "/dashboard/admin/admin" ? "default" : "outline"}
+          variant={
+            pathname === "/dashboard/admin/admin" ? "default" : "outline"
+          }
         >
-          <Link href="/dashboard/admin/admin">
-            Admin
-          </Link>
+          <Link href="/dashboard/admin/admin">Admin</Link>
         </Button>
-        <Button 
+        <Button
           asChild
-          variant={pathname === "/dashboard/admin/settings" ? "default" : "outline"}
+          variant={
+            pathname === "/dashboard/admin/settings" ? "default" : "outline"
+          }
         >
-          <Link href="/dashboard/admin/settings">
-            Settings
-          </Link>
+          <Link href="/dashboard/admin/settings">Settings</Link>
         </Button>
       </div>
       <UserButton />

@@ -45,7 +45,7 @@ export const columns: ColumnDef<any>[] = [
     accessorKey: "date",
     header: "Message Date",
     cell({ getValue }) {
-      return format(new Date(getValue() as string), 'EEE dd yyyy h:mm aa');
+      return format(new Date(getValue() as string), "EEE dd yyyy h:mm aa");
     },
   },
   // {

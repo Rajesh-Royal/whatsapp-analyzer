@@ -1,4 +1,9 @@
-import { BookOpenCheck, LayoutDashboard, MessageSquare, Settings } from "lucide-react";
+import {
+  BookOpenCheck,
+  LayoutDashboard,
+  MessageSquare,
+  Settings,
+} from "lucide-react";
 import { type NavItem } from "@/types";
 
 export const NavItems: NavItem[] = [

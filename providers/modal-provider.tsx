@@ -1,22 +1,22 @@
 import { type ReactNode, createContext, useContext, useState } from "react";
 
 const ModalContext = createContext({
-    isOpen: false,
-    toggleModal: () => {
-        /* No Action */
-    },
+  isOpen: false,
+  toggleModal: () => {
+    /* No Action */
+  },
 });
 
 export const useModal = () => useContext(ModalContext);
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
-    const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-    const toggleModal = () => setIsOpen(!isOpen);
+  const toggleModal = () => setIsOpen(!isOpen);
 
-    return (
-        <ModalContext.Provider value={{ isOpen, toggleModal }}>
-            {children}
-        </ModalContext.Provider>
-    );
+  return (
+    <ModalContext.Provider value={{ isOpen, toggleModal }}>
+      {children}
+    </ModalContext.Provider>
+  );
 };

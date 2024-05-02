@@ -10,6 +10,8 @@ import ChatSummary from "./_components/analytics/ChatSummary";
 import ChatTimeline from "./_components/analytics/ChatTimeline";
 import ChatInsightDayWise from "./_components/analytics/ChatInsightDayWise";
 import ChatTimeRadar from "./_components/analytics/ChatTimeRadar";
+import ChatEmojiInsights from "./_components/analytics/ChatEmojiInsights";
+import ChatPersonalStats from "./_components/analytics/ChatPersonalStats";
 
 const Home = () => {
   return (
@@ -25,12 +27,8 @@ const Home = () => {
         <Tabs defaultValue="analytics" className="space-y-4">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="analytics">
-              Analytics
-            </TabsTrigger>
-            <TabsTrigger value="reports">
-              Reports
-            </TabsTrigger>
+            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+            <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
@@ -52,6 +50,8 @@ const Home = () => {
             <ChatTimeline />
             <ChatInsightDayWise />
             <ChatTimeRadar />
+            <ChatEmojiInsights />
+            <ChatPersonalStats />
           </TabsContent>
         </Tabs>
       </div>

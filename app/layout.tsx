@@ -1,23 +1,24 @@
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { SessionProvider } from 'next-auth/react'
-import { auth } from '@/auth'
-import './globals.css'
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
+import { auth } from "@/auth";
+import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
-import NextThemeProviders from '@/providers/theme-provider'
-import { ChatInsightStoreProvider } from '@/providers/chatInsightStoreProvider'
+import NextThemeProviders from "@/providers/theme-provider";
+import { ChatInsightStoreProvider } from "@/providers/chatInsightStoreProvider";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'WhatsApp Chat Analyzer',
-  description: 'A full fledged application to analyze your whatsapp chat, fun facts, and its trends',
-}
+  title: "WhatsApp Chat Analyzer",
+  description:
+    "A full fledged application to analyze your whatsapp chat, fun facts, and its trends",
+};
 
 export default async function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   const session = await auth();
 
@@ -26,13 +27,11 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <NextThemeProviders>
-            <ChatInsightStoreProvider >
-              {children}
-            </ChatInsightStoreProvider>
+            <ChatInsightStoreProvider>{children}</ChatInsightStoreProvider>
           </NextThemeProviders>
           <Toaster />
         </body>
       </html>
     </SessionProvider>
-  )
+  );
 }

@@ -1,15 +1,15 @@
-import { NextRequest, NextResponse } from 'next/server'
-import * as whatsapp from '@/lib/utils/whatsapp-parser';
-import { createLogger } from '@/lib/logger';
-import { makeTimeStampUnique } from '@/lib/utils/addUniqueTimestamp';
-import { NextApiErrorHandler } from '@/lib/apiError';
-import { uploadChatDataToDB } from '@/actions/uploadChatDataToDB';
+import { NextRequest, NextResponse } from "next/server";
+import * as whatsapp from "@/lib/utils/whatsapp-parser";
+import { createLogger } from "@/lib/logger";
+import { makeTimeStampUnique } from "@/lib/utils/addUniqueTimestamp";
+import { NextApiErrorHandler } from "@/lib/apiError";
+import { uploadChatDataToDB } from "@/actions/uploadChatDataToDB";
 
-const logger = createLogger('app/api/parse-and-save-whatsapp-chat');
+const logger = createLogger("app/api/parse-and-save-whatsapp-chat");
 
 export async function POST(request: NextRequest) {
   try {
-    logger.info('started parsing uploaded file');
+    logger.info("started parsing uploaded file");
 
     // Read the file from the request
     const formData = await request.formData();
@@ -22,12 +22,25 @@ export async function POST(request: NextRequest) {
 
     const result = await uploadChatDataToDB(makeTimeStampUnique(messages));
 
-    const totalRecordsCreated = result.reduce((acc, item) => acc + item.count, 0);
-    
-    logger.info(`inserted ${totalRecordsCreated} new messages into the messages table`);
+    const totalRecordsCreated = result.reduce(
+      (acc, item) => acc + item.count,
+      0,
+    );
 
-    return NextResponse.json({ message: `File uploaded and parsed successfully ${totalRecordsCreated} new messages were found`, status: 200, data: [], count: totalRecordsCreated });
+    logger.info(
+      `inserted ${totalRecordsCreated} new messages into the messages table`,
+    );
+
+    return NextResponse.json({
+      message: `File uploaded and parsed successfully ${totalRecordsCreated} new messages were found`,
+      status: 200,
+      data: [],
+      count: totalRecordsCreated,
+    });
   } catch (error: any) {
-    return NextApiErrorHandler(error, 'Failed to parse file and save whatsapp chat');
+    return NextApiErrorHandler(
+      error,
+      "Failed to parse file and save whatsapp chat",
+    );
   }
 }
