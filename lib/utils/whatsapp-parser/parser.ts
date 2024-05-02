@@ -1,11 +1,11 @@
-import { daysBeforeMonths, normalizeDate, orderDateComponents } from './date';
+import { daysBeforeMonths, normalizeDate, orderDateComponents } from "./date";
 import {
   regexSplitTime,
   convertTime12to24,
   normalizeAMPM,
   normalizeTime,
-} from './time';
-import { Attachment, Message, RawMessage, ParseStringOptions } from './types';
+} from "./time";
+import { Attachment, Message, RawMessage, ParseStringOptions } from "./types";
 
 const sharedRegex =
   /^(?:\u200E|\u200F)*\[?(\d{1,4}[-/.]\s?\d{1,4}[-/.]\s?\d{1,4})[,.]?\s\D*?(\d{1,2}[.:]\d{1,2}(?:[.:]\d{1,2})?)(?:\s([ap]\.?\s?m\.?))?\]?(?:\s-|:)?\s/;
@@ -13,11 +13,11 @@ const authorAndMessageRegex = /(.+?):\s([^]*)/;
 const messageRegex = /([^]+)/;
 const regexParser = new RegExp(
   sharedRegex.source + authorAndMessageRegex.source,
-  'i',
+  "i",
 );
 const regexParserSystem = new RegExp(
   sharedRegex.source + messageRegex.source,
-  'i',
+  "i",
 );
 const regexAttachment = /<.+:(.+)>|([A-Z\d-]+\.\w+)\s[(<].+[)>]/;
 
@@ -43,7 +43,7 @@ function makeArrayOfMessages(lines: string[]): RawMessage[] {
       }
 
       // Else it's part of the previous message and it should be concatenated
-      else if (typeof acc[acc.length - 1] !== 'undefined') {
+      else if (typeof acc[acc.length - 1] !== "undefined") {
         const prevMessage = acc.pop()!;
 
         acc.push({
@@ -82,7 +82,7 @@ function parseMessages(
   const { parseAttachments } = options;
 
   // Parse messages with regex
-  const parsed = messages.map(obj => {
+  const parsed = messages.map((obj) => {
     const { system, msg } = obj;
 
     // If it's a system message another regex should be used to parse it
@@ -91,7 +91,7 @@ function parseMessages(
         msg,
       ) as RegExpExecArray;
 
-      return { date, time, ampm: ampm || 'null', author: 'system', message };
+      return { date, time, ampm: ampm || "null", author: "system", message };
     }
 
     const [, date, time, ampm, author, message] = regexParser.exec(
@@ -102,10 +102,10 @@ function parseMessages(
   });
 
   // Understand date format if not supplied (do days come first?)
-  if (typeof daysFirst !== 'boolean') {
+  if (typeof daysFirst !== "boolean") {
     const numericDates = Array.from(
       new Set(parsed.map(({ date }) => date)),
-      date => orderDateComponents(date).map(Number),
+      (date) => orderDateComponents(date).map(Number),
     );
 
     daysFirst = daysBeforeMonths(numericDates);

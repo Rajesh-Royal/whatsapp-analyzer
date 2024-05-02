@@ -25,13 +25,13 @@ export default function Sidebar({ className }: SidebarProps) {
         `relative hidden h-screen border-r pt-20 md:block`,
         status && "duration-500",
         isOpen ? "w-72" : "w-[78px]",
-        className
+        className,
       )}
     >
       <BsArrowLeftShort
         className={cn(
           "absolute -right-3 top-20 cursor-pointer rounded-full border bg-background text-3xl text-foreground",
-          !isOpen && "rotate-180"
+          !isOpen && "rotate-180",
         )}
         onClick={handleToggle}
       />

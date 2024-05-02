@@ -5,32 +5,32 @@ import { SideNav } from "@/components/dashboardLayout/side-nav";
 import { NavItems } from "@/components/constants/side-nav";
 
 export const MobileSidebar = () => {
-    const [open, setOpen] = useState(false);
-    const [isMounted, setIsMounted] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
-    if (!isMounted) {
-        return null;
-    }
+  if (!isMounted) {
+    return null;
+  }
 
-    return (
-        <>
-            <Sheet open={open} onOpenChange={setOpen}>
-                <SheetTrigger asChild>
-                    <div className="flex items-center justify-center gap-2">
-                        <MenuIcon />
-                        <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
-                    </div>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-72">
-                    <div className="px-1 py-6 pt-16">
-                        <SideNav items={NavItems} setOpen={setOpen} />
-                    </div>
-                </SheetContent>
-            </Sheet>
-        </>
-    );
+  return (
+    <>
+      <Sheet open={open} onOpenChange={setOpen}>
+        <SheetTrigger asChild>
+          <div className="flex items-center justify-center gap-2">
+            <MenuIcon />
+            <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
+          </div>
+        </SheetTrigger>
+        <SheetContent side="left" className="w-72">
+          <div className="px-1 py-6 pt-16">
+            <SideNav items={NavItems} setOpen={setOpen} />
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
+  );
 };

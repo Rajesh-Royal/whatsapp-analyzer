@@ -12,10 +12,7 @@ export const WhatsappChat = async () => {
   return (
     <>
       <div className="flex items-center justify-between">
-        <Heading
-          title="Whatsapp Chats"
-          description="See all"
-        />
+        <Heading title="Whatsapp Chats" description="See all" />
       </div>
       <Separator />
       <div>

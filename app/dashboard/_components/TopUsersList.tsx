@@ -1,6 +1,6 @@
-'use server'
+"use server";
 
-import React from 'react';
+import React from "react";
 import {
   CardHeader,
   CardTitle,
@@ -10,8 +10,6 @@ import {
 } from "@/components/ui/card";
 import { RecentSales } from "@/components/dashboard/recent-sales";
 import { getMessagesCountPerAuthor } from "@/data/whatsapp-chat/messages-per-author";
-
-
 
 const TopUsersList = async () => {
   const messagesPerAuthor = await getMessagesCountPerAuthor();
@@ -28,7 +26,7 @@ const TopUsersList = async () => {
         <RecentSales topMessageCountUsers={messagesPerAuthor} />
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default TopUsersList
+export default TopUsersList;

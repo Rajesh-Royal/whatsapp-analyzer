@@ -1,4 +1,4 @@
-import prisma from '@/lib/prisma'
+import prisma from "@/lib/prisma";
 
 export const getChatSummary = async (author?: string | null) => {
   // Get the date of the first and last message
@@ -10,34 +10,52 @@ export const getChatSummary = async (author?: string | null) => {
       date: true,
     },
     where: {
-      ...(author ? {author: {
-        equals: author,
-        mode: 'insensitive'
-      }}: '')
-    }
+      ...(author
+        ? {
+            author: {
+              equals: author,
+              mode: "insensitive",
+            },
+          }
+        : ""),
+    },
   });
-  
+
   // Get the total number of messages
   const totalMessages = prisma.message.count({
     where: {
-      ...(author ? {author: {
-        equals: author,
-        mode: 'insensitive'
-      }}: '')
-    }
+      ...(author
+        ? {
+            author: {
+              equals: author,
+              mode: "insensitive",
+            },
+          }
+        : ""),
+    },
   });
-  
+
   // Get the list of authors
   const authors = prisma.message.groupBy({
-    by: ['author'],
+    by: ["author"],
   });
 
-  const [{_max: lastMessageResult, _min: firstMessageResult}, totalMessagesResult, authorsResult] = await prisma.$transaction([firstAndLastMessage, totalMessages, authors]);
+  const [
+    { _max: lastMessageResult, _min: firstMessageResult },
+    totalMessagesResult,
+    authorsResult,
+  ] = await prisma.$transaction([firstAndLastMessage, totalMessages, authors]);
 
   // Calculate the difference in days between the first and last message
-  const diffInDays = firstMessageResult.date && lastMessageResult.date && Math.ceil((lastMessageResult.date.getTime() - firstMessageResult.date.getTime()) / (1000 * 60 * 60 * 24));
+  const diffInDays =
+    firstMessageResult.date &&
+    lastMessageResult.date &&
+    Math.ceil(
+      (lastMessageResult.date.getTime() - firstMessageResult.date.getTime()) /
+        (1000 * 60 * 60 * 24),
+    );
 
-  const authorNames = authorsResult.map(author => author.author);
+  const authorNames = authorsResult.map((author) => author.author);
 
   return {
     firstMessage: firstMessageResult?.date,
@@ -46,4 +64,4 @@ export const getChatSummary = async (author?: string | null) => {
     totalMessages: totalMessagesResult,
     authors: authorNames,
   };
-}
+};

@@ -12,24 +12,30 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = ({
   children,
-  classNames = '',
-  title = '',
-  subTitle = ''
+  classNames = "",
+  title = "",
+  subTitle = "",
 }) => {
   return (
-
     <section className="mb-12 ">
       <Card
-        className={cn(classNames, style.sectionDefaultShadow, "p-6 border-none dark:shadow-sm dark:shadow-neutral-600")}
+        className={cn(
+          classNames,
+          style.sectionDefaultShadow,
+          "border-none p-6 dark:shadow-sm dark:shadow-neutral-600",
+        )}
       >
         {title && <h1 className="text-2xl">{title}</h1>}
-        {subTitle && <h1 className="text-sm text-muted-foreground leading-6">{subTitle}</h1>}
+        {subTitle && (
+          <h1 className="text-sm leading-6 text-muted-foreground">
+            {subTitle}
+          </h1>
+        )}
 
-        <div className={cn({'mt-6': title}, 'space-y-6')}>{children}</div>
+        <div className={cn({ "mt-6": title }, "space-y-6")}>{children}</div>
       </Card>
     </section>
-
   );
-}
+};
 
 export default Section;

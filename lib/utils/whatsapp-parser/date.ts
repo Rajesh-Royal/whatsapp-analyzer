@@ -1,4 +1,4 @@
-import { indexAboveValue, isNegative, groupArrayByValueAtIndex } from './utils';
+import { indexAboveValue, isNegative, groupArrayByValueAtIndex } from "./utils";
 
 /**
  * Takes an array of numeric dates and tries to understand if the days come
@@ -33,7 +33,7 @@ function checkAbove12(numericDates: number[][]): boolean | null {
  */
 function checkDecreasing(numericDates: number[][]): boolean | null {
   const datesByYear = groupArrayByValueAtIndex(numericDates, 2);
-  const results = datesByYear.map(dates => {
+  const results = datesByYear.map((dates) => {
     const daysFirst = dates.slice(1).some((date, i) => {
       const [first1] = dates[i];
       const [first2] = date;
@@ -55,11 +55,11 @@ function checkDecreasing(numericDates: number[][]): boolean | null {
     return null;
   });
 
-  const anyTrue = results.some(value => value === true);
+  const anyTrue = results.some((value) => value === true);
 
   if (anyTrue) return true;
 
-  const anyFalse = results.some(value => value === false);
+  const anyFalse = results.some((value) => value === false);
 
   if (anyFalse) return false;
 
@@ -125,9 +125,9 @@ function normalizeDate(
 ): [string, string, string] {
   return [
     // 2 digit years are assumed to be in the 2000-2099 range
-    year.padStart(4, '2000'),
-    month.padStart(2, '0'),
-    day.padStart(2, '0'),
+    year.padStart(4, "2000"),
+    month.padStart(2, "0"),
+    day.padStart(2, "0"),
   ];
 }
 

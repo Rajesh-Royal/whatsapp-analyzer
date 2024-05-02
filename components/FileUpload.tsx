@@ -1,6 +1,6 @@
-'use client'
-import { useState } from 'react';
-import { toast } from 'sonner';
+"use client";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -11,22 +11,25 @@ const FileUpload = () => {
 
   const handleFileUpload = async () => {
     const formData = new FormData();
-    formData.append('file', selectedFile as any);
+    formData.append("file", selectedFile as any);
 
-    const response = await fetch('/api/parse-and-save-whatsapp-chat', {
-      method: 'POST',
+    const response = await fetch("/api/parse-and-save-whatsapp-chat", {
+      method: "POST",
       body: formData,
-    }).then(async (response) => {
-      return response.json();
-    }).then((response) => {
-      if(response.status > 299 || response.status < 200){
-        throw new Error(response.message);
-      }
-      toast.success(response.message);
-    }).catch((error) => {
-      console.log(error);
-      toast.error(`Failed to parse file - ${error.message}`)
-    });
+    })
+      .then(async (response) => {
+        return response.json();
+      })
+      .then((response) => {
+        if (response.status > 299 || response.status < 200) {
+          throw new Error(response.message);
+        }
+        toast.success(response.message);
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error(`Failed to parse file - ${error.message}`);
+      });
   };
 
   return (

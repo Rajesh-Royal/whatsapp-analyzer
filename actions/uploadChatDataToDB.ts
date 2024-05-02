@@ -1,8 +1,8 @@
-import { chunkArray } from '@/lib/utils/chunkArray';
-import { createLogger } from '@/lib/logger';
-import prisma from '@/lib/prisma';
+import { chunkArray } from "@/lib/utils/chunkArray";
+import { createLogger } from "@/lib/logger";
+import prisma from "@/lib/prisma";
 
-const logger = createLogger('app/api/whatsapp-chat');
+const logger = createLogger("app/api/whatsapp-chat");
 
 export const uploadChatDataToDB = async (messages: any[]) => {
   const messagesChunks = chunkArray(messages, 500);
@@ -21,4 +21,4 @@ export const uploadChatDataToDB = async (messages: any[]) => {
   logger.info("finished executing prisma transactions for whatsapp messages");
 
   return result;
-}
+};

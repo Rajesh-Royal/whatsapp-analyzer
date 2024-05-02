@@ -1,5 +1,5 @@
-import { makeArrayOfMessages, parseMessages } from './parser';
-import { Attachment, Message, ParseStringOptions } from './types';
+import { makeArrayOfMessages, parseMessages } from "./parser";
+import { Attachment, Message, ParseStringOptions } from "./types";
 
 const newlinesRegex = /(?:\r\n|\r|\n)/;
 

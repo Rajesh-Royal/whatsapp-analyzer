@@ -10,10 +10,10 @@ function convertTime12to24(time: string, ampm: string): string {
   // eslint-disable-next-line prefer-const
   let [hours, minutes, seconds] = time.split(regexSplitTime);
 
-  if (hours === '12') hours = '00';
-  if (ampm === 'PM') hours = String(parseInt(hours, 10) + 12);
+  if (hours === "12") hours = "00";
+  if (ampm === "PM") hours = String(parseInt(hours, 10) + 12);
 
-  return `${hours}:${minutes}${seconds ? `:${seconds}` : ''}`;
+  return `${hours}:${minutes}${seconds ? `:${seconds}` : ""}`;
 }
 
 /**
@@ -22,14 +22,14 @@ function convertTime12to24(time: string, ampm: string): string {
 function normalizeTime(time: string): string {
   const [hours, minutes, seconds] = time.split(regexSplitTime);
 
-  return `${hours.padStart(2, '0')}:${minutes}:${seconds || '00'}`;
+  return `${hours.padStart(2, "0")}:${minutes}:${seconds || "00"}`;
 }
 
 /**
  * Normalizes `am` / `a.m.` / etc. to `AM` (uppercase, no other characters).
  */
 function normalizeAMPM(ampm: string): string {
-  return ampm.replace(/[^apm]/gi, '').toUpperCase();
+  return ampm.replace(/[^apm]/gi, "").toUpperCase();
 }
 
 export { regexSplitTime, convertTime12to24, normalizeTime, normalizeAMPM };
