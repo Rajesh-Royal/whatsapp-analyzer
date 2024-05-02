@@ -33,7 +33,7 @@ const ChatInsightUserSpecific = () => {
       </select>
       <Card className={"bg-whatsappGreenBg-default"}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <CardTitle className="text-2xl font-bold">{selectedUser}</CardTitle>
+          <CardTitle className="text-2xl font-bold">{selectedUser.charAt(0).toUpperCase() + selectedUser.slice(1)}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-xl">
