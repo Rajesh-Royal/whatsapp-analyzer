@@ -8,7 +8,21 @@ import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 // TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatPersonalStats = () => {
-  const chatSummary = useChatInsightStore((store) => store.stats.summary);
+  const {summary: chatSummary, userspecific:userSpecificChatSummary} = useChatInsightStore((store) => store.stats);
+
+  const userWithMaxLinks = React.useMemo(() => {
+    let maxLinks = 0;
+    let userName = '';
+
+    for (let user in userSpecificChatSummary) {
+        if (userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalLinks > maxLinks) {
+            maxLinks = userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalLinks;
+            userName = user;
+        }
+    }
+
+    return {userName, totalNoOfLinks: maxLinks};
+}, [userSpecificChatSummary]);
 
   return (
     <Section title="Personal Stats">
@@ -34,6 +48,12 @@ const ChatPersonalStats = () => {
           iconName="link"
         />
       </div>
+      <ChatStatsBox
+          title={`${userWithMaxLinks.userName} Sends More Links to the group`}
+          stats={`Total ${userWithMaxLinks.totalNoOfLinks} links. 🦀`}
+          iconName="land-plot"
+        />
+        {/* TODO: Count Instagram, Youtube, Facebook links */}
     </Section>
   );
 };

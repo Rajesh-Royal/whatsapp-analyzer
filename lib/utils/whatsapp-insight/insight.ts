@@ -717,7 +717,7 @@ interface ChatTimeline {
 
 // userspecific information
 
-interface UserSpecificInfo {
+export interface UserSpecificInfo {
   [username: string]: {
     averageMessagePerDay: number;
     averageWordsPerMessage: number;
