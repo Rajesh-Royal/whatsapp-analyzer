@@ -2,9 +2,7 @@ import { type ReactNode, createContext, useContext, useState } from "react";
 
 const ModalContext = createContext({
   isOpen: false,
-  toggleModal: () => {
-    /* No Action */
-  },
+  toggleModal: () => {},
 });
 
 export const useModal = () => useContext(ModalContext);

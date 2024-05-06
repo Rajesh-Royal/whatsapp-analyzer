@@ -6,9 +6,13 @@ import GetWhatsappChatInsights from "@/lib/utils/whatsapp-insight/insight";
 import * as whatsapp from "@/lib/utils/whatsapp-parser";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import { ChatInsightState } from "@/stores/ChatInsightsStore";
+import { useModal } from "@/providers/modal-provider";
+import { LoaderCircle } from "lucide-react";
+import { Modal } from "./common/modal";
 
 
 const FileUploadClientComponent: React.FC = () => {
+  const { toggleModal } = useModal();
   const router = useRouter();
   const uploadChatInsightData = useChatInsightStore((state) => state.uploadChatInsightData);
 
@@ -17,12 +21,12 @@ const FileUploadClientComponent: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
 
-    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      const selectedFile = event.target.files && event.target.files[0];
-      if (selectedFile) {
-        setFile(selectedFile);
-      }
-    };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files && event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+    }
+  };
 
   const handleSubmit = async () => {
     try {
@@ -40,7 +44,7 @@ const FileUploadClientComponent: React.FC = () => {
       uploadChatInsightData(new_insights as unknown as ChatInsightState);
 
       router.push("/dashboard");
-
+      toggleModal();
     } catch (error: any) {
       setLoading(false);
       setError(error.message);
@@ -66,10 +70,18 @@ const FileUploadClientComponent: React.FC = () => {
           className={`rounded bg-blue-500 px-4 py-2 text-white ${loading || !file ? "cursor-not-allowed opacity-50" : ""
             }`}
         >
-          {loading ? "Uploading..." : "Upload File"}
+          {loading ? "Processing..." : "Upload File"}
         </button>
+
       </div>
       {error && <p className="mt-2 text-red-500">{error}</p>}
+
+      <Modal type="dialog" title="Preparing the analysis dashboard for your chat" description="" hideCloseButton>
+        <div className="my-6 text-center">
+           <LoaderCircle className="animate-spin m-auto size-20"/>
+        </div>
+      </Modal>
+
     </div>
   );
 };
