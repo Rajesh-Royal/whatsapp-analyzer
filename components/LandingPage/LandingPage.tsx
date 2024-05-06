@@ -16,7 +16,7 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <div className="flex h-full w-full flex-col items-center justify-center py-40">
+      <div className="flex h-full w-full flex-col items-center justify-center py-40 mt-24 px-5">
         <Heading
           title="Welcome to WhatsappAnalyzer"
           description="Get insights into your chats - Now with more interesting graphs, free statistics and full PDF export, whatsapp chat file upload and more features will be added one by one, please consider to contribute."
@@ -68,7 +68,7 @@ const WhatsappChatExportHowTo = () => {
             </li>
           </ul>
           <br />
-          Now save it somewhere, send it via email or any other medium. This fille will be used for analysis, and when asked please use this file.
+          Now save it somewhere, send it via email or any other medium. This file will be used for analysis, before uploading the export file you may need to unzip the exported file to get the .txt file.
 
           <blockquote className="p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
             If you choose to attach media, the most recent media sent will
