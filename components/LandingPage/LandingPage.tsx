@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import FileUploadClientComponent from "../FileUploadClientComponent";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { LoaderCircle } from "lucide-react";
+import { ModalProvider } from "@/providers/modal-provider";
 
 const LandingPage = () => {
   const router = useRouter();
@@ -16,13 +17,15 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <div className="flex h-full w-full flex-col items-center justify-center py-40">
+      <div className="flex h-full w-full flex-col items-center justify-center py-40 mt-24 px-5">
         <Heading
           title="Welcome to WhatsappAnalyzer"
           description="Get insights into your chats - Now with more interesting graphs, free statistics and full PDF export, whatsapp chat file upload and more features will be added one by one, please consider to contribute."
           className="my-5 max-w-[800px] text-center space-y-2"
         />
-        <FileUploadClientComponent />
+        <ModalProvider>
+          <FileUploadClientComponent />
+        </ModalProvider>
         <Button
           onClick={() => {
             setIsDashboardRouteLoading(true);
@@ -33,7 +36,7 @@ const LandingPage = () => {
           className={`mt-12 ${isDashboardRouteLoading ? 'cursor-not-allowed opacity-50' : ''}`}
           disabled={isDashboardRouteLoading}
         >
-          {!isDashboardRouteLoading ? "I want to proceed with dummy data" : "Preparing the analysis dashboard"} {isDashboardRouteLoading && <LoaderCircle className="ml-2 animate-spin"/>}
+          {!isDashboardRouteLoading ? "I want to proceed with dummy data" : "Preparing the analysis dashboard"} {isDashboardRouteLoading && <LoaderCircle className="ml-2 animate-spin" />}
         </Button>
         <WhatsappChatExportHowTo />
       </div>
@@ -68,7 +71,7 @@ const WhatsappChatExportHowTo = () => {
             </li>
           </ul>
           <br />
-          Now save it somewhere, send it via email or any other medium. This fille will be used for analysis, and when asked please use this file.
+          Now save it somewhere, send it via email or any other medium. This file will be used for analysis, before uploading the export file you may need to unzip the exported file to get the .txt file.
 
           <blockquote className="p-4 my-4 border-s-4 border-gray-300 bg-gray-50 dark:border-gray-500 dark:bg-gray-800">
             If you choose to attach media, the most recent media sent will

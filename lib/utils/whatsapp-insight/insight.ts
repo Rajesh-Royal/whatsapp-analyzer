@@ -51,7 +51,7 @@ class GetWhatsappChatInsights {
     // Extract all usernames from messages
     const allUsernames: string[] = this.chatDatabase
       .map((message) => message.author)
-      .filter((author) => author !== null) as string[];
+      .filter((author) => author !== null && !this.isSystemUser(author)) as string[];
     // Use Set to get unique usernames
     const uniqueUsernames: string[] = [...new Set(allUsernames)];
     return uniqueUsernames;
@@ -185,7 +185,7 @@ class GetWhatsappChatInsights {
         this.chatDatabase[this.chatDatabase.length - 1].date,
       ).getTime() -
         new Date(this.chatDatabase[0].date).getTime()) /
-        (1000 * 60 * 60 * 24),
+      (1000 * 60 * 60 * 24),
     );
     const totalMessageExchanged = this.chatDatabase.filter(
       (message) => message.author !== "system",
@@ -310,51 +310,69 @@ class GetWhatsappChatInsights {
       return days[date.getDay()];
     };
 
-    // Count messages for each day of the week
-    const dayStats: { [day: string]: number } = {};
+    // Calculate stats for the All users
+    {
+      // Count messages for each day of the week
+      const dayStats: { [day: string]: number } = {};
+      this.chatDatabase.forEach((message) => {
+        const day = getDayOfWeek(message.date);
+        dayStats[day] = (dayStats[day] || 0) + 1;
+      });
+
+      // Convert dayStats to array of DayStats objects
+      const dayStatsArray: DayStats[] = Object.entries(dayStats).map(
+        ([day, count]) => ({ DAY: day, MESSAGE: count }),
+      );
+
+      // Calculate average texts, least active day, and most active day
+      const totalMessages = Object.values(dayStats).reduce(
+        (total, count) => total + count,
+        0,
+      );
+      const averageTexts = totalMessages / 7;
+      const leastActiveDay = Object.entries(dayStats).reduce(
+        (prev, [day, count]) => (count < prev[1] ? [day, count] : prev),
+        ["Sunday", Infinity],
+      )[0];
+      const mostActiveDay = Object.entries(dayStats).reduce(
+        (prev, [day, count]) => (count > prev[1] ? [day, count] : prev),
+        ["Sunday", 0],
+      )[0];
+
+      // Store data for all users combined
+      basedOnDaysData.All = [
+        dayStatsArray,
+        {
+          averageTexts,
+          leastActiveDay,
+          mostActiveDay,
+        },
+      ];
+    }
+
+    // Count messages for each day of the week for each user
+    const dayStats: { [username: string]: { [day: string]: number } } = {};
     this.chatDatabase.forEach((message) => {
-      const day = getDayOfWeek(message.date);
-      dayStats[day] = (dayStats[day] || 0) + 1;
+      const author = message.author;
+      if (!this.isSystemUser(author) && author !== null) {
+        const day = getDayOfWeek(message.date);
+        dayStats[author] = dayStats[author] || {};
+        dayStats[author][day] = (dayStats[author][day] || 0) + 1;
+      }
     });
 
-    // Convert dayStats to array of DayStats objects
-    const dayStatsArray: DayStats[] = Object.entries(dayStats).map(
-      ([day, count]) => ({ DAY: day, MESSAGE: count }),
-    );
+    // Convert dayStats to array of DayStats objects for each user
+    Object.entries(dayStats).forEach(([username, stats]) => {
+      const dayStatsArray: { DAY: string; MESSAGE: number }[] = Object.entries(stats).map(([day, count]) => ({ DAY: day, MESSAGE: count }));
 
-    // Calculate average texts, least active day, and most active day
-    const totalMessages = Object.values(dayStats).reduce(
-      (total, count) => total + count,
-      0,
-    );
-    const averageTexts = totalMessages / 7;
-    const leastActiveDay = Object.entries(dayStats).reduce(
-      (prev, [day, count]) => (count < prev[1] ? [day, count] : prev),
-      ["Sunday", Infinity],
-    )[0];
-    const mostActiveDay = Object.entries(dayStats).reduce(
-      (prev, [day, count]) => (count > prev[1] ? [day, count] : prev),
-      ["Sunday", 0],
-    )[0];
+      // Calculate average texts, least active day, and most active day for each user
+      const totalMessages = Object.values(stats).reduce((total, count) => total + count, 0);
+      const averageTexts = totalMessages / 7;
+      const leastActiveDay = Object.entries(stats).reduce((prev, [day, count]) => (count < prev[1] ? [day, count] : prev), ["Sunday", Infinity])[0];
+      const mostActiveDay = Object.entries(stats).reduce((prev, [day, count]) => (count > prev[1] ? [day, count] : prev), ["Sunday", 0])[0];
 
-    // Store data for all users combined
-    basedOnDaysData.All = [
-      dayStatsArray,
-      {
-        averageTexts,
-        leastActiveDay,
-        mostActiveDay,
-      },
-    ];
-
-    // Store data for each user (excluding system)
-    const users = new Set(
-      this.chatDatabase
-        .filter((message) => message.author !== "system")
-        .map((message) => message.author as string),
-    );
-    users.forEach((user) => {
-      basedOnDaysData[user] = [
+      // Store data for each user
+      basedOnDaysData[username] = [
         dayStatsArray,
         {
           averageTexts,
