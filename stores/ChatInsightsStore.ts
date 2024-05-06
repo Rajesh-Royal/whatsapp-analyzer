@@ -4,8 +4,7 @@ import { exampleChatInsightData } from "@/lib/utils/whatsapp-insight/exampleChat
 export type ChatInsightState = typeof exampleChatInsightData;
 
 export type CounterActions = {
-  // decrementCount: () => void
-  // incrementCount: () => void
+  uploadChatInsightData: (chatInsightData: ChatInsightState) => void
 };
 
 export type ChatInsightStore = ChatInsightState & CounterActions;
@@ -17,7 +16,6 @@ export const createChatInsightStore = (
 ) => {
   return createStore<ChatInsightStore>()((set) => ({
     ...initState,
-    // decrementCount: () => set((state) => ({ count: state.count - 1 })),
-    // incrementCount: () => set((state) => ({ count: state.count + 1 })),
+    uploadChatInsightData: (chatInsightData: ChatInsightState) => set(chatInsightData),
   }));
 };

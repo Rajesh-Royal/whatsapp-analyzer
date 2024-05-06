@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 
-const FileUpload = () => {
+const FileUploadServer = () => {
   const [selectedFile, setSelectedFile] = useState();
 
   const handleFileChange = (event: any) => {
@@ -40,4 +40,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default FileUploadServer;

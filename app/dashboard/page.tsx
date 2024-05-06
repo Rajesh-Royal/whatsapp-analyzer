@@ -33,6 +33,7 @@ const Home = () => {
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
+            <p className="text-muted text-sm space-y-2">You are seeing an example overview data:</p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>
                 <OverviewCards />
@@ -56,6 +57,9 @@ const Home = () => {
             <ChatPersonalStats />
             <ChatInsightWordCloud />
             <ChatInsightUserSpecific />
+          </TabsContent>
+          <TabsContent value="reports" className="p-8">
+            <p className="text-2xl">Coming Soon</p>
           </TabsContent>
         </Tabs>
       </div>
