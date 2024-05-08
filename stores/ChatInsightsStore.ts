@@ -1,6 +1,6 @@
 import { createStore } from "zustand/vanilla";
 import { exampleChatInsightData } from "@/lib/utils/whatsapp-insight/exampleChatInsightData";
-import { WhatsAppChatInsightsType } from "@/lib/utils/whatsapp-insight/insight";
+import { type WhatsAppChatInsightsType } from "@/lib/utils/whatsapp-insight/insight";
 
 export type CounterActions = {
   uploadChatInsightData: (chatInsightData: WhatsAppChatInsightsType) => void

@@ -17,9 +17,11 @@ class GetWhatsappChatInsights {
     this.chatDatabase = chatDatabase;
     this.chatInsightsVars.groupName = filename.slice(19, -4);
 
-    this.chatInsightsVars.uniqueUserNames = this.getUniqueUsernames();
-    this.generateEmojiData();
-    this.generateWordCloud();
+    if (chatDatabase.length) {
+      this.chatInsightsVars.uniqueUserNames = this.getUniqueUsernames();
+      this.generateEmojiData();
+      this.generateWordCloud();
+    }
   }
 
   analysis() {
@@ -656,8 +658,8 @@ class GetWhatsappChatInsights {
 
 export default GetWhatsappChatInsights;
 
-const insights = new GetWhatsappChatInsights([], '').analysis();
-export type WhatsAppChatInsightsType = typeof insights;
+const insights = new GetWhatsappChatInsights([], '');
+export type WhatsAppChatInsightsType = ReturnType<typeof insights.analysis>;
 
 interface EmojiData {
   [username: string]: {
