@@ -8,7 +8,6 @@ import {
   MessageSquareIcon,
 } from "lucide-react";
 import { getChatSummary } from "@/data/whatsapp-chat/chat-summary";
-import { Skeleton } from "@/components/ui/skeleton";
 
 const OverviewCards = async () => {
   const result = await getChatSummary();
