@@ -7,6 +7,7 @@ import {
   authRoutes,
   publicRoutes,
 } from "@/routes";
+import { format } from "date-fns";
 
 const { auth } = NextAuth(authConfig);
 
@@ -19,7 +20,7 @@ export default auth((req) => {
       params[key] = value;
     }
 
-    console.info("incoming GET request", { params });
+    console.info(`[${format(new Date(), "yyyy-MM-dd HH:mm:ss.SSS")}] incoming GET request for ${req.url}`, { params });
   }
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
