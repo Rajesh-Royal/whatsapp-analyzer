@@ -42,9 +42,7 @@ const Home = () => {
             </div>
           </TabsContent>
           <TabsContent value="analytics">
-            <Suspense fallback={<h1>Loading............</h1>}>
-              <ChatAnalytics />
-            </Suspense>
+            <ChatAnalytics />
           </TabsContent>
           <TabsContent value="reports" className="p-8">
             <p className="text-2xl">Coming Soon</p>
