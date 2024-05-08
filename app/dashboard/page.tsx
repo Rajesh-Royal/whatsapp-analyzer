@@ -32,7 +32,7 @@ const Home = () => {
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
-          <TabsContent value="overview" className="space-y-4">
+          <TabsContent value="overview" className="space-y-4" >
             <p className="text-muted text-sm space-y-2">You are seeing an example overview data:</p>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>

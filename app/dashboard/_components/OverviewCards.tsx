@@ -20,7 +20,7 @@ const OverviewCards = async () => {
           <CalendarRangeIcon className="size-4 text-muted-foreground" />
         </CardHeader>
         <CardContent>
-          <div className="text-2xl font-bold">
+          <div className="text-2xl font-bold" >
             {format(result.firstMessage as Date, "MMM dd yyyy h:mm aa")}
           </div>
           <p className="text-xs text-muted-foreground">

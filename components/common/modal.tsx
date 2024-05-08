@@ -24,6 +24,7 @@ interface ModalProps {
   description: string;
   children?: React.ReactNode;
   hideCloseButton?: boolean;
+  isDefaultOpen?: boolean;
 }
 
 export const Modal: React.FC<ModalProps> = ({
@@ -33,13 +34,14 @@ export const Modal: React.FC<ModalProps> = ({
   description,
   children,
   hideCloseButton,
+  isDefaultOpen,
 }) => {
   const { isOpen, toggleModal } = useModal();
 
   return (
     <>
       {type === "dialog" ? (
-        <Dialog open={isOpen} onOpenChange={toggleModal} >
+        <Dialog open={isOpen || isDefaultOpen} onOpenChange={toggleModal} >
           <DialogContent className={cn(className)} hideCloseButton={hideCloseButton}>
             <DialogHeader >
               <DialogTitle>{title}</DialogTitle>
