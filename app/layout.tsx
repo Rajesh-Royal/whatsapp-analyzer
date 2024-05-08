@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from 'nextjs-toploader';
 import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -27,6 +28,7 @@ export default async function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <NextThemeProviders>
+            <NextTopLoader />
             <ChatInsightStoreProvider>{children}</ChatInsightStoreProvider>
           </NextThemeProviders>
           <Toaster />
