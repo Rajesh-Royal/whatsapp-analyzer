@@ -27,9 +27,9 @@ const Section: React.FC<SectionProps> = ({
       >
         {title && <h1 className="text-2xl">{title}</h1>}
         {subTitle && (
-          <h1 className="text-sm leading-6 text-muted-foreground">
+          <h4 className="text-sm leading-6 text-muted-foreground">
             {subTitle}
-          </h1>
+          </h4>
         )}
 
         <div className={cn({ "mt-6": title }, "space-y-6")}>{children}</div>

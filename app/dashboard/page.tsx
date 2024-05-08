@@ -6,14 +6,7 @@ import MessagesPerMonth from "./_components/MessagesPerMonth";
 import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
 import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
 import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
-import ChatSummary from "./_components/analytics/ChatSummary";
-import ChatTimeline from "./_components/analytics/ChatTimeline";
-import ChatInsightDayWise from "./_components/analytics/ChatInsightDayWise";
-import ChatTimeRadar from "./_components/analytics/ChatTimeRadar";
-import ChatEmojiInsights from "./_components/analytics/ChatEmojiInsights";
-import ChatPersonalStats from "./_components/analytics/ChatPersonalStats";
-import ChatInsightWordCloud from "./_components/analytics/ChatInsightWordCloud";
-import ChatInsightUserSpecific from "./_components/analytics/ChatInsightUserSpecific";
+import ChatAnalytics from "./_components/ChatAnalytics";
 
 const Home = () => {
   return (
@@ -33,7 +26,7 @@ const Home = () => {
             <TabsTrigger value="reports">Reports</TabsTrigger>
           </TabsList>
           <TabsContent value="overview" className="space-y-4" >
-            <p className="text-muted text-sm space-y-2">You are seeing an example overview data:</p>
+            <h4 className="text-muted-foreground text-sm space-y-2">You are seeing an example overview data:</h4>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>
                 <OverviewCards />
@@ -49,14 +42,9 @@ const Home = () => {
             </div>
           </TabsContent>
           <TabsContent value="analytics">
-            <ChatSummary />
-            <ChatTimeline />
-            <ChatInsightDayWise />
-            <ChatTimeRadar />
-            <ChatEmojiInsights />
-            <ChatPersonalStats />
-            <ChatInsightWordCloud />
-            <ChatInsightUserSpecific />
+            <Suspense fallback={<h1>Loading............</h1>}>
+              <ChatAnalytics />
+            </Suspense>
           </TabsContent>
           <TabsContent value="reports" className="p-8">
             <p className="text-2xl">Coming Soon</p>
