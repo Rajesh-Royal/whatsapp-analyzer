@@ -6,14 +6,13 @@ import Section from "@/components/dashboard/Section";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatInsightWordCloud = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
   const {wordcloud: chatWordCloud, emoji: emojiStats} = useChatInsightStore((store) => store.stats);
-  const [selectedUser, setSelectedUser] = useState<"All">("All");
+  const [selectedUser, setSelectedUser] = useState("All");
 
-  const handleUserChange = (userName: string) => setSelectedUser(userName as "All");
+  const handleUserChange = (userName: string) => setSelectedUser(userName);
 
   const fontSize = useCallback((word: {value: number}) => Math.log2(word.value) * 3, []);
 

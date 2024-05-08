@@ -6,7 +6,6 @@ import { BarChart, Bar, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 const ChatTimeline = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
   const chatTimeline = useChatInsightStore((store) => store.stats.timeline);
@@ -58,7 +57,7 @@ export const TimelineBarChart: React.FC<{ selectedOption: string }> = ({
     <ResponsiveContainer width="100%" height={400}>
       <BarChart
         height={400}
-        data={chatInsightTimeline[selectedOption as "All"].timelineUsage}
+        data={chatInsightTimeline[selectedOption].timelineUsage}
       >
         <Bar
           dataKey="count"

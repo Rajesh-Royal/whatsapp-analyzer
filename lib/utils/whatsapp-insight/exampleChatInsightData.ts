@@ -1,3 +1,5 @@
+import { WhatsAppChatInsightsType } from "./insight";
+
 export const exampleChatInsightData = {
   stats: {
     emoji: {
@@ -59560,4 +59562,4 @@ export const exampleChatInsightData = {
   usernames: ["Rajesh", "pappy", "denny"],
   groupName: "common ",
   isDummyData: true,
-};
+} as WhatsAppChatInsightsType;

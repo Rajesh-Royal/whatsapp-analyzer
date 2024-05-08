@@ -13,7 +13,6 @@ import {
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatInsightDayWise = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
@@ -46,7 +45,7 @@ const ChatInsightDayWise = () => {
         <ChatStatsBox
           title="Average Texts Per Day"
           stats={(
-            chatInsightBasedOnDays[selectedUser as "All"][1] as {
+            chatInsightBasedOnDays[selectedUser][1] as {
               averageTexts: number;
               leastActiveDay: string;
               mostActiveDay: string;
@@ -58,7 +57,7 @@ const ChatInsightDayWise = () => {
           title="Most Texted Day"
           stats={
             (
-              chatInsightBasedOnDays[selectedUser as "All"][1] as {
+              chatInsightBasedOnDays[selectedUser][1] as {
                 averageTexts: number;
                 leastActiveDay: string;
                 mostActiveDay: string;
@@ -71,7 +70,7 @@ const ChatInsightDayWise = () => {
           title="Least Texted Day"
           stats={
             (
-              chatInsightBasedOnDays[selectedUser as "All"][1] as {
+              chatInsightBasedOnDays[selectedUser][1] as {
                 averageTexts: number;
                 leastActiveDay: string;
                 mostActiveDay: string;
@@ -96,7 +95,7 @@ export const DayWiseBarChart: React.FC<{ selectedOption: string }> = ({
   );
 
   const days = sortedDays(
-    chatInsightBasedOnDays[selectedOption as "All"][0] as {
+    chatInsightBasedOnDays[selectedOption][0] as {
       DAY: string;
       MESSAGE: number;
     }[],
@@ -107,7 +106,7 @@ export const DayWiseBarChart: React.FC<{ selectedOption: string }> = ({
       <BarChart
         height={400}
         data={
-          chatInsightBasedOnDays[selectedOption as "All"][0] as {
+          chatInsightBasedOnDays[selectedOption][0] as {
             DAY: string;
             MESSAGE: number;
           }[]

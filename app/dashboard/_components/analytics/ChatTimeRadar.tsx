@@ -14,7 +14,6 @@ import {
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatTimeRadar = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
@@ -45,21 +44,21 @@ const ChatTimeRadar = () => {
         <ChatStatsBox
           title="Average Texts Per Hour"
           stats={chatRadarMap[
-            selectedUser as "All"
+            selectedUser
           ].radarmapStat.averageTextsPerHour.toFixed(2)}
           iconName="message-circle-code"
         />
         <ChatStatsBox
           title="Most Active Hour"
           stats={
-            chatRadarMap[selectedUser as "All"].radarmapStat.mostActiveHour
+            chatRadarMap[selectedUser].radarmapStat.mostActiveHour
           }
           iconName="alarm-clock-plus"
         />
         <ChatStatsBox
           title="Least Active Hour"
           stats={
-            chatRadarMap[selectedUser as "All"].radarmapStat.leastActiveHour
+            chatRadarMap[selectedUser].radarmapStat.leastActiveHour
           }
           iconName="hourglass"
         />
@@ -84,7 +83,7 @@ export const TimeRadarChart: React.FC<{ selectedOption: string }> = ({
 
   return (
     <ResponsiveContainer width="100%" height={500}>
-      <RadarChart data={chatRadarMap[selectedOption as "All"].radarmapUsage}>
+      <RadarChart data={chatRadarMap[selectedOption].radarmapUsage}>
         <PolarGrid />
         <PolarAngleAxis dataKey={timeFormat} />
         <PolarRadiusAxis />

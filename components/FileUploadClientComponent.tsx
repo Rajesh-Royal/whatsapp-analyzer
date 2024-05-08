@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import GetWhatsappChatInsights from "@/lib/utils/whatsapp-insight/insight";
 import * as whatsapp from "@/lib/utils/whatsapp-parser";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
-import { ChatInsightState } from "@/stores/ChatInsightsStore";
 import { useModal } from "@/providers/modal-provider";
 import { LoaderCircle } from "lucide-react";
 import { Modal } from "./common/modal";
@@ -41,7 +40,7 @@ const FileUploadClientComponent: React.FC = () => {
 
       console.log(new_insights);
 
-      uploadChatInsightData(new_insights as unknown as ChatInsightState);
+      uploadChatInsightData(new_insights);
 
       router.push("/dashboard");
       toggleModal();

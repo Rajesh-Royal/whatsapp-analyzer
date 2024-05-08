@@ -7,14 +7,13 @@ import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatInsightUserSpecific = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
   const userSpecificChatInsight = useChatInsightStore((store) => store.stats.userspecific);
-  const [selectedUser, setSelectedUser] = useState<"Rajesh">("Rajesh");
+  const [selectedUser, setSelectedUser] = useState(chatUsers[0]);
 
-  const handleUserChange = (userName: string) => setSelectedUser(userName as "Rajesh");
+  const handleUserChange = (userName: string) => setSelectedUser(userName);
   return (
     <Section title="Userspecific chat summary">
       <select

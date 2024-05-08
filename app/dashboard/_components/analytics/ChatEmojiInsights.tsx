@@ -7,7 +7,6 @@ import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from "recharts";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatEmojiInsights = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
@@ -37,7 +36,7 @@ const ChatEmojiInsights = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <ChatStatsBox
           title="Most Used Emojis"
-          stats={chatEmojis[selectedUser as "All"].emojiUsage.map(
+          stats={chatEmojis[selectedUser].emojiUsage.map(
             (item, index) => {
               return index >= 5 ? null : `${item.emoji}`;
             },
@@ -46,12 +45,12 @@ const ChatEmojiInsights = () => {
         />
         <ChatStatsBox
           title="Number of Emoji Used"
-          stats={chatEmojis[selectedUser as "All"].emojiStat.totalEmojis}
+          stats={chatEmojis[selectedUser].emojiStat.totalEmojis}
           iconName="square-sigma"
         />
         <ChatStatsBox
           title="Number of Unqiue Emojis"
-          stats={chatEmojis[selectedUser as "All"].emojiStat.totalUniqueEmojis}
+          stats={chatEmojis[selectedUser].emojiStat.totalUniqueEmojis}
           iconName="shield-check"
         />
       </div>
@@ -72,14 +71,14 @@ export const TimeRadarChart: React.FC<{ selectedOption: string }> = ({
       <PieChart>
         <Pie
           isAnimationActive={false}
-          data={chatEmojis[selectedOption as "All"].emojiUsage}
+          data={chatEmojis[selectedOption].emojiUsage}
           labelLine={false}
           label={renderCustomizedLabel}
           outerRadius={150}
           fill="#8884d8"
           dataKey="value"
         >
-          {chatEmojis[selectedOption as "All"].emojiUsage.map(
+          {chatEmojis[selectedOption].emojiUsage.map(
             (entry, index) => (
               <Cell key={`cell-${index}`} fill={randomColor()} />
             ),

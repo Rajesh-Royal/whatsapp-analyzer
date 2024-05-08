@@ -5,7 +5,6 @@ import Section from "@/components/dashboard/Section";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
-// TODO: fix All ts type
 // TODO: Refactor component to move select inside layout
 const ChatPersonalStats = () => {
   const { summary: chatSummary, userspecific: userSpecificChatSummary } = useChatInsightStore((store) => store.stats);
@@ -15,8 +14,8 @@ const ChatPersonalStats = () => {
     let userName = '';
 
     for (let user in userSpecificChatSummary) {
-      if (userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalLinks > maxLinks) {
-        maxLinks = userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalLinks;
+      if (userSpecificChatSummary[user].totalLinks > maxLinks) {
+        maxLinks = userSpecificChatSummary[user].totalLinks;
         userName = user;
       }
     }
@@ -29,8 +28,8 @@ const ChatPersonalStats = () => {
     let userName = '';
 
     for (let user in userSpecificChatSummary) {
-      if (userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalMedia > maxMedia) {
-        maxMedia = userSpecificChatSummary[user as keyof typeof userSpecificChatSummary].totalMedia;
+      if (userSpecificChatSummary[user].totalMedia > maxMedia) {
+        maxMedia = userSpecificChatSummary[user].totalMedia;
         userName = user;
       }
     }

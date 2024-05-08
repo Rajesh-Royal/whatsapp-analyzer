@@ -1,21 +1,20 @@
 import { createStore } from "zustand/vanilla";
 import { exampleChatInsightData } from "@/lib/utils/whatsapp-insight/exampleChatInsightData";
-
-export type ChatInsightState = typeof exampleChatInsightData;
+import { WhatsAppChatInsightsType } from "@/lib/utils/whatsapp-insight/insight";
 
 export type CounterActions = {
-  uploadChatInsightData: (chatInsightData: ChatInsightState) => void
+  uploadChatInsightData: (chatInsightData: WhatsAppChatInsightsType) => void
 };
 
-export type ChatInsightStore = ChatInsightState & CounterActions;
+export type ChatInsightStore = WhatsAppChatInsightsType & CounterActions;
 
-export const defaultInitState: ChatInsightState = exampleChatInsightData;
+export const defaultInitState: WhatsAppChatInsightsType = exampleChatInsightData;
 
 export const createChatInsightStore = (
-  initState: ChatInsightState = defaultInitState,
+  initState: WhatsAppChatInsightsType = defaultInitState,
 ) => {
   return createStore<ChatInsightStore>()((set) => ({
     ...initState,
-    uploadChatInsightData: (chatInsightData: ChatInsightState) => set(chatInsightData),
+    uploadChatInsightData: (chatInsightData: WhatsAppChatInsightsType) => set(chatInsightData),
   }));
 };

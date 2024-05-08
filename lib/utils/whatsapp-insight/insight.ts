@@ -5,7 +5,7 @@ class GetWhatsappChatInsights {
   chatInsightsVars = {
     no_of_days: 0,
     totalwords: 0,
-    worddata: {},
+    worddata: {} as WordCloudData,
     userdata: {},
     emojidata: {} as EmojiData,
     groupName: "",
@@ -655,6 +655,9 @@ class GetWhatsappChatInsights {
 }
 
 export default GetWhatsappChatInsights;
+
+const insights = new GetWhatsappChatInsights([], '').analysis();
+export type WhatsAppChatInsightsType = typeof insights;
 
 interface EmojiData {
   [username: string]: {
