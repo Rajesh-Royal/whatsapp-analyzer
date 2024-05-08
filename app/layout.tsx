@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
   themeColor: "#daf8c4",
   verification: {
-    google: "google-site-verification=CRwqvsQjLJimgYeoQ0xs3jl2b18mfRSrFkci_OTSabE"
+    google: "CRwqvsQjLJimgYeoQ0xs3jl2b18mfRSrFkci_OTSabE"
   },
   openGraph: {
     type: 'website',
