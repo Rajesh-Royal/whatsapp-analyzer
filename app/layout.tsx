@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: siteTitle,
     description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
-    images: "https://whatsapp-chat-trends.vercel.app/opengraph-image-public.png",
+    images: "https://whatsapp-chat-trends.vercel.app/wapp-trends-opengraph-1200x630.png",
     url: "https://whatsapp-chat-trends.vercel.app",
   },
   twitter: {
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
     card: "summary_large_image",
     site: "https://whatsapp-chat-trends.vercel.app",
-    images: "https://whatsapp-chat-trends.vercel.app/opengraph-image-public.png",
+    images: "https://whatsapp-chat-trends.vercel.app/wapp-trends-opengraph-1200x630.png",
     creator: "Raj_896",
   }
 
