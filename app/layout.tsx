@@ -7,16 +7,19 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import NextThemeProviders from "@/providers/theme-provider";
 import { ChatInsightStoreProvider } from "@/providers/chatInsightStoreProvider";
-import { SITE_NAME } from "@/lib/utils/constants";
+import { SITE_BASE_URL, SITE_NAME } from "@/lib/utils/constants";
+import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
  themeColor: '#daf8c4'
 }
+    console.log(SITE_BASE_URL);
 
 const siteTitle = `${SITE_NAME} - WhatsApp Analytics and Insights app`;
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_BASE_URL),
   title: siteTitle,
   description:
     "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
@@ -27,7 +30,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: siteTitle,
     description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
-    images: "https://whatsapp-chat-trends.vercel.app/wapp-trends-opengraph-1200x630-compressed.jpg",
+    images: "/wapp-trends-opengraph-1200x630-compressed.jpg",
     url: "https://whatsapp-chat-trends.vercel.app",
   },
   twitter: {
@@ -35,7 +38,7 @@ export const metadata: Metadata = {
     description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
     card: "summary_large_image",
     site: "https://whatsapp-chat-trends.vercel.app",
-    images: "https://whatsapp-chat-trends.vercel.app/wapp-trends-opengraph-1200x630-compressed.jpg",
+    images: "/wapp-trends-opengraph-1200x630-compressed.jpg",
     creator: "Raj_896",
   }
 
