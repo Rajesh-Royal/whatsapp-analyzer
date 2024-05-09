@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
 import { auth } from "@/auth";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -13,8 +13,8 @@ import { headers } from "next/headers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const viewport: Viewport = {
- themeColor: '#daf8c4'
-}
+  themeColor: "#daf8c4",
+};
 
 const siteTitle = `${SITE_NAME} - WhatsApp Analytics and Insights app`;
 export const metadata: Metadata = {
@@ -26,21 +26,22 @@ export const metadata: Metadata = {
     google: "Y3dQyATThljiDYYWIrKfK2EOYU-B7rILPW_0arfC9HM",
   },
   openGraph: {
-    type: 'website',
+    type: "website",
     title: siteTitle,
-    description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
+    description:
+      "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
     images: "/wapp-trends-opengraph-1200x630-compressed.jpg",
     url: "https://whatsapp-chat-trends.vercel.app",
   },
   twitter: {
     title: siteTitle,
-    description: "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
+    description:
+      "A full fledged application to analyze your whatsapp chat, fun facts, and its trends. It is 100% secure",
     card: "summary_large_image",
     site: "https://whatsapp-chat-trends.vercel.app",
     images: "/wapp-trends-opengraph-1200x630-compressed.jpg",
     creator: "Raj_896",
-  }
-
+  },
 };
 
 export default async function RootLayout({

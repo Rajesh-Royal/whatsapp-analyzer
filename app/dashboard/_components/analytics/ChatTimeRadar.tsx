@@ -50,16 +50,12 @@ const ChatTimeRadar = () => {
         />
         <ChatStatsBox
           title="Most Active Hour"
-          stats={
-            chatRadarMap[selectedUser].radarmapStat.mostActiveHour
-          }
+          stats={chatRadarMap[selectedUser].radarmapStat.mostActiveHour}
           iconName="alarm-clock-plus"
         />
         <ChatStatsBox
           title="Least Active Hour"
-          stats={
-            chatRadarMap[selectedUser].radarmapStat.leastActiveHour
-          }
+          stats={chatRadarMap[selectedUser].radarmapStat.leastActiveHour}
           iconName="hourglass"
         />
       </div>

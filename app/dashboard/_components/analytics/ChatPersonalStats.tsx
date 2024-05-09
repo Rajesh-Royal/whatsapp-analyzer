@@ -7,11 +7,12 @@ import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 
 // TODO: Refactor component to move select inside layout
 const ChatPersonalStats = () => {
-  const { summary: chatSummary, userspecific: userSpecificChatSummary } = useChatInsightStore((store) => store.stats);
+  const { summary: chatSummary, userspecific: userSpecificChatSummary } =
+    useChatInsightStore((store) => store.stats);
 
   const userWithMaxLinks = React.useMemo(() => {
     let maxLinks = 0;
-    let userName = '';
+    let userName = "";
 
     for (let user in userSpecificChatSummary) {
       if (userSpecificChatSummary[user].totalLinks > maxLinks) {
@@ -25,7 +26,7 @@ const ChatPersonalStats = () => {
 
   const userWithMaxMedia = React.useMemo(() => {
     let maxMedia = 0;
-    let userName = '';
+    let userName = "";
 
     for (let user in userSpecificChatSummary) {
       if (userSpecificChatSummary[user].totalMedia > maxMedia) {

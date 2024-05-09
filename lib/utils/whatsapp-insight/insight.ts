@@ -53,7 +53,9 @@ class GetWhatsappChatInsights {
     // Extract all usernames from messages
     const allUsernames: string[] = this.chatDatabase
       .map((message) => message.author)
-      .filter((author) => author !== null && !this.isSystemUser(author)) as string[];
+      .filter(
+        (author) => author !== null && !this.isSystemUser(author),
+      ) as string[];
     // Use Set to get unique usernames
     const uniqueUsernames: string[] = [...new Set(allUsernames)];
     return uniqueUsernames;
@@ -187,7 +189,7 @@ class GetWhatsappChatInsights {
         this.chatDatabase[this.chatDatabase.length - 1].date,
       ).getTime() -
         new Date(this.chatDatabase[0].date).getTime()) /
-      (1000 * 60 * 60 * 24),
+        (1000 * 60 * 60 * 24),
     );
     const totalMessageExchanged = this.chatDatabase.filter(
       (message) => message.author !== "system",
@@ -365,13 +367,24 @@ class GetWhatsappChatInsights {
 
     // Convert dayStats to array of DayStats objects for each user
     Object.entries(dayStats).forEach(([username, stats]) => {
-      const dayStatsArray: { DAY: string; MESSAGE: number }[] = Object.entries(stats).map(([day, count]) => ({ DAY: day, MESSAGE: count }));
+      const dayStatsArray: { DAY: string; MESSAGE: number }[] = Object.entries(
+        stats,
+      ).map(([day, count]) => ({ DAY: day, MESSAGE: count }));
 
       // Calculate average texts, least active day, and most active day for each user
-      const totalMessages = Object.values(stats).reduce((total, count) => total + count, 0);
+      const totalMessages = Object.values(stats).reduce(
+        (total, count) => total + count,
+        0,
+      );
       const averageTexts = totalMessages / 7;
-      const leastActiveDay = Object.entries(stats).reduce((prev, [day, count]) => (count < prev[1] ? [day, count] : prev), ["Sunday", Infinity])[0];
-      const mostActiveDay = Object.entries(stats).reduce((prev, [day, count]) => (count > prev[1] ? [day, count] : prev), ["Sunday", 0])[0];
+      const leastActiveDay = Object.entries(stats).reduce(
+        (prev, [day, count]) => (count < prev[1] ? [day, count] : prev),
+        ["Sunday", Infinity],
+      )[0];
+      const mostActiveDay = Object.entries(stats).reduce(
+        (prev, [day, count]) => (count > prev[1] ? [day, count] : prev),
+        ["Sunday", 0],
+      )[0];
 
       // Store data for each user
       basedOnDaysData[username] = [
@@ -658,7 +671,7 @@ class GetWhatsappChatInsights {
 
 export default GetWhatsappChatInsights;
 
-const insights = new GetWhatsappChatInsights([], '');
+const insights = new GetWhatsappChatInsights([], "");
 export type WhatsAppChatInsightsType = ReturnType<typeof insights.analysis>;
 
 interface EmojiData {

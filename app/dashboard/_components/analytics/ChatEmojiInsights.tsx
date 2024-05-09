@@ -36,11 +36,9 @@ const ChatEmojiInsights = () => {
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <ChatStatsBox
           title="Most Used Emojis"
-          stats={chatEmojis[selectedUser].emojiUsage.map(
-            (item, index) => {
-              return index >= 5 ? null : `${item.emoji}`;
-            },
-          )}
+          stats={chatEmojis[selectedUser].emojiUsage.map((item, index) => {
+            return index >= 5 ? null : `${item.emoji}`;
+          })}
           iconName="smile-plus"
         />
         <ChatStatsBox
@@ -78,11 +76,9 @@ export const TimeRadarChart: React.FC<{ selectedOption: string }> = ({
           fill="#8884d8"
           dataKey="value"
         >
-          {chatEmojis[selectedOption].emojiUsage.map(
-            (entry, index) => (
-              <Cell key={`cell-${index}`} fill={randomColor()} />
-            ),
-          )}
+          {chatEmojis[selectedOption].emojiUsage.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={randomColor()} />
+          ))}
         </Pie>
         <Tooltip content={<CustomTooltip />} />
       </PieChart>

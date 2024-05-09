@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,16 +9,16 @@ import { useModal } from "@/providers/modal-provider";
 import { LoaderCircle } from "lucide-react";
 import { Modal } from "./common/modal";
 
-
 const FileUploadClientComponent: React.FC = () => {
   const { toggleModal } = useModal();
   const router = useRouter();
-  const uploadChatInsightData = useChatInsightStore((state) => state.uploadChatInsightData);
+  const uploadChatInsightData = useChatInsightStore(
+    (state) => state.uploadChatInsightData,
+  );
 
   const [file, setFile] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = event.target.files && event.target.files[0];
@@ -55,8 +55,10 @@ const FileUploadClientComponent: React.FC = () => {
 
   return (
     <div className="mt-12 flex flex-col space-y-3">
-      <p className="md:text-start text-center">Please upload a Whatsapp chat export .txt file for analysis.</p>
-      <div className="flex items-center justify-center flex-wrap">
+      <p className="text-center md:text-start">
+        Please upload a Whatsapp chat export .txt file for analysis.
+      </p>
+      <div className="flex flex-wrap items-center justify-center">
         <input
           type="file"
           onChange={handleFileChange}
@@ -66,21 +68,25 @@ const FileUploadClientComponent: React.FC = () => {
         <button
           onClick={handleSubmit}
           disabled={loading || !file}
-          className={`rounded bg-blue-500 px-4 py-2 text-white ${loading || !file ? "cursor-not-allowed opacity-50" : ""
-            }`}
+          className={`rounded bg-blue-500 px-4 py-2 text-white ${
+            loading || !file ? "cursor-not-allowed opacity-50" : ""
+          }`}
         >
           {loading ? "Processing..." : "Upload File"}
         </button>
-
       </div>
       {error && <p className="mt-2 text-red-500">{error}</p>}
 
-      <Modal type="dialog" title="Preparing the analysis dashboard for your chat" description="" hideCloseButton>
+      <Modal
+        type="dialog"
+        title="Preparing the analysis dashboard for your chat"
+        description=""
+        hideCloseButton
+      >
         <div className="my-6 text-center">
-           <LoaderCircle className="animate-spin m-auto size-20"/>
+          <LoaderCircle className="m-auto size-20 animate-spin" />
         </div>
       </Modal>
-
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const MobileSidebar = () => {
             <MenuIcon />
             <Link
               href={"/"}
-              className="items-center justify-between gap-2 flex"
+              className="flex items-center justify-between gap-2"
             >
               <Image
                 src="/logo.png"

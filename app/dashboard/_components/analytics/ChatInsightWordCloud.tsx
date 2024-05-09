@@ -9,12 +9,17 @@ import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
 // TODO: Refactor component to move select inside layout
 const ChatInsightWordCloud = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
-  const {wordcloud: chatWordCloud, emoji: emojiStats} = useChatInsightStore((store) => store.stats);
+  const { wordcloud: chatWordCloud, emoji: emojiStats } = useChatInsightStore(
+    (store) => store.stats,
+  );
   const [selectedUser, setSelectedUser] = useState("All");
 
   const handleUserChange = (userName: string) => setSelectedUser(userName);
 
-  const fontSize = useCallback((word: {value: number}) => Math.log2(word.value) * 3, []);
+  const fontSize = useCallback(
+    (word: { value: number }) => Math.log2(word.value) * 3,
+    [],
+  );
 
   return (
     <Section title="Most Used Word's Wordcloud">
@@ -41,9 +46,7 @@ const ChatInsightWordCloud = () => {
           stats={
             chatWordCloud[selectedUser] == null
               ? "No Stats"
-              : chatWordCloud[selectedUser][
-                "wordStat"
-              ].mostUsedWord
+              : chatWordCloud[selectedUser]["wordStat"].mostUsedWord
           }
           iconName="message-circle-more"
         />
@@ -52,9 +55,7 @@ const ChatInsightWordCloud = () => {
           stats={
             chatWordCloud[selectedUser] == null
               ? "No Stats"
-              : chatWordCloud[selectedUser][
-                "wordStat"
-              ].leastUsedWord
+              : chatWordCloud[selectedUser]["wordStat"].leastUsedWord
           }
           iconName="message-circle-x"
         />
@@ -64,17 +65,20 @@ const ChatInsightWordCloud = () => {
           iconName="smile-plus"
         />
       </div>
-     {chatWordCloud[selectedUser] == null ? (
-          <h1 className="text-center text-2xl h-36 flex items-center justify-center">
+      {chatWordCloud[selectedUser] == null ? (
+        <h1 className="flex h-36 items-center justify-center text-center text-2xl">
           Woops! This user has no words!
         </h1>
-        ) : <ReactWordcloud fontSize={fontSize} rotate={2} data={chatWordCloud[selectedUser].wordUsage} spiral={"archimedean"}/>}
+      ) : (
+        <ReactWordcloud
+          fontSize={fontSize}
+          rotate={2}
+          data={chatWordCloud[selectedUser].wordUsage}
+          spiral={"archimedean"}
+        />
+      )}
     </Section>
   );
 };
 
 export default ChatInsightWordCloud;
-
-
-
-

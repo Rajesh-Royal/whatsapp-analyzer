@@ -10,7 +10,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 // TODO: Refactor component to move select inside layout
 const ChatInsightUserSpecific = () => {
   const chatUsers = useChatInsightStore((store) => store.usernames);
-  const userSpecificChatInsight = useChatInsightStore((store) => store.stats.userspecific);
+  const userSpecificChatInsight = useChatInsightStore(
+    (store) => store.stats.userspecific,
+  );
   const [selectedUser, setSelectedUser] = useState(chatUsers[0]);
 
   const handleUserChange = (userName: string) => setSelectedUser(userName);
@@ -32,7 +34,9 @@ const ChatInsightUserSpecific = () => {
       </select>
       <Card className={"bg-whatsappGreenBg-default"}>
         <CardHeader className="flex flex-row items-center justify-between space-y-0">
-          <CardTitle className="text-2xl font-bold">{selectedUser.charAt(0).toUpperCase() + selectedUser.slice(1)}</CardTitle>
+          <CardTitle className="text-2xl font-bold">
+            {selectedUser.charAt(0).toUpperCase() + selectedUser.slice(1)}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-xl">
@@ -60,15 +64,13 @@ const ChatInsightUserSpecific = () => {
             ].averageWordsPerMessage.toFixed(0)}{" "}
             words per message
           </p>
-          <p className="text-lg py-6">
-            {userSpecificChatInsight[selectedUser].totalEmojis}{" "}
-            Emojis,{" "}
-            {userSpecificChatInsight[selectedUser].totalLinks}{" "}
-            Links,{" "}
+          <p className="py-6 text-lg">
+            {userSpecificChatInsight[selectedUser].totalEmojis} Emojis,{" "}
+            {userSpecificChatInsight[selectedUser].totalLinks} Links,{" "}
             {userSpecificChatInsight[selectedUser].totalMedia} Media
           </p>
           <p className="text-lg">
-            <span className="text-blue-400 text-2xl">
+            <span className="text-2xl text-blue-400">
               {userSpecificChatInsight[selectedUser].mostActiveDate}
             </span>
             , being the most active date
@@ -76,11 +78,7 @@ const ChatInsightUserSpecific = () => {
         </CardContent>
       </Card>
     </Section>
-  )
+  );
 };
 
 export default ChatInsightUserSpecific;
-
-
-
-

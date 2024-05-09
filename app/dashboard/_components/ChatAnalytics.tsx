@@ -1,6 +1,6 @@
-'use client'
+"use client";
 
-import React from 'react';
+import React from "react";
 import ChatSummary from "./analytics/ChatSummary";
 import ChatTimeline from "./analytics/ChatTimeline";
 import ChatInsightDayWise from "./analytics/ChatInsightDayWise";
@@ -22,7 +22,7 @@ const ChatAnalytics = () => {
       <ChatInsightWordCloud />
       <ChatInsightUserSpecific />
     </React.Fragment>
-  )
-}
+  );
+};
 
-export default ChatAnalytics
+export default ChatAnalytics;

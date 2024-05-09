@@ -41,9 +41,12 @@ export const Modal: React.FC<ModalProps> = ({
   return (
     <>
       {type === "dialog" ? (
-        <Dialog open={isOpen || isDefaultOpen} onOpenChange={toggleModal} >
-          <DialogContent className={cn(className)} hideCloseButton={hideCloseButton}>
-            <DialogHeader >
+        <Dialog open={isOpen || isDefaultOpen} onOpenChange={toggleModal}>
+          <DialogContent
+            className={cn(className)}
+            hideCloseButton={hideCloseButton}
+          >
+            <DialogHeader>
               <DialogTitle>{title}</DialogTitle>
               <DialogDescription>{description}</DialogDescription>
             </DialogHeader>
