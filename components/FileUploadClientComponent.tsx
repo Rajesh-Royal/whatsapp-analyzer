@@ -42,8 +42,8 @@ const FileUploadClientComponent: React.FC = () => {
 
       uploadChatInsightData(new_insights);
 
-      router.push("/dashboard");
-      toggleModal();
+      // router.push("/dashboard");
+      // toggleModal();
     } catch (error: any) {
       setLoading(false);
       setError(error.message);

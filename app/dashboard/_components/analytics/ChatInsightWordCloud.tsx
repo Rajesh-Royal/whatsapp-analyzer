@@ -5,9 +5,11 @@ import ReactWordcloud from "react-d3-cloud";
 import Section from "@/components/dashboard/Section";
 import { useChatInsightStore } from "@/providers/chatInsightStoreProvider";
 import ChatStatsBox from "@/components/dashboard/ChatStatsBox";
+import { cn } from "@/lib/utils";
 
 // TODO: Refactor component to move select inside layout
 const ChatInsightWordCloud = () => {
+  const [selectedWord, setSelectedWord] = useState<WordCloudWordType>();
   const chatUsers = useChatInsightStore((store) => store.usernames);
   const { wordcloud: chatWordCloud, emoji: emojiStats } = useChatInsightStore(
     (store) => store.stats,
@@ -70,15 +72,45 @@ const ChatInsightWordCloud = () => {
           Woops! This user has no words!
         </h1>
       ) : (
+        <div>
         <ReactWordcloud
           fontSize={fontSize}
           rotate={2}
           data={chatWordCloud[selectedUser].wordUsage}
           spiral={"archimedean"}
+          onWordClick={(_, d) => {
+            setSelectedWord(d as WordCloudWordType);
+          }}
         />
+        <span className={cn("border p-3 text-foreground mt-3", {['hidden']: !selectedWord?.text })}>
+          The word <span className="font-bold">{selectedWord?.text}</span> is used <span className="font-bold">{selectedWord?.value}</span> times
+        </span>
+        </div>
       )}
     </Section>
   );
 };
 
 export default ChatInsightWordCloud;
+
+type WordCloudWordType = {
+  text: string
+  value: number
+  font: string
+  style: string
+  weight: string
+  rotate: number
+  size: number
+  padding: number
+  width: number
+  height: number
+  xoff: number
+  yoff: number
+  x1: number
+  y1: number
+  x0: number
+  y0: number
+  hasText: boolean
+  x: number
+  y: number
+}
