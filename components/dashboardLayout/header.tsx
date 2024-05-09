@@ -23,7 +23,7 @@ export default function Header() {
             src="/logo.png"
             width={50}
             height={50}
-            alt="Picture of the author"
+            alt="TrendyWapp website logo"
           />
           <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
         </Link>

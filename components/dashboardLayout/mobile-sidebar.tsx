@@ -3,6 +3,8 @@ import { MenuIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { SideNav } from "@/components/dashboardLayout/side-nav";
 import { NavItems } from "@/components/constants/side-nav";
+import Link from "next/link";
+import Image from "next/image";
 
 export const MobileSidebar = () => {
   const [open, setOpen] = useState(false);
@@ -20,9 +22,20 @@ export const MobileSidebar = () => {
     <>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
-          <div className="flex items-center justify-center gap-2">
+          <div className="flex items-center justify-center gap-4">
             <MenuIcon />
-            <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
+            <Link
+              href={"/"}
+              className="items-center justify-between gap-2 flex"
+            >
+              <Image
+                src="/logo.png"
+                width={30}
+                height={30}
+                alt="TrendyWapp website logo"
+              />
+              <h1 className="text-lg font-semibold">WhatsApp Analyzer</h1>
+            </Link>
           </div>
         </SheetTrigger>
         <SheetContent side="left" className="w-72">
