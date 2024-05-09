@@ -15,7 +15,6 @@ const inter = Inter({ subsets: ["latin"] });
 export const viewport: Viewport = {
  themeColor: '#daf8c4'
 }
-    console.log(SITE_BASE_URL);
 
 const siteTitle = `${SITE_NAME} - WhatsApp Analytics and Insights app`;
 export const metadata: Metadata = {
