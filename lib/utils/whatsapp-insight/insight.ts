@@ -239,7 +239,7 @@ class GetWhatsappChatInsights {
       const words = tokenizeMessage(message.message);
       words.forEach((word) => {
         // Skip "<Media omitted>" and similar words
-        if (!word.includes("<media") && !word.includes("omitted>")) {
+        if (word !== "media" && word !== "omitted") {
           const existingWordIndex = wordCloudData[author].wordUsage.findIndex(
             (item) => item.text === word,
           );
