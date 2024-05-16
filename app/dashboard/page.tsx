@@ -7,6 +7,8 @@ import OverviewCardsSkeleton from "./_components/OverviewCardsSkeleton";
 import MessagesPerMonthSkeleton from "./_components/MessagesPerMonthSkeleton";
 import TopUsersListSkeleton from "./_components/TopUsersListSkeleton";
 import ChatAnalytics from "./_components/ChatAnalytics";
+import { ChatSummarySkeleton } from "./_components/analytics/ChatSummary";
+import { ChatTimelineSkeleton } from "./_components/analytics/ChatTimeline";
 
 const Home = () => {
   return (
@@ -27,7 +29,7 @@ const Home = () => {
           </TabsList>
           <TabsContent value="overview" className="space-y-4">
             <h4 className="space-y-2 text-sm text-muted-foreground">
-              You are seeing an example overview data:
+              You are seeing an example overview data of an different group:
             </h4>
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
               <Suspense fallback={<OverviewCardsSkeleton />}>
@@ -44,7 +46,9 @@ const Home = () => {
             </div>
           </TabsContent>
           <TabsContent value="analytics">
+          <Suspense fallback={<><ChatSummarySkeleton /> <ChatTimelineSkeleton /></>}>
             <ChatAnalytics />
+            </Suspense>
           </TabsContent>
           <TabsContent value="reports" className="p-8">
             <p className="text-2xl">Coming Soon</p>
