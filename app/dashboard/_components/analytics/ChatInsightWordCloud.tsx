@@ -73,18 +73,23 @@ const ChatInsightWordCloud = () => {
         </h1>
       ) : (
         <div>
-        <ReactWordcloud
-          fontSize={fontSize}
-          rotate={2}
-          data={chatWordCloud[selectedUser].wordUsage}
-          spiral={"archimedean"}
-          onWordClick={(_, d) => {
-            setSelectedWord(d as WordCloudWordType);
-          }}
-        />
-        <span className={cn("border p-3 text-foreground mt-3", {['hidden']: !selectedWord?.text })}>
-          The word <span className="font-bold">{selectedWord?.text}</span> is used <span className="font-bold">{selectedWord?.value}</span> times
-        </span>
+          <ReactWordcloud
+            fontSize={fontSize}
+            rotate={2}
+            data={chatWordCloud[selectedUser].wordUsage}
+            spiral={"archimedean"}
+            onWordClick={(_, d) => {
+              setSelectedWord(d as WordCloudWordType);
+            }}
+          />
+          <span
+            className={cn("mt-3 border p-3 text-foreground", {
+              ["hidden"]: !selectedWord?.text,
+            })}
+          >
+            The word <span className="font-bold">{selectedWord?.text}</span> is
+            used <span className="font-bold">{selectedWord?.value}</span> times
+          </span>
         </div>
       )}
     </Section>
@@ -94,23 +99,23 @@ const ChatInsightWordCloud = () => {
 export default ChatInsightWordCloud;
 
 type WordCloudWordType = {
-  text: string
-  value: number
-  font: string
-  style: string
-  weight: string
-  rotate: number
-  size: number
-  padding: number
-  width: number
-  height: number
-  xoff: number
-  yoff: number
-  x1: number
-  y1: number
-  x0: number
-  y0: number
-  hasText: boolean
-  x: number
-  y: number
-}
+  text: string;
+  value: number;
+  font: string;
+  style: string;
+  weight: string;
+  rotate: number;
+  size: number;
+  padding: number;
+  width: number;
+  height: number;
+  xoff: number;
+  yoff: number;
+  x1: number;
+  y1: number;
+  x0: number;
+  y0: number;
+  hasText: boolean;
+  x: number;
+  y: number;
+};

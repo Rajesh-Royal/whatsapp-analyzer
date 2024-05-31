@@ -1,18 +1,18 @@
-import { MetadataRoute } from 'next'
- 
+import { MetadataRoute } from "next";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: 'https://whatsapp-chat-trends.vercel.app',
+      url: "https://whatsapp-chat-trends.vercel.app",
       lastModified: new Date(),
-      changeFrequency: 'yearly',
+      changeFrequency: "yearly",
       priority: 1,
     },
     {
-      url: 'https://whatsapp-chat-trends.vercel.app/dashboard',
+      url: "https://whatsapp-chat-trends.vercel.app/dashboard",
       lastModified: new Date(),
-      changeFrequency: 'monthly',
+      changeFrequency: "monthly",
       priority: 0.8,
     },
-  ]
+  ];
 }

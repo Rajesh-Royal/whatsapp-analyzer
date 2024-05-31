@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card'
-import { Skeleton } from '../ui/skeleton'
+import React from "react";
+import { Card, CardHeader, CardTitle, CardContent } from "../ui/card";
+import { Skeleton } from "../ui/skeleton";
 
 const ChatStatsBoxSkeleton = () => {
   return (
@@ -20,7 +20,7 @@ const ChatStatsBoxSkeleton = () => {
         </p>
       </CardContent>
     </Card>
-  )
-}
+  );
+};
 
-export default ChatStatsBoxSkeleton
+export default ChatStatsBoxSkeleton;

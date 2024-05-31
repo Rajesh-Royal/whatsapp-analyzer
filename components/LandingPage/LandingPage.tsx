@@ -22,7 +22,7 @@ const LandingPage = () => {
   return (
     <>
       <Header />
-      <div className="py-16 px-5 flex w-full flex-col items-center justify-center  overflow-y-auto min-h-[100vh]">
+      <div className="flex min-h-[100vh] w-full flex-col items-center justify-center overflow-y-auto  px-5 py-16">
         <Heading
           title="Welcome to WhatsappAnalyzer"
           description="Get insights into your chats - Now with more interesting graphs, free statistics and full PDF export, whatsapp chat file upload and more features will be added one by one, please consider to contribute."

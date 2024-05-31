@@ -12,7 +12,7 @@ export const MobileSidebar = () => {
   const [open, setOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
 
-  const isDashboardPath = usePathname().includes('/dashboard');
+  const isDashboardPath = usePathname().includes("/dashboard");
 
   useEffect(() => {
     setIsMounted(true);
@@ -22,8 +22,8 @@ export const MobileSidebar = () => {
     return null;
   }
 
-  return (
-    isDashboardPath ? <>
+  return isDashboardPath ? (
+    <>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <div className="flex items-center justify-center gap-4">
@@ -48,11 +48,10 @@ export const MobileSidebar = () => {
           </div>
         </SheetContent>
       </Sheet>
-    </> : <div className="flex items-center justify-center gap-4">
-      <Link
-        href={"/"}
-        className="flex items-center justify-between gap-2"
-      >
+    </>
+  ) : (
+    <div className="flex items-center justify-center gap-4">
+      <Link href={"/"} className="flex items-center justify-between gap-2">
         <Image
           src="/logo.png"
           width={30}

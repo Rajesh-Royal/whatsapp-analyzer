@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  CardHeader,
-  CardTitle,
-  CardContent,
-  Card,
-} from "@/components/ui/card";
+import { CardHeader, CardTitle, CardContent, Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
 const OverviewCardsSkeleton = () => {

@@ -46,8 +46,14 @@ const Home = () => {
             </div>
           </TabsContent>
           <TabsContent value="analytics">
-          <Suspense fallback={<><ChatSummarySkeleton /> <ChatTimelineSkeleton /></>}>
-            <ChatAnalytics />
+            <Suspense
+              fallback={
+                <>
+                  <ChatSummarySkeleton /> <ChatTimelineSkeleton />
+                </>
+              }
+            >
+              <ChatAnalytics />
             </Suspense>
           </TabsContent>
           <TabsContent value="reports" className="p-8">

@@ -12,11 +12,13 @@ import ChatInsightUserSpecific from "./analytics/ChatInsightUserSpecific";
 
 const ChatAnalytics = () => {
   // This is to trigger the suspense, if not used then the below charts heavy components will block ui updates initially which makes user feel the UI is stuck for a moment
-  const data = use(new Promise((resolve, reject) => {
-    setTimeout(() => {
-      resolve('');
-    }, 1500);
-  }));
+  const data = use(
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve("");
+      }, 1500);
+    }),
+  );
 
   return (
     <React.Fragment>

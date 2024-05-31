@@ -56,8 +56,7 @@ export const SectionSkeleton: React.FC<SectionProps> = ({
           "border-none p-6 dark:shadow-sm dark:shadow-neutral-600",
         )}
       >
-
-        {title && <Skeleton className="w-[35%] min-w-[200px] text-2xl h-4" />}
+        {title && <Skeleton className="h-4 w-[35%] min-w-[200px] text-2xl" />}
         {subTitle && (
           <Skeleton className="mt-2 h-2 w-[80%] text-sm leading-6 text-muted-foreground" />
         )}
