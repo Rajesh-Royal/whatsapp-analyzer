@@ -8,7 +8,6 @@ import { Toaster } from "@/components/ui/sonner";
 import NextThemeProviders from "@/providers/theme-provider";
 import { ChatInsightStoreProvider } from "@/providers/chatInsightStoreProvider";
 import { SITE_BASE_URL, SITE_NAME } from "@/lib/utils/constants";
-import { headers } from "next/headers";
 
 const inter = Inter({ subsets: ["latin"] });
 
