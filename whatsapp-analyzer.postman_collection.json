@@ -1,0 +1,2189 @@
+{
+	"info": {
+		"_postman_id": "96f731ff-3f5a-4507-a38e-c3d045dbc3bb",
+		"name": "whatsapp-analyzer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20032615"
+	},
+	"item": [
+		{
+			"name": "Get-whatsapp-chat",
+			"item": [
+				{
+					"name": "get-whatsapp-chat",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/whatsapp-chat?limit=5&offset=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"whatsapp-chat"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get-response-sample",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/whatsapp-chat?limit=5&offset=5",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"whatsapp-chat"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 13:31:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 6039,\n            \"date\": \"2023-02-02T14:09:00.006Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"2 ko reply nahi hotaa same cheej\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6040,\n            \"date\": \"2023-02-02T14:09:00.007Z\",\n            \"author\": \"denny\",\n            \"message\": \"Thoda sa chutiya h n\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6041,\n            \"date\": \"2023-02-02T14:10:00.008Z\",\n            \"author\": \"pappy\",\n            \"message\": \"😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6042,\n            \"date\": \"2023-02-02T14:10:00.009Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"copy paste kr rhaa thaa idhar se udhar\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6043,\n            \"date\": \"2023-02-02T14:10:00.010Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"🤣\",\n            \"attachmentId\": null\n        }\n    ],\n    \"count\": 5681\n}"
+						}
+					]
+				},
+				{
+					"name": "get-by-id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-message-by-id?messageId=6039",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-message-by-id"
+							],
+							"query": [
+								{
+									"key": "messageId",
+									"value": "6039"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "error-response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-message-by-id?messageId=1",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-message-by-id"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "messageId",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 14:47:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Message id is required\",\n    \"status\": 400,\n    \"data\": []\n}"
+						},
+						{
+							"name": "success-response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-message-by-id?messageId=6039",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-message-by-id"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "",
+											"disabled": true
+										},
+										{
+											"key": "messageId",
+											"value": "6039"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 14:48:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 6039,\n            \"date\": \"2023-02-02T14:09:00.006Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"2 ko reply nahi hotaa same cheej\",\n            \"attachmentId\": null\n        }\n    ],\n    \"count\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "get-by-author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-by-author-name?author=pappy&limit=5&offset=0",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-by-author-name"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "pappy"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "not-found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-author-name",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-author-name"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 14:59:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No message found for this author\",\n    \"status\": 204,\n    \"data\": [],\n    \"count\": 0\n}"
+						},
+						{
+							"name": "error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-author-name",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-author-name"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 05 Apr 2024 15:01:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Author name is required\",\n    \"status\": 400,\n    \"data\": []\n}"
+						},
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-author-name?author=rajesh&limit=5&offset=0",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-author-name"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 05:06:19 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched message successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 6036,\n            \"date\": \"2023-02-02T14:09:00.003Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"yahaan bhejo\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6037,\n            \"date\": \"2023-02-02T14:09:00.004Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"🤣\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6039,\n            \"date\": \"2023-02-02T14:09:00.006Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"2 ko reply nahi hotaa same cheej\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6042,\n            \"date\": \"2023-02-02T14:10:00.009Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"copy paste kr rhaa thaa idhar se udhar\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6043,\n            \"date\": \"2023-02-02T14:10:00.010Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"🤣\",\n            \"attachmentId\": null\n        }\n    ],\n    \"count\": 5\n}"
+						},
+						{
+							"name": "validation-error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-author-name?author=pappy&limit='abc'&offset='bg'",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-author-name"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "pappy"
+										},
+										{
+											"key": "limit",
+											"value": "'abc'"
+										},
+										{
+											"key": "offset",
+											"value": "'bg'"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 07:12:01 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid Params\",\n    \"status\": 500,\n    \"data\": [],\n    \"errorMessage\": \"limit must be a number\",\n    \"validationErrors\": [\n        {\n            \"code\": \"custom\",\n            \"message\": \"limit must be a number\",\n            \"path\": [\n                \"limit\"\n            ]\n        },\n        {\n            \"code\": \"custom\",\n            \"message\": \"offset must be a number\",\n            \"path\": [\n                \"offset\"\n            ]\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "get-by-date-range",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-by-date-range?author=pappy&limit=5&offset=0&fromDate=2023-02-08&toDate=2023-02-25",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-by-date-range"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "pappy"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "fromDate",
+									"value": "2023-02-08"
+								},
+								{
+									"key": "toDate",
+									"value": "2023-02-25"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-date-range?author=pappy&limit=5&offset=0&fromDate=2023-02-08&toDate=2023-02-25",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-date-range"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "pappy"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "fromDate",
+											"value": "2023-02-08"
+										},
+										{
+											"key": "toDate",
+											"value": "2023-02-25"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 06:59:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"id\": 6659,\n            \"date\": \"2023-02-08T07:10:00.004Z\",\n            \"author\": \"pappy\",\n            \"message\": \"🤣🤣\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6660,\n            \"date\": \"2023-02-08T07:10:00.005Z\",\n            \"author\": \"pappy\",\n            \"message\": \"Nhi thodi izzat to bcha k rkhni chahiye 😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6706,\n            \"date\": \"2023-02-17T17:24:00.032Z\",\n            \"author\": \"pappy\",\n            \"message\": \"Aaj but mera working h iss weekend\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6708,\n            \"date\": \"2023-02-17T17:25:00.034Z\",\n            \"author\": \"pappy\",\n            \"message\": \"Kl mandir ja skta hu bs\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6715,\n            \"date\": \"2023-02-22T05:50:00.002Z\",\n            \"author\": \"pappy\",\n            \"message\": \"😅😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6717,\n            \"date\": \"2023-02-22T07:42:00.004Z\",\n            \"author\": \"pappy\",\n            \"message\": \"Firetruck\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6719,\n            \"date\": \"2023-02-22T07:42:00.006Z\",\n            \"author\": \"pappy\",\n            \"message\": \"🤣🤣🤣🤣\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6721,\n            \"date\": \"2023-02-22T07:43:00.008Z\",\n            \"author\": \"pappy\",\n            \"message\": \"We found it on Quora🤣🤣🤣\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6752,\n            \"date\": \"2023-02-23T07:41:00.004Z\",\n            \"author\": \"pappy\",\n            \"message\": \"😅😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6754,\n            \"date\": \"2023-02-24T12:46:00.002Z\",\n            \"author\": \"pappy\",\n            \"message\": \"🤣🤣🤣🤣🤣\",\n            \"attachmentId\": null\n        }\n    ],\n    \"count\": 10\n}"
+						},
+						{
+							"name": "error-validation",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-date-range?limit=5&offset=0&fromDate=2023-02-08&toDate=2023-02-25",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-date-range"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "pappy",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "fromDate",
+											"value": "2023-02-08"
+										},
+										{
+											"key": "toDate",
+											"value": "2023-02-25"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 06:59:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Author name is required\",\n    \"status\": 400,\n    \"data\": []\n}"
+						},
+						{
+							"name": "not-found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-date-range?author=pappydd&limit=5&offset=0&fromDate=2023-02-08&toDate=2023-02-25",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-date-range"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "pappydd"
+										},
+										{
+											"key": "limit",
+											"value": "5"
+										},
+										{
+											"key": "offset",
+											"value": "0"
+										},
+										{
+											"key": "fromDate",
+											"value": "2023-02-08"
+										},
+										{
+											"key": "toDate",
+											"value": "2023-02-25"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 06 Apr 2024 07:00:13 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No message found for this search\",\n    \"status\": 204,\n    \"data\": [],\n    \"count\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "get-by-messages-per-day",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "{{Cookie}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}/get-by-messages-per-day?fromDate=2023-02-02",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-by-messages-per-day"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2023-02-02",
+									"description": "format: YYYY-MM-DD - required"
+								},
+								{
+									"key": "toDate",
+									"value": "2024-02-02",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "rajesh",
+									"description": "case insensitive",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "1",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success-default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "{{Cookie}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-day",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-day"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD",
+											"disabled": true
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 02:49:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages analytics successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"date\": \"2023-03-17T00:00:00.000Z\",\n            \"count\": 196\n        },\n        {\n            \"date\": \"2023-10-25T00:00:00.000Z\",\n            \"count\": 193\n        },\n        {\n            \"date\": \"2023-05-06T00:00:00.000Z\",\n            \"count\": 164\n        },\n        {\n            \"date\": \"2023-03-30T00:00:00.000Z\",\n            \"count\": 159\n        },\n        {\n            \"date\": \"2023-11-09T00:00:00.000Z\",\n            \"count\": 141\n        },\n        {\n            \"date\": \"2023-05-25T00:00:00.000Z\",\n            \"count\": 137\n        },\n        {\n            \"date\": \"2023-12-13T00:00:00.000Z\",\n            \"count\": 121\n        },\n        {\n            \"date\": \"2023-09-13T00:00:00.000Z\",\n            \"count\": 104\n        },\n        {\n            \"date\": \"2023-07-14T00:00:00.000Z\",\n            \"count\": 99\n        },\n        {\n            \"date\": \"2023-11-04T00:00:00.000Z\",\n            \"count\": 94\n        },\n        {\n            \"date\": \"2023-04-03T00:00:00.000Z\",\n            \"count\": 86\n        },\n        {\n            \"date\": \"2023-05-08T00:00:00.000Z\",\n            \"count\": 82\n        },\n        {\n            \"date\": \"2023-04-22T00:00:00.000Z\",\n            \"count\": 78\n        },\n        {\n            \"date\": \"2023-12-18T00:00:00.000Z\",\n            \"count\": 78\n        },\n        {\n            \"date\": \"2023-12-06T00:00:00.000Z\",\n            \"count\": 75\n        },\n        {\n            \"date\": \"2023-12-03T00:00:00.000Z\",\n            \"count\": 70\n        },\n        {\n            \"date\": \"2023-07-20T00:00:00.000Z\",\n            \"count\": 65\n        },\n        {\n            \"date\": \"2023-07-11T00:00:00.000Z\",\n            \"count\": 62\n        },\n        {\n            \"date\": \"2023-03-24T00:00:00.000Z\",\n            \"count\": 62\n        },\n        {\n            \"date\": \"2023-04-23T00:00:00.000Z\",\n            \"count\": 62\n        },\n        {\n            \"date\": \"2023-11-29T00:00:00.000Z\",\n            \"count\": 59\n        },\n        {\n            \"date\": \"2023-09-15T00:00:00.000Z\",\n            \"count\": 57\n        },\n        {\n            \"date\": \"2023-03-16T00:00:00.000Z\",\n            \"count\": 57\n        },\n        {\n            \"date\": \"2023-04-20T00:00:00.000Z\",\n            \"count\": 56\n        },\n        {\n            \"date\": \"2023-05-28T00:00:00.000Z\",\n            \"count\": 55\n        },\n        {\n            \"date\": \"2023-12-17T00:00:00.000Z\",\n            \"count\": 53\n        },\n        {\n            \"date\": \"2023-09-26T00:00:00.000Z\",\n            \"count\": 52\n        },\n        {\n            \"date\": \"2023-09-22T00:00:00.000Z\",\n            \"count\": 51\n        },\n        {\n            \"date\": \"2023-12-22T00:00:00.000Z\",\n            \"count\": 49\n        },\n        {\n            \"date\": \"2023-09-27T00:00:00.000Z\",\n            \"count\": 49\n        },\n        {\n            \"date\": \"2023-08-18T00:00:00.000Z\",\n            \"count\": 49\n        },\n        {\n            \"date\": \"2023-03-25T00:00:00.000Z\",\n            \"count\": 48\n        },\n        {\n            \"date\": \"2023-12-11T00:00:00.000Z\",\n            \"count\": 47\n        },\n        {\n            \"date\": \"2023-05-15T00:00:00.000Z\",\n            \"count\": 46\n        },\n        {\n            \"date\": \"2023-03-15T00:00:00.000Z\",\n            \"count\": 46\n        },\n        {\n            \"date\": \"2023-04-06T00:00:00.000Z\",\n            \"count\": 46\n        },\n        {\n            \"date\": \"2023-02-02T00:00:00.000Z\",\n            \"count\": 46\n        },\n        {\n            \"date\": \"2023-11-28T00:00:00.000Z\",\n            \"count\": 45\n        },\n        {\n            \"date\": \"2023-04-05T00:00:00.000Z\",\n            \"count\": 45\n        },\n        {\n            \"date\": \"2023-05-26T00:00:00.000Z\",\n            \"count\": 45\n        },\n        {\n            \"date\": \"2023-08-07T00:00:00.000Z\",\n            \"count\": 44\n        },\n        {\n            \"date\": \"2023-05-12T00:00:00.000Z\",\n            \"count\": 43\n        },\n        {\n            \"date\": \"2023-05-11T00:00:00.000Z\",\n            \"count\": 41\n        },\n        {\n            \"date\": \"2023-08-19T00:00:00.000Z\",\n            \"count\": 41\n        },\n        {\n            \"date\": \"2023-04-25T00:00:00.000Z\",\n            \"count\": 40\n        },\n        {\n            \"date\": \"2023-05-18T00:00:00.000Z\",\n            \"count\": 39\n        },\n        {\n            \"date\": \"2023-12-04T00:00:00.000Z\",\n            \"count\": 39\n        },\n        {\n            \"date\": \"2023-09-25T00:00:00.000Z\",\n            \"count\": 38\n        },\n        {\n            \"date\": \"2023-09-18T00:00:00.000Z\",\n            \"count\": 38\n        },\n        {\n            \"date\": \"2023-11-22T00:00:00.000Z\",\n            \"count\": 37\n        },\n        {\n            \"date\": \"2023-11-08T00:00:00.000Z\",\n            \"count\": 36\n        },\n        {\n            \"date\": \"2023-03-26T00:00:00.000Z\",\n            \"count\": 36\n        },\n        {\n            \"date\": \"2023-05-22T00:00:00.000Z\",\n            \"count\": 36\n        },\n        {\n            \"date\": \"2023-02-17T00:00:00.000Z\",\n            \"count\": 35\n        },\n        {\n            \"date\": \"2023-05-24T00:00:00.000Z\",\n            \"count\": 35\n        },\n        {\n            \"date\": \"2023-02-22T00:00:00.000Z\",\n            \"count\": 35\n        },\n        {\n            \"date\": \"2023-05-29T00:00:00.000Z\",\n            \"count\": 34\n        },\n        {\n            \"date\": \"2023-09-20T00:00:00.000Z\",\n            \"count\": 34\n        },\n        {\n            \"date\": \"2023-09-21T00:00:00.000Z\",\n            \"count\": 33\n        },\n        {\n            \"date\": \"2023-09-10T00:00:00.000Z\",\n            \"count\": 31\n        },\n        {\n            \"date\": \"2023-09-16T00:00:00.000Z\",\n            \"count\": 30\n        },\n        {\n            \"date\": \"2023-04-27T00:00:00.000Z\",\n            \"count\": 30\n        },\n        {\n            \"date\": \"2023-11-23T00:00:00.000Z\",\n            \"count\": 30\n        },\n        {\n            \"date\": \"2023-03-27T00:00:00.000Z\",\n            \"count\": 29\n        },\n        {\n            \"date\": \"2023-03-19T00:00:00.000Z\",\n            \"count\": 29\n        },\n        {\n            \"date\": \"2023-07-28T00:00:00.000Z\",\n            \"count\": 28\n        },\n        {\n            \"date\": \"2023-11-21T00:00:00.000Z\",\n            \"count\": 28\n        },\n        {\n            \"date\": \"2023-07-18T00:00:00.000Z\",\n            \"count\": 28\n        },\n        {\n            \"date\": \"2023-08-30T00:00:00.000Z\",\n            \"count\": 28\n        },\n        {\n            \"date\": \"2023-03-28T00:00:00.000Z\",\n            \"count\": 27\n        },\n        {\n            \"date\": \"2023-12-15T00:00:00.000Z\",\n            \"count\": 27\n        },\n        {\n            \"date\": \"2023-11-05T00:00:00.000Z\",\n            \"count\": 26\n        },\n        {\n            \"date\": \"2023-04-16T00:00:00.000Z\",\n            \"count\": 25\n        },\n        {\n            \"date\": \"2023-12-26T00:00:00.000Z\",\n            \"count\": 25\n        },\n        {\n            \"date\": \"2023-07-04T00:00:00.000Z\",\n            \"count\": 24\n        },\n        {\n            \"date\": \"2023-06-29T00:00:00.000Z\",\n            \"count\": 24\n        },\n        {\n            \"date\": \"2023-09-19T00:00:00.000Z\",\n            \"count\": 24\n        },\n        {\n            \"date\": \"2023-12-02T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2023-10-06T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2023-10-08T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2024-01-22T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2023-12-20T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2023-12-01T00:00:00.000Z\",\n            \"count\": 23\n        },\n        {\n            \"date\": \"2023-09-17T00:00:00.000Z\",\n            \"count\": 22\n        },\n        {\n            \"date\": \"2023-06-01T00:00:00.000Z\",\n            \"count\": 22\n        },\n        {\n            \"date\": \"2023-05-02T00:00:00.000Z\",\n            \"count\": 22\n        },\n        {\n            \"date\": \"2023-04-30T00:00:00.000Z\",\n            \"count\": 22\n        },\n        {\n            \"date\": \"2024-01-13T00:00:00.000Z\",\n            \"count\": 21\n        },\n        {\n            \"date\": \"2023-11-01T00:00:00.000Z\",\n            \"count\": 21\n        },\n        {\n            \"date\": \"2023-10-21T00:00:00.000Z\",\n            \"count\": 21\n        },\n        {\n            \"date\": \"2024-01-05T00:00:00.000Z\",\n            \"count\": 20\n        },\n        {\n            \"date\": \"2023-07-31T00:00:00.000Z\",\n            \"count\": 20\n        },\n        {\n            \"date\": \"2023-12-16T00:00:00.000Z\",\n            \"count\": 19\n        },\n        {\n            \"date\": \"2023-09-05T00:00:00.000Z\",\n            \"count\": 19\n        },\n        {\n            \"date\": \"2023-04-21T00:00:00.000Z\",\n            \"count\": 19\n        },\n        {\n            \"date\": \"2023-12-10T00:00:00.000Z\",\n            \"count\": 18\n        },\n        {\n            \"date\": \"2023-11-02T00:00:00.000Z\",\n            \"count\": 18\n        },\n        {\n            \"date\": \"2023-10-20T00:00:00.000Z\",\n            \"count\": 18\n        },\n        {\n            \"date\": \"2023-02-07T00:00:00.000Z\",\n            \"count\": 18\n        },\n        {\n            \"date\": \"2023-03-05T00:00:00.000Z\",\n            \"count\": 17\n        },\n        {\n            \"date\": \"2023-07-26T00:00:00.000Z\",\n            \"count\": 17\n        },\n        {\n            \"date\": \"2023-08-29T00:00:00.000Z\",\n            \"count\": 17\n        },\n        {\n            \"date\": \"2024-01-27T00:00:00.000Z\",\n            \"count\": 17\n        },\n        {\n            \"date\": \"2023-08-02T00:00:00.000Z\",\n            \"count\": 17\n        },\n        {\n            \"date\": \"2023-09-23T00:00:00.000Z\",\n            \"count\": 16\n        },\n        {\n            \"date\": \"2023-05-30T00:00:00.000Z\",\n            \"count\": 16\n        },\n        {\n            \"date\": \"2023-09-30T00:00:00.000Z\",\n            \"count\": 15\n        },\n        {\n            \"date\": \"2023-11-03T00:00:00.000Z\",\n            \"count\": 15\n        },\n        {\n            \"date\": \"2023-06-08T00:00:00.000Z\",\n            \"count\": 15\n        },\n        {\n            \"date\": \"2023-10-10T00:00:00.000Z\",\n            \"count\": 14\n        },\n        {\n            \"date\": \"2023-12-05T00:00:00.000Z\",\n            \"count\": 14\n        },\n        {\n            \"date\": \"2023-08-03T00:00:00.000Z\",\n            \"count\": 14\n        },\n        {\n            \"date\": \"2023-02-09T00:00:00.000Z\",\n            \"count\": 13\n        },\n        {\n            \"date\": \"2023-05-09T00:00:00.000Z\",\n            \"count\": 13\n        },\n        {\n            \"date\": \"2023-11-10T00:00:00.000Z\",\n            \"count\": 13\n        },\n        {\n            \"date\": \"2023-08-08T00:00:00.000Z\",\n            \"count\": 13\n        },\n        {\n            \"date\": \"2023-02-27T00:00:00.000Z\",\n            \"count\": 13\n        },\n        {\n            \"date\": \"2023-04-07T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-12-23T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-05-19T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-07-08T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-10-04T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-10-01T00:00:00.000Z\",\n            \"count\": 12\n        },\n        {\n            \"date\": \"2023-03-01T00:00:00.000Z\",\n            \"count\": 11\n        },\n        {\n            \"date\": \"2023-05-07T00:00:00.000Z\",\n            \"count\": 11\n        },\n        {\n            \"date\": \"2023-09-02T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2023-10-29T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2023-05-20T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2023-06-05T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2024-01-04T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2023-05-03T00:00:00.000Z\",\n            \"count\": 10\n        },\n        {\n            \"date\": \"2023-10-02T00:00:00.000Z\",\n            \"count\": 9\n        },\n        {\n            \"date\": \"2023-10-14T00:00:00.000Z\",\n            \"count\": 9\n        },\n        {\n            \"date\": \"2023-07-24T00:00:00.000Z\",\n            \"count\": 8\n        },\n        {\n            \"date\": \"2023-09-14T00:00:00.000Z\",\n            \"count\": 8\n        },\n        {\n            \"date\": \"2024-01-14T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-08-21T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-10-13T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-03-07T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-02-03T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-06-02T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-12-28T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-08-01T00:00:00.000Z\",\n            \"count\": 7\n        },\n        {\n            \"date\": \"2023-03-31T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-05-31T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-05-13T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-10-03T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-11-26T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-07-21T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-07-13T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-10-05T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2024-01-26T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-08-13T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-11-24T00:00:00.000Z\",\n            \"count\": 6\n        },\n        {\n            \"date\": \"2023-12-07T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2024-01-16T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-04-09T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-08-26T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-05-27T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-10-17T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-02-08T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-08-14T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-04-04T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-08-04T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-08-31T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2024-01-09T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2024-01-06T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-07-22T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-09-11T00:00:00.000Z\",\n            \"count\": 5\n        },\n        {\n            \"date\": \"2023-07-05T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-09-01T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-11-12T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-03-22T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-08-25T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-09-09T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2024-01-19T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-08-28T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-10-19T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-12-12T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2024-01-12T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-02-23T00:00:00.000Z\",\n            \"count\": 4\n        },\n        {\n            \"date\": \"2023-05-16T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-06-06T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-09-04T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2024-01-21T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-10-12T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-09-07T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-12-25T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-07-12T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-08-12T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-08-22T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-12-29T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-02-21T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-10-26T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-12-21T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-04-19T00:00:00.000Z\",\n            \"count\": 3\n        },\n        {\n            \"date\": \"2023-08-16T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-02-24T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-12-30T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-03-12T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-07-06T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-04-28T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-03-29T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2024-01-15T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-07-25T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-07-29T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-09-08T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-08-05T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-12-24T00:00:00.000Z\",\n            \"count\": 2\n        },\n        {\n            \"date\": \"2023-03-02T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-09-24T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-12-08T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-03-13T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-02-10T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-07-17T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-12-14T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-02-20T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-10-31T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-10-09T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-11-19T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-07-15T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-11-27T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-02-05T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-11-18T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-05-21T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2024-01-24T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-08-11T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-08-06T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2024-01-08T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-06-24T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-08-24T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-07-09T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-03-20T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-10-23T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-12-31T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-03-23T00:00:00.000Z\",\n            \"count\": 1\n        },\n        {\n            \"date\": \"2023-11-07T00:00:00.000Z\",\n            \"count\": 1\n        }\n    ],\n    \"count\": 237\n}"
+						},
+						{
+							"name": "error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-day?fromDate=2023-02-02&toDate=2024-02-02d&author=rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-day"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD"
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02d"
+										},
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "case insensitive"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 03:30:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Failed to fetch messages analytics data\",\n    \"status\": 500,\n    \"data\": [],\n    \"errorMessage\": \"Invalid time value\"\n}"
+						},
+						{
+							"name": "not-found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-day?fromDate=2023-02-02&toDate=2024-02-02&author=rajeshsss",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-day"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD"
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02"
+										},
+										{
+											"key": "author",
+											"value": "rajeshsss",
+											"description": "case insensitive"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 03:31:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No messages analytics data found for this search\",\n    \"status\": 204,\n    \"data\": [],\n    \"count\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "get-by-messages-per-author",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-by-messages-per-author",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-by-messages-per-author"
+							],
+							"query": [
+								{
+									"key": "fromDate",
+									"value": "2023-02-02",
+									"description": "format: YYYY/MM/DD ",
+									"disabled": true
+								},
+								{
+									"key": "toDate",
+									"value": "2024-02-02",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"disabled": true
+								},
+								{
+									"key": "offset",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "author",
+									"value": "rajeshd",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success-single",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-author?author=rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-author"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD ",
+											"disabled": true
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02",
+											"disabled": true
+										},
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "case insensitive"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 03:56:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages analytics successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_count\": {\n                \"message\": 2445\n            },\n            \"author\": \"Rajesh\"\n        }\n    ],\n    \"count\": 1\n}"
+						},
+						{
+							"name": "success-multiple",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-author",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-author"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD ",
+											"disabled": true
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02",
+											"disabled": true
+										},
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "case insensitive",
+											"disabled": true
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 03:57:38 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages analytics successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"_count\": {\n                \"message\": 2445\n            },\n            \"author\": \"Rajesh\"\n        },\n        {\n            \"_count\": {\n                \"message\": 2004\n            },\n            \"author\": \"denny\"\n        },\n        {\n            \"_count\": {\n                \"message\": 1180\n            },\n            \"author\": \"pappy\"\n        },\n        {\n            \"_count\": {\n                \"message\": 52\n            },\n            \"author\": \"system\"\n        }\n    ],\n    \"count\": 4\n}"
+						},
+						{
+							"name": "not-found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-by-messages-per-author?author=rajeshd",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-by-messages-per-author"
+									],
+									"query": [
+										{
+											"key": "fromDate",
+											"value": "2023-02-02",
+											"description": "format: YYYY/MM/DD ",
+											"disabled": true
+										},
+										{
+											"key": "toDate",
+											"value": "2024-02-02",
+											"disabled": true
+										},
+										{
+											"key": "author",
+											"value": "rajeshd",
+											"description": "case insensitive"
+										},
+										{
+											"key": "limit",
+											"value": "10",
+											"disabled": true
+										},
+										{
+											"key": "offset",
+											"value": "1",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 03:58:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"No messages analytics data found for this search\",\n    \"status\": 204,\n    \"data\": [],\n    \"count\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "chat-summary",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/chat-summary?author=rajesh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"chat-summary"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "rajesh",
+									"description": "when used chat summary of specific author is returned"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/chat-summary",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"chat-summary"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 04:47:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages analytics successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"firstMessage\": \"2023-02-02T14:09:00.001Z\",\n            \"lastMessage\": \"2024-04-03T03:54:00.002Z\",\n            \"totalDays\": 426,\n            \"totalMessages\": 5681,\n            \"authors\": [\n                \"denny\",\n                \"system\",\n                \"pappy\",\n                \"Rajesh\"\n            ]\n        }\n    ],\n    \"count\": 4\n}"
+						},
+						{
+							"name": "author-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/chat-summary?author=rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"chat-summary"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "when used chat summary of specific author is returned"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 05:06:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages analytics successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"rajesh\": {\n                \"numberOfWords\": 9282,\n                \"averageMessageLength\": 3,\n                \"uniqueWords\": 2572,\n                \"charactersInLongestMessage\": 452\n            }\n        }\n    ],\n    \"count\": 0\n}"
+						}
+					]
+				},
+				{
+					"name": "chat-fun-facts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/chat-fun-facts",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"chat-fun-facts"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "rajesh",
+									"description": "when used chat facts of specific author is returned",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/chat-fun-facts",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"chat-fun-facts"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 04:47:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages fun facts successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"denny\": {\n                \"numberOfWords\": 6471,\n                \"averageMessageLength\": 3,\n                \"uniqueWords\": 1903,\n                \"charactersInLongestMessage\": 381\n            },\n            \"system\": {\n                \"numberOfWords\": 308,\n                \"averageMessageLength\": 5,\n                \"uniqueWords\": 59,\n                \"charactersInLongestMessage\": 139\n            },\n            \"pappy\": {\n                \"numberOfWords\": 5481,\n                \"averageMessageLength\": 4,\n                \"uniqueWords\": 1686,\n                \"charactersInLongestMessage\": 157\n            },\n            \"Rajesh\": {\n                \"numberOfWords\": 9282,\n                \"averageMessageLength\": 3,\n                \"uniqueWords\": 2572,\n                \"charactersInLongestMessage\": 452\n            }\n        }\n    ],\n    \"count\": 4\n}"
+						},
+						{
+							"name": "author-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/chat-fun-facts?author=rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"chat-fun-facts"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "when used chat summary of specific author is returned"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 05:06:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages fun facts successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"rajesh\": {\n                \"numberOfWords\": 9282,\n                \"averageMessageLength\": 3,\n                \"uniqueWords\": 2572,\n                \"charactersInLongestMessage\": 452\n            }\n        }\n    ],\n    \"count\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "active-time-of-day",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/active-time-of-day?author=rajesh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"active-time-of-day"
+							],
+							"query": [
+								{
+									"key": "author",
+									"value": "rajesh",
+									"description": "when used chat active time of specific author is returned"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/active-time-of-day",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"active-time-of-day"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 04:47:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages fun facts successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"grouped\": {\n                \"system\": [\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"8PM\",\n                        \"count\": 11\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"9PM\",\n                        \"count\": 7\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"7PM\",\n                        \"count\": 6\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"12PM\",\n                        \"count\": 4\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"11AM\",\n                        \"count\": 4\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"5PM\",\n                        \"count\": 3\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"6PM\",\n                        \"count\": 3\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"10AM\",\n                        \"count\": 3\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"3PM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"4PM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"10PM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"8AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"1PM\",\n                        \"count\": 1\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"2PM\",\n                        \"count\": 1\n                    },\n                    {\n                        \"author\": \"system\",\n                        \"time\": \"9AM\",\n                        \"count\": 1\n                    }\n                ],\n                \"Rajesh\": [\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"12PM\",\n                        \"count\": 292\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"5PM\",\n                        \"count\": 261\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"11AM\",\n                        \"count\": 214\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"1PM\",\n                        \"count\": 207\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"8PM\",\n                        \"count\": 204\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"4PM\",\n                        \"count\": 171\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"10AM\",\n                        \"count\": 160\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"7PM\",\n                        \"count\": 143\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"2PM\",\n                        \"count\": 138\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"9PM\",\n                        \"count\": 135\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"6PM\",\n                        \"count\": 129\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"3PM\",\n                        \"count\": 105\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"10PM\",\n                        \"count\": 101\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"9AM\",\n                        \"count\": 75\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"7AM\",\n                        \"count\": 40\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"8AM\",\n                        \"count\": 35\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"11PM\",\n                        \"count\": 17\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"6AM\",\n                        \"count\": 11\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"1AM\",\n                        \"count\": 4\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"5AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"2AM\",\n                        \"count\": 1\n                    }\n                ],\n                \"pappy\": [\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"12PM\",\n                        \"count\": 163\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"1PM\",\n                        \"count\": 135\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"8PM\",\n                        \"count\": 121\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"10PM\",\n                        \"count\": 99\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"7PM\",\n                        \"count\": 98\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"11AM\",\n                        \"count\": 94\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"3PM\",\n                        \"count\": 87\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"4PM\",\n                        \"count\": 83\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"9PM\",\n                        \"count\": 56\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"10AM\",\n                        \"count\": 48\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"6PM\",\n                        \"count\": 46\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"5PM\",\n                        \"count\": 42\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"9AM\",\n                        \"count\": 30\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"2PM\",\n                        \"count\": 22\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"8AM\",\n                        \"count\": 18\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"11PM\",\n                        \"count\": 15\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"7AM\",\n                        \"count\": 11\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"6AM\",\n                        \"count\": 5\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"1AM\",\n                        \"count\": 4\n                    },\n                    {\n                        \"author\": \"pappy\",\n                        \"time\": \"12AM\",\n                        \"count\": 3\n                    }\n                ],\n                \"denny\": [\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"5PM\",\n                        \"count\": 215\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"1PM\",\n                        \"count\": 185\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"12PM\",\n                        \"count\": 176\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"4PM\",\n                        \"count\": 167\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"8PM\",\n                        \"count\": 159\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"11AM\",\n                        \"count\": 157\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"3PM\",\n                        \"count\": 156\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"10PM\",\n                        \"count\": 146\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"10AM\",\n                        \"count\": 118\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"7PM\",\n                        \"count\": 106\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"9PM\",\n                        \"count\": 106\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"6PM\",\n                        \"count\": 100\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"2PM\",\n                        \"count\": 100\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"9AM\",\n                        \"count\": 60\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"11PM\",\n                        \"count\": 26\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"8AM\",\n                        \"count\": 11\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"12AM\",\n                        \"count\": 9\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"2AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"1AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"6AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"denny\",\n                        \"time\": \"3AM\",\n                        \"count\": 1\n                    }\n                ]\n            },\n            \"mostActiveTime\": {\n                \"system\": {\n                    \"author\": \"system\",\n                    \"time\": \"8PM\",\n                    \"count\": 11\n                },\n                \"Rajesh\": {\n                    \"author\": \"Rajesh\",\n                    \"time\": \"12PM\",\n                    \"count\": 292\n                },\n                \"pappy\": {\n                    \"author\": \"pappy\",\n                    \"time\": \"12PM\",\n                    \"count\": 163\n                },\n                \"denny\": {\n                    \"author\": \"denny\",\n                    \"time\": \"5PM\",\n                    \"count\": 215\n                }\n            }\n        }\n    ],\n    \"count\": 0\n}"
+						},
+						{
+							"name": "author-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/chat-fun-facts?author=rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"chat-fun-facts"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajesh",
+											"description": "when used chat summary of specific author is returned"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 05:06:18 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages fun facts successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"mostActiveTimeByEachAuthorEachHour\": {\n                \"Rajesh\": [\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"12PM\",\n                        \"count\": 292\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"5PM\",\n                        \"count\": 261\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"11AM\",\n                        \"count\": 214\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"1PM\",\n                        \"count\": 207\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"8PM\",\n                        \"count\": 204\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"4PM\",\n                        \"count\": 171\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"10AM\",\n                        \"count\": 160\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"7PM\",\n                        \"count\": 143\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"2PM\",\n                        \"count\": 138\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"9PM\",\n                        \"count\": 135\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"6PM\",\n                        \"count\": 129\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"3PM\",\n                        \"count\": 105\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"10PM\",\n                        \"count\": 101\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"9AM\",\n                        \"count\": 75\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"7AM\",\n                        \"count\": 40\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"8AM\",\n                        \"count\": 35\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"11PM\",\n                        \"count\": 17\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"6AM\",\n                        \"count\": 11\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"1AM\",\n                        \"count\": 4\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"5AM\",\n                        \"count\": 2\n                    },\n                    {\n                        \"author\": \"Rajesh\",\n                        \"time\": \"2AM\",\n                        \"count\": 1\n                    }\n                ]\n            },\n            \"mostActiveTimeByEachAuthor\": {\n                \"Rajesh\": {\n                    \"author\": \"Rajesh\",\n                    \"time\": \"12PM\",\n                    \"count\": 292\n                }\n            }\n        }\n    ],\n    \"count\": null\n}"
+						},
+						{
+							"name": "not-found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/active-time-of-day?author=rajeshdd",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"active-time-of-day"
+									],
+									"query": [
+										{
+											"key": "author",
+											"value": "rajeshdd",
+											"description": "when used chat active time of specific author is returned"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 07 Apr 2024 06:30:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched messages fun facts successfully\",\n    \"status\": 200,\n    \"data\": [\n        {\n            \"mostActiveTimeByEachAuthorEachHour\": {},\n            \"mostActiveTimeByEachAuthor\": {}\n        }\n    ],\n    \"count\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "get-message-count-per-month",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/get-message-count-per-month?month=2&author=Rajesh",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"get-message-count-per-month"
+							],
+							"query": [
+								{
+									"key": "year",
+									"value": "2024",
+									"disabled": true
+								},
+								{
+									"key": "month",
+									"value": "2"
+								},
+								{
+									"key": "author",
+									"value": "Rajesh"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "year-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-message-count-per-month?year=2023",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-message-count-per-month"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2023"
+										},
+										{
+											"key": "month",
+											"value": "02",
+											"disabled": true
+										},
+										{
+											"key": "author",
+											"value": "Rajesh",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Apr 2024 05:01:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched message count successfully\",\n    \"status\": 200,\n    \"data\": {\n        \"Rajesh\": {\n            \"2\": 94,\n            \"3\": 413,\n            \"4\": 323,\n            \"5\": 419,\n            \"6\": 50,\n            \"7\": 104,\n            \"8\": 101,\n            \"9\": 228,\n            \"10\": 182,\n            \"11\": 164,\n            \"12\": 272\n        },\n        \"denny\": {\n            \"2\": 68,\n            \"3\": 279,\n            \"4\": 140,\n            \"5\": 294,\n            \"6\": 13,\n            \"7\": 143,\n            \"8\": 105,\n            \"9\": 248,\n            \"10\": 108,\n            \"11\": 241,\n            \"12\": 289\n        },\n        \"pappy\": {\n            \"2\": 19,\n            \"3\": 47,\n            \"4\": 70,\n            \"5\": 154,\n            \"6\": 14,\n            \"7\": 141,\n            \"8\": 71,\n            \"9\": 169,\n            \"10\": 91,\n            \"11\": 174,\n            \"12\": 181\n        },\n        \"system\": {\n            \"2\": 3,\n            \"3\": 3,\n            \"4\": 3,\n            \"5\": 5,\n            \"6\": 5,\n            \"7\": 8,\n            \"8\": 7,\n            \"9\": 8,\n            \"11\": 4,\n            \"12\": 6\n        }\n    }\n}"
+						},
+						{
+							"name": "author-success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-message-count-per-month?year=2023&month=02&author=Rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-message-count-per-month"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2023"
+										},
+										{
+											"key": "month",
+											"value": "02"
+										},
+										{
+											"key": "author",
+											"value": "Rajesh"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Apr 2024 05:01:56 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Fetched message count successfully\",\n    \"status\": 200,\n    \"data\": {\n        \"Rajesh\": {\n            \"2\": 94\n        }\n    }\n}"
+						},
+						{
+							"name": "validation-error",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/get-message-count-per-month?month=2&author=Rajesh",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"get-message-count-per-month"
+									],
+									"query": [
+										{
+											"key": "year",
+											"value": "2024",
+											"disabled": true
+										},
+										{
+											"key": "month",
+											"value": "2"
+										},
+										{
+											"key": "author",
+											"value": "Rajesh"
+										}
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "vary",
+									"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 08 Apr 2024 17:17:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Invalid Params\",\n    \"status\": 400,\n    \"data\": [],\n    \"errorMessage\": \"Year is required when month is provided\",\n    \"validationErrors\": [\n        {\n            \"code\": \"custom\",\n            \"message\": \"Year is required when month is provided\",\n            \"path\": []\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "parse-chat-file-and-save",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Cookie",
+						"value": "{{Cookie}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"description": "chat export of a whatsapp contact/group",
+							"type": "file",
+							"src": "/home/rajesh/Downloads/WhatsApp Chat with common .txt"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/parse-and-save-whatsapp-chat",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"parse-and-save-whatsapp-chat"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "response sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"description": "chat export of a whatsapp contact/group",
+									"type": "file",
+									"src": "/home/rajesh/Downloads/WhatsApp Chat with common .txt"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/parse-and-save-whatsapp-chat",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"parse-and-save-whatsapp-chat"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Apr 2024 13:32:36 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"File uploaded and parsed successfully 0 new messages were found\",\n    \"status\": 200,\n    \"data\": [],\n    \"count\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "upload-whatsapp-chat",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"messages\": [\n        {\n            \"id\": 6039,\n            \"date\": \"2023-02-02T14:09:00.006Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"2 ko reply nahi hotaa same cheej\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6040,\n            \"date\": \"2023-02-02T14:09:00.007Z\",\n            \"author\": \"denny\",\n            \"message\": \"Thoda sa chutiya h n\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6041,\n            \"date\": \"2023-02-02T14:10:00.008Z\",\n            \"author\": \"pappy\",\n            \"message\": \"😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6042,\n            \"date\": \"2023-02-02T14:10:00.009Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"copy paste kr rhaa thaa idhar se udhar\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6043,\n            \"date\": \"2023-02-02T14:10:00.010Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"🤣\",\n            \"attachmentId\": null\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URL}}/whatsapp-chat?limit=5&offset=5",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"whatsapp-chat"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "offset",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "upload-response sample",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"messages\": [\n        {\n            \"id\": 6039,\n            \"date\": \"2023-02-02T14:09:00.006Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"2 ko reply nahi hotaa same cheej\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6040,\n            \"date\": \"2023-02-02T14:09:00.007Z\",\n            \"author\": \"denny\",\n            \"message\": \"Thoda sa chutiya h n\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6041,\n            \"date\": \"2023-02-02T14:10:00.008Z\",\n            \"author\": \"pappy\",\n            \"message\": \"😅\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6042,\n            \"date\": \"2023-02-02T14:10:00.009Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"copy paste kr rhaa thaa idhar se udhar\",\n            \"attachmentId\": null\n        },\n        {\n            \"id\": 6043,\n            \"date\": \"2023-02-02T14:10:00.010Z\",\n            \"author\": \"Rajesh\",\n            \"message\": \"🤣\",\n            \"attachmentId\": null\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/whatsapp-chat?limit=5&offset=5",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"whatsapp-chat"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "offset",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Apr 2024 12:51:04 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Data inserted successfully\",\n    \"status\": 200,\n    \"data\": [],\n    \"insertCount\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "delete all messages",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URL}}/whatsapp-chat",
+					"host": [
+						"{{BASE_URL}}"
+					],
+					"path": [
+						"whatsapp-chat"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "delete all response sample",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/whatsapp-chat",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"whatsapp-chat"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "vary",
+							"value": "RSC, Next-Router-State-Tree, Next-Router-Prefetch, Next-Url"
+						},
+						{
+							"key": "content-type",
+							"value": "application/json"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 05 Apr 2024 13:29:14 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Data deleted successfully\",\n    \"status\": 200,\n    \"data\": [],\n    \"count\": 0\n}"
+				}
+			]
+		}
+	]
+}
