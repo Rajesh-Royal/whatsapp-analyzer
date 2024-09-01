@@ -38,12 +38,10 @@ const FileUploadClientComponent: React.FC = () => {
       const insights = new GetWhatsappChatInsights(parsedText, file?.name);
       const new_insights = insights.analysis();
 
-      console.log(new_insights);
-
       uploadChatInsightData(new_insights);
 
-      // router.push("/dashboard");
-      // toggleModal();
+      router.push("/dashboard");
+      toggleModal();
     } catch (error: any) {
       setLoading(false);
       setError(error.message);
