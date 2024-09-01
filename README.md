@@ -1,4 +1,22 @@
+<p align="center">
+  <img src="app/android-chrome-192x192.png" alt="A logo of Catepedia"/>
+</p>
+
+# TrendyWApp
+
+TrendyWApp is a full-fledged application to analyze your WhatsApp chat, fun facts, and its trends. It is 100% secure".
+
+<p align="center">
+  <img src="public/wapp-trends-opengraph-1200x630-compressed.jpg" alt=" A screenshot of the Whatsapp chat trends app"/>
+</p>
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+Next.js Versions:
+```json
+"next": "14.0.4",
+"next-auth": "^5.0.0-beta.4",
+```
 
 ## Getting Started
 
